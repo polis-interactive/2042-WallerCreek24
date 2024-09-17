@@ -1,0 +1,158 @@
+
+#ifndef POLIS_CONFIG_HPP
+#define POLIS_CONFIG_HPP
+
+#include <Arduino.h>
+
+#include <SD.h>
+#include <SPI.h>
+
+#include <ArduinoJson.h>
+
+#include <NativeEthernet.h>
+
+// #include <QNEthernet.h>
+
+#include <string>
+#include <sstream>
+#include <vector>
+
+#include "utils.hpp"
+
+#define ARTNET_PORT 6454
+
+constexpr int MaxString = 6;
+constexpr int MinString = 2;
+constexpr int MaxStrings = 16;
+constexpr int MaxLeds = MaxString * MaxStrings;
+
+
+std::string config_file_prefix = "receiver_config_";
+std::string config_file_suffix = ".json";
+
+struct Config {
+    int universe;
+    int count;
+    std::vector<size_t> strings;
+    bool is_rgbw;
+    bool use_dhcp;
+    IPAddress local_ip;
+};
+
+void ReadConfig(Config &config) {
+    if (MaxLeds > 512) {
+        infinitePrint("Oh no, you possibly have more pixels than an artnet universe...");
+    }
+    if (!SD.begin(BUILTIN_SDCARD)) {
+        infinitePrint("Error reading SD card");
+    }
+    auto root = SD.open("/", FILE_READ);
+    File entry;
+    std::stringstream ss;
+    while (true) {
+        entry = root.openNextFile(FILE_READ);
+        if (!entry) {
+            break;
+        } else if (entry.isDirectory()) {
+            continue;
+        }
+        auto file_name = entry.name();
+        if (!beginsWith(file_name, config_file_prefix)) {
+            continue;
+        } else if (!endsWith(file_name, config_file_suffix)) {
+            continue;
+        }
+        break;
+    }
+    root.close();
+    if (!entry) {
+        ss.clear();
+        ss << "Couldn't find confile with format (" <<
+            config_file_prefix << "*" << config_file_suffix << ") on SD card"
+        ;
+        infinitePrint(ss.str());
+    }
+    const auto entry_name = entry.name();
+    const auto entry_size = entry.size();
+    if (entry_size <= 0) {
+        entry.close();
+        ss.clear();
+        ss << "Found file " << entry_name << " has size of 0";
+        infinitePrint(ss.str());
+    }
+    
+    char json[entry_size];
+    for (size_t i = 0; i < entry_size; i++) {
+        json[i] = entry.read();
+    }
+    entry.close();
+
+    JsonDocument doc;
+    auto err = deserializeJson(doc, json);
+    if (err) {
+        ss.clear();
+        ss << "Failed to deserialize json of file " << entry_name;
+        infinitePrint(ss.str());
+    }
+
+    const int universe = doc["universe"] | 0;
+    if (universe <= 0) {
+        infinitePrint("Universe is either missing from config, or has a non positive value");
+    }
+    if (!doc["strings"].is<JsonArray>()) {
+        infinitePrint("strings is either missing from config, or not an array of ints");
+    }
+    // should I be cleaning this up?
+    const JsonArray strings = doc["strings"];
+    const auto strings_count = strings.size();
+    if (strings_count <= 0) {
+        infinitePrint("strings array is empty");
+    } else if (strings_count > MaxStrings) {
+        infinitePrint("strings array contains more values than supported channels");
+    }
+    size_t found_count = 0;
+    for(const JsonVariant &v : strings) {
+        if (!v.is<int>()) {
+            infinitePrint("found non numeric value parsing strings array");
+        }
+        const auto value = v.as<int>();
+        if (value > MaxString || value < MinString) {
+            ss.clear();
+            ss << "Found value outside of range [" << 
+                MinString << ", " << MaxString << " while parsing strings array"
+            ;
+            infinitePrint(ss.str());
+
+        }
+        found_count += v.as<size_t>();
+    }
+    if (found_count > MaxLeds) {
+        infinitePrint("count is larger than a dmx universe");
+    }
+
+    const bool is_rgbw = doc["is_rgbw"] | false;
+
+    const bool use_dhcp = doc["use_dhcp"] | false;
+    const std::string local_ip = doc["local_ip"] | "";
+
+    if (!local_ip.empty() && !config.local_ip.fromString(local_ip.c_str())) {
+        infinitePrint("local_ip is set to an invalid value");
+    } else if (local_ip.empty() && !use_dhcp) {
+        infinitePrint("local_ip is not set while use_dhcp is false or not set...");
+    }
+
+    config.universe = universe;
+    config.count = found_count;
+    // could be cleaner but meh
+    config.strings.clear();
+    config.strings.reserve(strings_count);
+    for(const JsonVariant &v : strings) {
+        config.strings.push_back(v.as<size_t>());
+    }
+    config.is_rgbw = is_rgbw;
+    config.use_dhcp = use_dhcp;
+}
+
+
+
+#endif // POLIS_CONFIG_HPP

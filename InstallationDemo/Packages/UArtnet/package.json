@@ -1,0 +1,22 @@
+{
+  "name": "com.polis.uartnet",
+  "version": "0.0.1",
+  "displayName": "Polis UArtnet",
+  "description": "Package for receiving ArtNet in Unity",
+  "unity": "2022.3",
+  "unityRelease": "38f1",
+  "documentationUrl": "https://github.com/polis/uartnet",
+  "changelogUrl": "https://github.com/polis/uartnet/changelog.html",
+  "licensesUrl": "https://github.com/polis/uartnet/licensing.html",
+  "dependencies": {},
+  "keywords": [
+    "Unity",
+    "ArtNet",
+    "keyword3"
+  ],
+  "author": {
+    "name": "Broose Goose",
+    "email": "bruce@polis.tv",
+    "url": "https://polis.tv"
+  }
+}

@@ -1,0 +1,18 @@
+needs parameters:
+- Substitue out volumes
+- XYZ scaling of densiy
+	- define the grid size of hog wire XY
+	- rope lengths of lights
+	- "fill density"
+
+- two different scripts
+	- quick dirty density to get rough quantity
+	- final generate pretty good, and we edit by hand
+
+
+- three different light spacings by hand
+- 2, 4, 6, with 3 different spacings, and a 1
+
+- fish is 
+- 302 mm long
+- 165 mm from lips to COM

@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.UI.Image;
 
 public struct Edge
 {
@@ -104,19 +108,102 @@ public class SectionFinal
 {
     public SectionFinal(List<Vector3> points)
     {
-        this.points = points;
+        _points = points;
     }
 
-    public  List<Vector3> points;
+    public SectionFinal(SectionFinal absoluteSection)
+    {
+        _points = new List<Vector3>();
+        _points.Add(Vector3.zero);
+        var xAxis = absoluteSection.xAxisDirection;
+        var zAxis = absoluteSection.zAxisDireciton;
+        var yAxis = absoluteSection.yAxisDirection;
+        // Debug.Log($"{xAxis.ToString()}, {yAxis.ToString()}, {zAxis.ToString()}");
+        foreach (var point in absoluteSection._points.Skip(1))
+        {
+            var relativeVector = point - absoluteSection.originPoint;
+            var xComponent = Vector3.Dot(relativeVector, xAxis);
+            var yComponent = Vector3.Dot(relativeVector, yAxis);
+            var relativePosition = new Vector3(xComponent, yComponent, 0.0f);
+            _points.Add(relativePosition);
+        }
+    }
+
+    public List<Vector3> _points;
 
     public bool isTriangle
     {
         get
         {
-            return points.Count == 3;
+            return _points.Count == 3;
         }
     }
 
+    public List<Vector3> points
+    {
+        get
+        {
+            return _points;
+        }
+    }
+
+    public Vector3 originPoint
+    {
+        get
+        {
+            return _points[0];
+        }
+    }
+    public Vector3 xAxisPoint
+    {
+        get
+        {
+            return _points[1];
+        }
+    }
+    public Vector3 finalPoint
+    {
+        get
+        {
+            return isTriangle ? _points[2] : _points[3];
+        }
+    }
+    public Vector3 furthestPoint
+    {
+        get
+        {
+            return isTriangle ? _points[1] : _points[2];
+        }
+    }
+
+    public Vector3 xAxisDirection
+    {
+        get
+        {
+            return (xAxisPoint - originPoint).normalized;
+        }
+    }
+
+    public Vector3 zAxisDireciton
+    {
+        get
+        {
+            return new Vector3(0, 0, -1.0f);
+        }
+    }
+
+    public Vector3 yAxisDirection
+    {
+        get
+        {
+            return Vector3.Cross(zAxisDireciton, xAxisDirection).normalized;
+        }
+    }
+
+    public Vector3 InverseTransform(Vector3 relativePoint)
+    {
+        return originPoint + relativePoint.y * yAxisDirection + relativePoint.x * xAxisDirection;
+    }
 
     private float TriangleArea(Vector3 a, Vector3 b, Vector3 c)
     {
@@ -138,6 +225,22 @@ public class SectionFinal
                 var area1 = TriangleArea(points[0], points[1], points[2]);
                 var area2 = TriangleArea(points[0], points[2], points[3]);
                 return area1 + area2;
+            }
+        }
+    }
+
+    public Vector3 Center
+    {
+        get
+        {
+            {
+                Vector3 center = Vector3.zero;
+                foreach (Vector3 point in points)
+                {
+                    center += point;
+                }
+                center /= points.Count;
+                return center;
             }
         }
     }
@@ -180,6 +283,11 @@ public class SectionFinal
             point.z
         );
     }
+
+    public string GetString()
+    {
+        return "{" + string.Join(", ", _points.Select(p => p.ToString())) + "}";
+    }
 }
 
 [System.Serializable]
@@ -218,13 +326,19 @@ public class BoundingCollisionFinal
     public float exitDistance = 0.0f;
 }
 
+public enum StringSelectionStrategy
+{
+    Nominal, ExpWeighted, FibWeighted
+}
+
 public class LayoutHelperFinal
 {
-    public LayoutHelperFinal(List<FishStringConfigFinal> fishStrings)
+    public LayoutHelperFinal(List<FishStringConfigFinal> fishStrings, StringSelectionStrategy stringSelectionStrategy)
     {
         _fishStrings = fishStrings;
         _fishStrings.Sort();
         _stringsUsed = new List<int>(Enumerable.Repeat(0, _fishStrings.Count));
+        _stringSelectionStrategy = stringSelectionStrategy;
     }
     public FishStringConfigFinal SelectFishString(BoundingCollisionFinal collision)
     {
@@ -241,7 +355,16 @@ public class LayoutHelperFinal
         var chosenString = chooseString(distance);
         if (chosenString != 0)
         {
-            chosenString = UnityEngine.Random.Range(1, chosenString + 1);
+            if (_stringSelectionStrategy == StringSelectionStrategy.Nominal)
+            {
+                chosenString = UnityEngine.Random.Range(1, chosenString + 1);
+            } else
+            {
+                var mWeight = Mathf.Pow(chosenString + 1, 2);
+                var rWeight = UnityEngine.Random.Range(1, mWeight);
+                chosenString = Mathf.FloorToInt(Mathf.Sqrt(rWeight));
+            }
+
         }
         _stringsUsed[chosenString]++;
         return _fishStrings[chosenString];
@@ -291,6 +414,7 @@ public class LayoutHelperFinal
 
     private List<FishStringConfigFinal> _fishStrings;
     private List<int> _stringsUsed;
+    private StringSelectionStrategy _stringSelectionStrategy;
     private float maxEntryDistance = 0.0f;
     private float minEntryDistance = 40.0f;
     private float maxSpan = 0.0f;
@@ -390,5 +514,139 @@ public class WeightHelperFinal
             Debug.Log($"Section {i + 1} - Area: {_baseWeights[i]}; Strings {_strings[i]} Fish {_fishCount[i] - 1}");
         }
         Debug.Log($"Total fish: {_totalFish}");
+    }
+}
+
+public class AssetManager
+{
+
+    private static string assetRoot = "Assets";
+
+    public static void CreateOrResetFolder(string folderPath)
+    {
+        var fullPath = Path.Combine(assetRoot, folderPath);
+        if (!AssetDatabase.IsValidFolder(fullPath)) {
+            CreateFolder(fullPath);
+        } else
+        {
+            ClearFolderContents(fullPath);
+        }
+        AssetDatabase.Refresh();
+    }
+
+    public static void WriteOutFile(string folderPath, string outputName, string outputContent)
+    {
+        var fullPath = Path.Combine(assetRoot, folderPath).Replace("\\", "/");
+        if (!AssetDatabase.IsValidFolder(fullPath)) {
+            CreateFolder(fullPath);
+        }
+        var filePath = Path.Combine(fullPath, outputName).Replace("\\", "/");
+        File.WriteAllText(filePath, outputContent);
+        AssetDatabase.ImportAsset(filePath);
+        AssetDatabase.Refresh();
+    }
+
+    public static string PrepareLocation(string folderPath, string outputName)
+    {
+        var fullPath = Path.Combine(assetRoot, folderPath).Replace("\\", "/");
+        if (!AssetDatabase.IsValidFolder(fullPath))
+        {
+            CreateFolder(fullPath);
+        }
+        var filePath = Path.Combine(fullPath, outputName).Replace("\\", "/");
+        AssetDatabase.DeleteAsset(filePath);
+        return filePath;
+    }
+
+    public static void LoadLocation(string folderPath, string outputName)
+    {
+        var fullPath = Path.Combine(assetRoot, folderPath).Replace("\\", "/");
+        var filePath = Path.Combine(fullPath, outputName).Replace("\\", "/");
+        AssetDatabase.ImportAsset(filePath);
+        AssetDatabase.Refresh();
+    }
+
+    private static void CreateFolder(string path)
+    {
+        var pathParts = path.Split(Path.DirectorySeparatorChar);
+        var currentPath = pathParts[0];
+        for (int i = 1; i < pathParts.Length; i++)
+        {
+            var nextPath = $"{currentPath}/{pathParts[i]}";
+            if (!AssetDatabase.IsValidFolder(nextPath))
+            {
+                AssetDatabase.CreateFolder(currentPath, pathParts[i]);
+            }
+            currentPath = nextPath;
+        }
+    }
+
+    private static void ClearFolderContents(string path)
+    {
+        var children = Directory.GetFiles(path).Concat(Directory.GetDirectories(path));
+        foreach (var child in children)
+        {
+            AssetDatabase.DeleteAsset(child);
+        }
+    }
+}
+
+public struct TPoint
+{
+    public TPoint(Vector3 position, float t, float left)
+    {
+        this.position = position;
+        this.t = t;
+        this.left = left;
+    }
+
+    public Vector3 position { get; }
+    public float t { get; }
+    public float left { get; }
+
+    public string GetString()
+    {
+        return $"{{({position.x}, {position.y}, {position.z}) / {t} / {left}}}";
+    }
+}
+
+public struct ManufacturingLine
+{
+    public ManufacturingLine(
+        int sectionNumber, int stringNumber, int fishCount, float stringSpacingInCm,
+        float stringToScaffoldingInM, int xPosition, string yPosition
+    )
+    {
+        this.sectionNumber = sectionNumber;
+        this.stringNumber = stringNumber;
+        this.fishCount = fishCount;
+        this.stringSpacingInCm = stringSpacingInCm;
+        this.stringToScaffoldingInM = stringToScaffoldingInM;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
+    public int sectionNumber { get; }
+    public int stringNumber { get; }
+    public int fishCount { get; }
+    public float stringSpacingInCm { get; }
+    public float stringToScaffoldingInM { get; }
+    public int xPosition { get; }
+    public string yPosition { get; }
+}
+
+[System.Serializable]
+public class ReceiverConfig
+{
+    public int universe;
+    public int channels;
+    public int strings;
+    public bool is_rgbw;
+    public bool use_dhcp;
+    public string local_ip;
+
+    // Convert the custom class to Unity's Vector3
+    public string ToFileName()
+    {
+        return $"receiver_config_{universe + 1}.json";
     }
 }

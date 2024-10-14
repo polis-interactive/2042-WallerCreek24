@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &919367411868448781
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &1015559700156445318
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &1478147220056423994
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &1654773315119686606
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &2245744710613621429
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &2765795166422539875
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,6 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!23 &1054169709690237345
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -776,6 +790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &3305515114024924349
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &3330411256826269574
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +952,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2668742715668758253, guid: 2dacff2e02083df469fc8002fd3e4640, type: 3}
+  - {fileID: -2668742715668758253, guid: c4cbd52ba63dd3e46a3c88104408b921, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1053,6 +1071,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &3490055771445523317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1126,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2668742715668758253, guid: 2dacff2e02083df469fc8002fd3e4640, type: 3}
+  - {fileID: -2668742715668758253, guid: c4cbd52ba63dd3e46a3c88104408b921, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1233,6 +1253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &4499125756740172401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,6 +1352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &5022301062871444349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &5497823241488967632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,6 +1637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &6086341985289283183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &6356575332822130225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,7 +1793,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2668742715668758253, guid: 2dacff2e02083df469fc8002fd3e4640, type: 3}
+  - {fileID: -2668742715668758253, guid: c4cbd52ba63dd3e46a3c88104408b921, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1924,6 +1954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &6822913141331955645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,6 +2053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &7050430192188766655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &7220465789762170817
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &7265708620349131065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,6 +2377,7 @@ MonoBehaviour:
   - fishCount: 4
     stringSpacingInCm: 30
     stringTailInCm: 15
+  drawVolume: 0
   drawSplineGizmos: 0
   drawScaffolding: 0
   drawScaffoldingGizmos: 0
@@ -2440,6 +2479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &8440975852465708687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2668742715668758253, guid: 2dacff2e02083df469fc8002fd3e4640, type: 3}
+  - {fileID: -2668742715668758253, guid: c4cbd52ba63dd3e46a3c88104408b921, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2620,6 +2661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &8733153354000235048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,6 +2760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: 0
+  center: {x: 0, y: 0, z: 0}
+  sectionNumber: 0
 --- !u!1 &8736151161342906466
 GameObject:
   m_ObjectHideFlags: 0

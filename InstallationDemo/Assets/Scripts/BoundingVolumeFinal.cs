@@ -1,9 +1,24 @@
 using UnityEngine;
 using static System.Collections.Specialized.BitVector32;
 
-[ExecuteInEditMode, RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(MeshCollider))]
 public class BoundingVolumeFinal : MonoBehaviour
 {
+
+    private bool drawVolume = false;
+
+    public void Setup(bool drawVolume = false) 
+    {
+        this.drawVolume = drawVolume;
+        if (!drawVolume)
+        {
+            GetComponent<Renderer>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Renderer>().enabled = true;
+        }
+    }
 
     public BoundingCollisionFinal CheckCollision(Vector3 position)
     {

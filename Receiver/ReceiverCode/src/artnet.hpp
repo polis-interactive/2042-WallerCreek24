@@ -81,8 +81,7 @@ struct Artnet {
 
 void SetupArtnet(Artnet &artnet, const Config &config) {
     artnet.universe = config.universe;
-    const size_t pixel_size = config.is_rgbw ? 4 : 3;
-    artnet.data = std::vector<uint8_t>(config.count * pixel_size, 0);
+    artnet.data = std::vector<uint8_t>(config.channels, 0);
     artnet.local_address = qn::Ethernet.localIP();
     artnet.broadcast_address = artnet.local_address;
     artnet.broadcast_address[0] = 255;
@@ -143,7 +142,7 @@ void SetupArtnet(Artnet &artnet, const Config &config) {
     artnet_reply.swin[0] = artnet.universe;
 
     ss.clear();
-    ss << "Accepting DMX for Uni " << artnet.universe;
+    ss << "Accepting DMX for Universe " << artnet.universe;
     const auto report = ss.str();
     memcpy(artnet_reply.nodereport, report.c_str(), report.size());
 

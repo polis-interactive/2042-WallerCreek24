@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -18,13 +19,25 @@ public class FusionSplineKnot
     }
 }
 
+public class ToDraw
+{
+    public ToDraw(Vector3 position, Vector3 direction, UnityEngine.Color color)
+    {
+        this.position = position;
+        this.direction = direction;
+        this.color = color;
+    }
+    public Vector3 position;
+    public Vector3 direction;
+    public UnityEngine.Color color;
+}
+
 [System.Serializable]
 public class FusionSplineData
 {
     public List<FusionSplineKnot> spline;
 }
 
-[ExecuteInEditMode]
 public class FusionSplineFinal : MonoBehaviour
 {
     [HideInInspector]
@@ -33,6 +46,8 @@ public class FusionSplineFinal : MonoBehaviour
     public TextAsset jsonFile;
 
     private bool drawGizmos = false;
+
+    private List<ToDraw> toDraw = new List<ToDraw>();
 
     public void Setup(bool _drawGizmos = false)
     {
@@ -62,7 +77,29 @@ public class FusionSplineFinal : MonoBehaviour
         {
             spline.Add(vec.ToVector3());
         }
+        toDraw = new List<ToDraw>();
         Debug.Log("FusionSplineFinal.Setup() finished");
+    }
+
+    public void GetTPoint(Vector3 position, out TPoint tPoint)
+    {
+        Vector3 localPosition = splineContainer.transform.InverseTransformPoint(position);
+        SplineUtility.GetNearestPoint(
+            splineContainer.Spline,
+            localPosition,
+            out float3 splinePoint,
+            out float t
+        );
+        SplineUtility.Evaluate(splineContainer.Spline, t, out splinePoint, out float3 tangent, out float3 up);
+        up = Quaternion.AngleAxis(90, tangent) * up;
+        var left = Vector3.Cross(tangent, up).normalized;
+        // toDraw.Add(new ToDraw(transform.TransformPoint(splinePoint), transform.TransformPoint(tangent), UnityEngine.Color.green));
+        // toDraw.Add(new ToDraw(transform.TransformPoint(splinePoint), transform.TransformPoint(up), UnityEngine.Color.red));
+        // toDraw.Add(new ToDraw(transform.TransformPoint(splinePoint), transform.TransformPoint(left), UnityEngine.Color.blue));
+        var useSplinePoint = new Vector3(splinePoint.x, splinePoint.y, splinePoint.z);
+        var leftActual = localPosition - useSplinePoint;
+        var leftVal = Vector3.Dot(left, leftActual);
+        tPoint = new TPoint(position, t, leftVal);
     }
 
     public Quaternion LookAtSpline(Vector3 position)
@@ -91,5 +128,10 @@ public class FusionSplineFinal : MonoBehaviour
         position = splineContainer.Spline.EvaluatePosition(1.0f);
         Gizmos.color = UnityEngine.Color.blue;
         Gizmos.DrawSphere(transform.TransformPoint(position), 0.1f);
+        foreach (var r in toDraw)
+        {
+            Gizmos.color = r.color;
+            Gizmos.DrawRay(r.position, r.direction);
+        }
     }
 }

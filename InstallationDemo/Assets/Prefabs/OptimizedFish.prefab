@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2668742715668758253, guid: 2dacff2e02083df469fc8002fd3e4640, type: 3}
+  - {fileID: 2100000, guid: 53a6e8651eb42a94a82810ce5389578a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,6 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2004155380169288356}
+  - component: {fileID: 8479625088251732987}
+  - component: {fileID: 756144868839634024}
   m_Layer: 0
   m_Name: OptimizedFish
   m_TagString: Untagged
@@ -115,3 +117,29 @@ Transform:
   - {fileID: 7863489440448325078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8479625088251732987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814485449623604249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1412341ea2d0d41af0c89ad943de1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: 0
+  channels: 0
+--- !u!114 &756144868839634024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814485449623604249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a97260fd0c6ee45a39f71159e47b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

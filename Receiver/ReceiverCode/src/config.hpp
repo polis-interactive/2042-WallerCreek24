@@ -21,9 +21,8 @@
 
 #define ARTNET_PORT 6454
 
-constexpr int MaxString = 6;
-constexpr int MinString = 2;
-constexpr int MaxStrings = 16;
+constexpr int MaxString = 5;
+constexpr int MaxStrings = 24;
 constexpr int MaxLeds = MaxString * MaxStrings;
 
 
@@ -32,8 +31,8 @@ std::string config_file_suffix = ".json";
 
 struct Config {
     int universe;
-    int count;
-    std::vector<size_t> strings;
+    int channels;
+    int strings;
     bool is_rgbw;
     bool use_dhcp;
     IPAddress local_ip;
@@ -95,39 +94,22 @@ void ReadConfig(Config &config) {
         infinitePrint(ss.str());
     }
 
-    const int universe = doc["universe"] | 0;
-    if (universe <= 0) {
+    const int universe = doc["universe"] | -1;
+    if (universe < 0) {
         infinitePrint("Universe is either missing from config, or has a non positive value");
     }
-    if (!doc["strings"].is<JsonArray>()) {
-        infinitePrint("strings is either missing from config, or not an array of ints");
+    
+    const int channels = doc["channels"] | 0;
+    if (channels <= 0) {
+        infinitePrint("Channels is either missing from config, or has a non positive value");
+    } else if (channels > 512) {
+        infinitePrint("Channels is bigger than an artnet universe");
     }
-    // should I be cleaning this up?
-    const JsonArray strings = doc["strings"];
-    const auto strings_count = strings.size();
-    if (strings_count <= 0) {
-        infinitePrint("strings array is empty");
-    } else if (strings_count > MaxStrings) {
-        infinitePrint("strings array contains more values than supported channels");
-    }
-    size_t found_count = 0;
-    for(const JsonVariant &v : strings) {
-        if (!v.is<int>()) {
-            infinitePrint("found non numeric value parsing strings array");
-        }
-        const auto value = v.as<int>();
-        if (value > MaxString || value < MinString) {
-            ss.clear();
-            ss << "Found value outside of range [" << 
-                MinString << ", " << MaxString << " while parsing strings array"
-            ;
-            infinitePrint(ss.str());
-
-        }
-        found_count += v.as<size_t>();
-    }
-    if (found_count > MaxLeds) {
-        infinitePrint("count is larger than a dmx universe");
+    const int strings = doc["strings"] | 0;
+    if (strings <= 0) {
+        infinitePrint("Strings is either missing from config, or has a non positive value");
+    } else if (strings > MaxStrings) {
+        infinitePrint("Strings is larger than physical outputs");
     }
 
     const bool is_rgbw = doc["is_rgbw"] | false;
@@ -142,13 +124,8 @@ void ReadConfig(Config &config) {
     }
 
     config.universe = universe;
-    config.count = found_count;
-    // could be cleaner but meh
-    config.strings.clear();
-    config.strings.reserve(strings_count);
-    for(const JsonVariant &v : strings) {
-        config.strings.push_back(v.as<size_t>());
-    }
+    config.channels = channels;
+    config.strings = strings;
     config.is_rgbw = is_rgbw;
     config.use_dhcp = use_dhcp;
 }

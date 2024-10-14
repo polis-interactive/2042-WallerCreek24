@@ -7,13 +7,15 @@ public struct LayoutFinalConfig
 {
     public int xSpacingInInches;
     public int ySpacingInInches;
+    public bool drawVolume;
     public bool drawSplineGizmos;
     public bool drawScaffolding;
     public bool drawScaffoldingGizmos;
     public List<FishStringConfigFinal> fishStrings;
+    public StringSelectionStrategy stringSelectionStrategy;
 }
 
-[ExecuteInEditMode]
+
 public class LayoutFinal : MonoBehaviour
 {
     [HideInInspector]
@@ -49,6 +51,7 @@ public class LayoutFinal : MonoBehaviour
             throw new System.Exception("Layout.Setup() Multiple children implementing BoundingVolume found");
         }
         boundingVolume = boundingVolumes[0];
+        boundingVolume.Setup(config.drawVolume);
         var splines = GetComponentsInChildren<FusionSplineFinal>();
         if (splines.Length == 0)
         {
@@ -63,10 +66,10 @@ public class LayoutFinal : MonoBehaviour
         SetupScaffoldingSections(config);
         xSpacing = config.xSpacingInInches * 0.0254f;
         ySpacing = config.ySpacingInInches * 0.0254f;
-        stringHelper = new LayoutHelperFinal(config.fishStrings);
+        stringHelper = new LayoutHelperFinal(config.fishStrings, config.stringSelectionStrategy);
         minDistance = 40.0f;
         maxDistance = 0.0f;
-        meterBuckets = Enumerable.Repeat(0, 3).ToList();
+        meterBuckets = Enumerable.Repeat(0,6).ToList();
         Debug.Log("Layout.Setup() finished");
     }
 
@@ -92,14 +95,14 @@ public class LayoutFinal : MonoBehaviour
         Debug.Log("Layout.SetupScaffoldingSections() finished");
     }
 
-    public void SetMinMaxDistance(float distance)
+    public void SetStrLen(float distance)
     {
         minDistance = Mathf.Min(minDistance, distance);
         maxDistance = Mathf.Max(maxDistance, distance);
         meterBuckets[(int)Mathf.Ceil(distance) - 1] += 1;
     }
 
-    public void PrintMinMax()
+    public void PrintLayoutStats()
     {
         Debug.Log($"Max string length: {maxDistance}, Min String Length {minDistance}");
         var strOut = "";
@@ -108,5 +111,13 @@ public class LayoutFinal : MonoBehaviour
             strOut += $"({i} - {i + 1}): {meterBuckets[i]} ";
         }
         Debug.Log(strOut);
+        var maxFish = 0;
+        foreach (var section in scaffolding)
+        {
+            var sectionFish = section.CountFish();
+            maxFish = Mathf.Max(maxFish, sectionFish);
+            Debug.Log($"{section.name}: {sectionFish} fish");
+        }
+        Debug.Log($"Max fish per section: {maxFish}");
     }
 }

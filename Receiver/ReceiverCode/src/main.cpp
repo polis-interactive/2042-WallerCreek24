@@ -38,6 +38,9 @@ long last_millis = 0;
 long packets_received = 0;
 long dmx_received = 0;
 
+long last_draw = 0;
+const long max_millis_since_last_draw = 300;
+
 void loop() {
     auto current_millis = millis();
     if (current_millis - last_millis > 1000) {
@@ -64,8 +67,13 @@ void loop() {
             dmx_received++;
             UpdateController(controller, artnet.data);
             RunController(controller);
+            last_draw = current_millis;
         } else if (artnet_response == ArtnetResponse::_ARTNET_SYNC) {
             // todo: maybe only show here?
         }
+    }
+    if (current_millis - last_draw > max_millis_since_last_draw) {
+        RunController(controller);
+        last_draw = current_millis;
     }
 }

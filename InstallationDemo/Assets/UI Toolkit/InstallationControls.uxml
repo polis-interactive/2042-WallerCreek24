@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/InstallationControls.uss?fileID=7433441132597879392&amp;guid=b87a516706638034aa519b29b7e85359&amp;type=3#InstallationControls" />
+    <ui:VisualElement name="Main" class="main" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="LeftPanel" class="panel" style="flex-grow: 0; flex-basis: 100%; flex-shrink: 1;">
+            <ui:VisualElement name="Controls" class="container" style="flex-grow: 0; align-self: flex-start; align-items: flex-start; flex-direction: row;">
+                <ui:Button text="Edit Config" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EditConfig" class="button" />
+                <ui:Button text="Show Artnet Viewer" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ShowArtnetViewer" class="button" style="margin-left: 16px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="RightPanel" class="panel" style="flex-grow: 0; flex-shrink: 1;">
+            <ui:VisualElement name="Statistics" class="container" style="flex-grow: 0; align-self: flex-end;">
+                <ui:VisualElement name="FrameRate" class="statisticsWrapper" style="flex-grow: 0;">
+                    <ui:Label tabindex="-1" text="Frame Rate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FrameRateLabel" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="FrameRateValue" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Config" class="overlay" style="flex-grow: 1; display: none;">
+        <ui:ScrollView class="overlayContent">
+            <ui:VisualElement name="ConfigHeader" class="overlayHeader" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Edit Config" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ConfigHeaderTitle" />
+                <ui:VisualElement name="ConfigHeaderControls" class="overlayHeaderControls" style="flex-grow: 0; justify-content: space-between;">
+                    <ButtonThatCanBeDisabled text="Save" enable-rich-text="true" enabled="false" display-tooltip-when-elided="true" parse-escape-sequences="true" name="SaveConfig" style="margin-right: 16px;" />
+                    <ui:Button text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseConfig" class="button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

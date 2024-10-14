@@ -14,9 +14,19 @@ ISSUELOG
 		- crossed TX and RX... how?
 		- Route all traces from leds from left side to left buffer chip, right side to right buffer chip; make it easier to route power
 - v0.2
-	- too hard to solder cap near ethernet
-	- scoot ethernet closer to the edge, hard to disconnect
-	- the headers are too close together
+	- Schematic Issues
+		- Need decoupling caps on all outputs
+		- Need spot for bulk decoupling cap
+	- Part issues
+		- See if you can't use a resitor network x8
+	- PCB Issues
+		- too hard to solder cap near ethernet
+		- scoot ethernet closer to the edge, hard to disconnect
+		- the headers are too close together (dumbass)
+		- What the hell was up with you decoupling cap on the south buffer chip
+		- move 5v rail next to buffer chips
+		- just use a ground pour for the primary + trace
+		- can we place leds on the data lines?
 
 Notes:
 - teensy pins

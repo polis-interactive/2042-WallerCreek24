@@ -62,9 +62,8 @@ public class InstallationFinal : MonoBehaviour
         SetupLayout(layoutConfig);
         GenerateStrings();
         OrderStrings();
+        GetPrintStats();
         EditorSceneManager.MarkSceneDirty(gameObject.scene);
-        layout.stringHelper.PrintStringResults();
-        layout.PrintLayoutStats();
         Debug.Log("InstallationFinal.Recreate() finished");
     }
 
@@ -118,6 +117,7 @@ public class InstallationFinal : MonoBehaviour
 
     private void OrderStrings()
     {
+        Debug.Log("InstallationFinal.OrderStrings() started");
         foreach (var section in layout.scaffolding)
         {
             var strings = section.GetComponentsInChildren<FishStringFinal>().ToList();
@@ -128,10 +128,21 @@ public class InstallationFinal : MonoBehaviour
                 strings[i].SetString(i + 1);
             }
         }
+        Debug.Log("InstallationFinal.OrderStrings() finished!");
+    }
+
+    private void GetPrintStats()
+    {
+        Debug.Log("InstallationFinal.GetPrintStats() started");
+        layout.GetPrintScaffoldingDistances();
+        layout.stringHelper.PrintStringResults();
+        layout.PrintLayoutStats();
+        Debug.Log("InstallationFinal.GetPrintStats() finished!");
     }
 
     private void CreateManifest()
     {
+        Debug.Log("InstallationFinal.CreateManifest() started");
         var filePath = AssetManager.PrepareLocation(manufacturingPath, manifestFile);
         using (var workbook = new XLWorkbook())
         {
@@ -160,11 +171,12 @@ public class InstallationFinal : MonoBehaviour
                 worksheet.Cell(4, 1).Value = "StringNumber";
                 worksheet.Cell(4, 2).Value = "FishCount";
                 worksheet.Cell(4, 3).Value = "StringSpacingInCm";
-                worksheet.Cell(4, 4).Value = "StringToScaffoldingInM";
-                worksheet.Cell(4, 5).Value = "Y";
-                worksheet.Cell(4, 6).Value = "X";
-                worksheet.Cell(4, 7).Value = "Assembled?";
-                worksheet.Cell(4, 8).Value = "Mounted?";
+                worksheet.Cell(4, 4).Value = "StringLengthInM";
+                worksheet.Cell(4, 5).Value = "StringToScaffoldingInM";
+                worksheet.Cell(4, 6).Value = "Y";
+                worksheet.Cell(4, 7).Value = "X";
+                worksheet.Cell(4, 8).Value = "Assembled?";
+                worksheet.Cell(4, 9).Value = "Mounted?";
                 worksheet.Row(4).Style.Font.Bold = true;
 
                 // body
@@ -176,17 +188,18 @@ public class InstallationFinal : MonoBehaviour
                     var line = fishString.GetManufacturingLine();
                     worksheet.Cell(row, 1).Value = line.stringNumber;
                     worksheet.Cell(row, 2).Value = line.fishCount;
-                    worksheet.Cell(row, 3).Value = line.stringSpacingInCm.ToString("F2");
-                    worksheet.Cell(row, 4).Value = line.stringToScaffoldingInM.ToString("F2");
-                    worksheet.Cell(row, 5).Value = line.yPosition;
-                    worksheet.Cell(row, 6).Value = line.xPosition;
+                    worksheet.Cell(row, 3).Value = line.stringSpacingInCm.ToString();
+                    worksheet.Cell(row, 4).Value = line.stringLengthInM.ToString();
+                    worksheet.Cell(row, 5).Value = line.stringToScaffoldingInM.ToString("F2");
+                    worksheet.Cell(row, 6).Value = line.yPosition;
+                    worksheet.Cell(row, 7).Value = line.xPosition;
                 }
                 worksheet.Range($"E4:E{row}").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
                 worksheet.Range($"F4:F{row}").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                 worksheet.Cell(2, 3).FormulaA1 =
-                    $"=IF(COUNTA(G5:G{row}) = 0, \"No...\", IF(COUNTBLANK(G5:G{row}) > 0, \"Somewhat?\", \"YES!\"))";
-                worksheet.Cell(2, 4).FormulaA1 =
                     $"=IF(COUNTA(H5:H{row}) = 0, \"No...\", IF(COUNTBLANK(H5:H{row}) > 0, \"Somewhat?\", \"YES!\"))";
+                worksheet.Cell(2, 4).FormulaA1 =
+                    $"=IF(COUNTA(I5:I{row}) = 0, \"No...\", IF(COUNTBLANK(I5:I{row}) > 0, \"Somewhat?\", \"YES!\"))";
                 worksheet.Columns().AdjustToContents();
                 foreach (var column in worksheet.ColumnsUsed())
                 {
@@ -205,10 +218,12 @@ public class InstallationFinal : MonoBehaviour
             workbook.SaveAs(filePath);
         }
         AssetManager.LoadLocation(manufacturingPath, manifestFile);
+        Debug.Log("InstallationFinal.CreateManifest() finished!");
     }
 
     private void CreateConfigs()
     {
+        Debug.Log("InstallationFinal.CreateConfigs() started!");
         AssetManager.CreateOrResetFolder(configPath);
         foreach (var section in layout.scaffolding)
         {
@@ -216,7 +231,6 @@ public class InstallationFinal : MonoBehaviour
             var config = new ReceiverConfig()
             {
                 universe = universe.universe,
-                channels = universe.channels,
                 strings = section.transform.childCount,
                 is_rgbw = true,
                 use_dhcp = false,
@@ -224,6 +238,7 @@ public class InstallationFinal : MonoBehaviour
             };
             AssetManager.WriteOutFile(configPath, config.ToFileName(), JsonUtility.ToJson(config));
         }
+        Debug.Log("InstallationFinal.CreateConfigs() finished!");
     }
 }
 

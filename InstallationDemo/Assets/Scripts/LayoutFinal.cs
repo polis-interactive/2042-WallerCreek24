@@ -102,6 +102,40 @@ public class LayoutFinal : MonoBehaviour
         meterBuckets[(int)Mathf.Ceil(distance) - 1] += 1;
     }
 
+    public void GetPrintScaffoldingDistances()
+    {
+        var centerPoints = new List<Vector3>();
+        foreach (var section in scaffolding)
+        {
+            centerPoints.Add(section.center);
+        }
+        var distances = new List<float>();
+        // for some reason, everything is in cm 
+        var cmToFt = 0.0328084f;
+        for (int i = 1; i < centerPoints.Count; i++)
+        {
+            var distance = Vector3.Distance(centerPoints[i], centerPoints[i - 1]);
+            distances.Add(distance * cmToFt);
+        }
+        var min = distances.Min().ToString("F2");
+        var max = distances.Max();
+        var average = distances.Average().ToString("F2");
+        Debug.Log($"Distances between scaffolding centers: min {min}; max {max.ToString("F2")}; average {average}");
+
+        var wireTail = Mathf.Round((max + 2) * 2.0f) / 2.0f;
+        Debug.Log($"Wire tail per box: {wireTail}");
+
+        var midPoint = Mathf.CeilToInt(distances.Count / 2.0f);
+        var firstHalf = distances.Take(midPoint).Sum();
+        var secondHalf = distances.Skip(midPoint).Sum();
+        Debug.Log($"Halfway distance: first {firstHalf.ToString("F2")}; second {secondHalf.ToString("F2")}");
+
+        var maxHalf = Mathf.Max(firstHalf, secondHalf);
+        var installationHeight = 18;
+        var wireToOrder = Mathf.Ceil(maxHalf + wireTail * midPoint + installationHeight * 2);
+        Debug.Log($"Wire to order: {wireToOrder}");
+    }
+
     public void PrintLayoutStats()
     {
         Debug.Log($"Max string length: {maxDistance}, Min String Length {minDistance}");

@@ -153,6 +153,7 @@ public class ScaffoldingSectionFinal : MonoBehaviour
         );
         var centerToPosition = (position - center).magnitude / 100.0f;
         var strLength = downPosition + centerToPosition + 0.65f;
+        fishString.SetStrLen(strLength);
         layout.SetStrLen(strLength);
         return fishStringConfig.fishCount;
     }

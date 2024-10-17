@@ -39,7 +39,7 @@ void SetupController(Controller &controller, const Config &config) {
     controller.led_count = config.strings * MaxString;
     const auto led_pixels = controller.is_rgbw ? 4 : 3;
     controller.pixel_count = led_pixels * controller.led_count;
-    const int ws_config = (config.is_rgbw ? WS2811_GRBW : WS2811_GRB) | WS2811_800kHz;
+    const int ws_config = (config.is_rgbw ? WS2811_WGRB : WS2811_GRB) | WS2811_800kHz;
     controller.output = std::make_unique<OctoWS2811>(
         MaxString, display_data, display_data, ws_config, config.strings, pinList
     );

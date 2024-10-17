@@ -23,6 +23,9 @@ public class FishStringFinal : MonoBehaviour
     [HideInInspector]
     public string yPosition;
 
+    [HideInInspector]
+    public int strLength;
+
     public float Initialize(
         FusionSplineFinal spline,
         GameObject fishPrefab,
@@ -77,11 +80,17 @@ public class FishStringFinal : MonoBehaviour
         }
     }
 
+    public void SetStrLen(float rawLength)
+    {
+        var intLength = Mathf.CeilToInt(rawLength);
+        strLength = Mathf.Min(Mathf.Max(intLength, 2), 4);
+    }
+
     public ManufacturingLine GetManufacturingLine()
     {
         var useScaffoldingDistance = Mathf.Round(stringToScaffoldingInM * 100.0f) / 100.0f;
         return new ManufacturingLine(
-            sectionNumber, stringNumber, fishCount, stringSpacingInCm, useScaffoldingDistance, xPosition, yPosition
+            sectionNumber, stringNumber, fishCount, stringSpacingInCm, strLength, useScaffoldingDistance, xPosition, yPosition
         );
     }
 }

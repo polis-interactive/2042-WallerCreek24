@@ -614,13 +614,14 @@ public struct ManufacturingLine
 {
     public ManufacturingLine(
         int sectionNumber, int stringNumber, int fishCount, float stringSpacingInCm,
-        float stringToScaffoldingInM, int xPosition, string yPosition
+        int stringLengthInM, float stringToScaffoldingInM, int xPosition, string yPosition
     )
     {
         this.sectionNumber = sectionNumber;
         this.stringNumber = stringNumber;
         this.fishCount = fishCount;
         this.stringSpacingInCm = stringSpacingInCm;
+        this.stringLengthInM = stringLengthInM;
         this.stringToScaffoldingInM = stringToScaffoldingInM;
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -629,6 +630,7 @@ public struct ManufacturingLine
     public int stringNumber { get; }
     public int fishCount { get; }
     public float stringSpacingInCm { get; }
+    public int stringLengthInM { get; }
     public float stringToScaffoldingInM { get; }
     public int xPosition { get; }
     public string yPosition { get; }
@@ -638,7 +640,6 @@ public struct ManufacturingLine
 public class ReceiverConfig
 {
     public int universe;
-    public int channels;
     public int strings;
     public bool is_rgbw;
     public bool use_dhcp;

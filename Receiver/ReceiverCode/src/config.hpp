@@ -99,12 +99,6 @@ void ReadConfig(Config &config) {
         infinitePrint("Universe is either missing from config, or has a non positive value");
     }
     
-    const int channels = doc["channels"] | 0;
-    if (channels <= 0) {
-        infinitePrint("Channels is either missing from config, or has a non positive value");
-    } else if (channels > 512) {
-        infinitePrint("Channels is bigger than an artnet universe");
-    }
     const int strings = doc["strings"] | 0;
     if (strings <= 0) {
         infinitePrint("Strings is either missing from config, or has a non positive value");
@@ -124,7 +118,7 @@ void ReadConfig(Config &config) {
     }
 
     config.universe = universe;
-    config.channels = channels;
+    config.channels = strings * MaxString * (is_rgbw ? 4 : 3);
     config.strings = strings;
     config.is_rgbw = is_rgbw;
     config.use_dhcp = use_dhcp;

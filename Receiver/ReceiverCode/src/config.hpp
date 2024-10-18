@@ -118,7 +118,7 @@ void ReadConfig(Config &config) {
     }
 
     config.universe = universe;
-    config.channels = strings * MaxString * (is_rgbw ? 4 : 3);
+    config.channels = MaxLeds * (is_rgbw ? 4 : 3);
     config.strings = strings;
     config.is_rgbw = is_rgbw;
     config.use_dhcp = use_dhcp;

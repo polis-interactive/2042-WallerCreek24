@@ -32,6 +32,8 @@ struct Controller {
     std::unique_ptr<OctoWS2811> output = nullptr;
 };
 
+void RunController(Controller &controller);
+
 
 void SetupController(Controller &controller, const Config &config) {
     controller.strings = config.strings;
@@ -39,9 +41,10 @@ void SetupController(Controller &controller, const Config &config) {
     controller.led_count = config.strings * MaxString;
     const auto led_pixels = controller.is_rgbw ? 4 : 3;
     controller.pixel_count = led_pixels * controller.led_count;
-    const int ws_config = (config.is_rgbw ? WS2811_WGRB : WS2811_GRB) | WS2811_800kHz;
+    // setting doesn't matter, just know what you're doing?
+    const int ws_config = (config.is_rgbw ? WS2811_GRBW : WS2811_GRB) | WS2811_800kHz;
     controller.output = std::make_unique<OctoWS2811>(
-        MaxString, display_data, display_data, ws_config, config.strings, pinList
+        MaxString, display_data, display_data, ws_config, MaxStrings, pinList
     );
     controller.output->begin();
     controller.output->show();
@@ -71,7 +74,7 @@ void SetupController(Controller &controller, const Config &config) {
             if (controller.is_rgbw) {
                 display_data[j * led_pixels + 3] = color.w;
             }
-            controller.output->show();
+            RunController(controller);
             delay(50);
         }
     }
@@ -80,7 +83,7 @@ void SetupController(Controller &controller, const Config &config) {
     for (int i = 0; i < 6; i++) {
         const uint8_t val = (i % 2) == 0 ? 128 : 0;
         memset(display_data, val, sizeof(display_data));
-        controller.output->show();
+        RunController(controller);
         if (i != 5) {
             delay(300);
         }
@@ -89,10 +92,31 @@ void SetupController(Controller &controller, const Config &config) {
 
 void UpdateController(Controller &controller, std::vector<uint8_t> data) {
     memset(display_data, 0, sizeof(display_data));
-    memcpy(display_data, data.data(), controller.pixel_count);
+    memcpy(display_data, data.data(), data.size());
+}
+
+static void swapBytes() {
+    uint8_t r, g, b, w;
+    for (size_t i = 0; i < sizeof(display_data); i += 4) {
+        // Assuming data is in r, g, b, w order:
+        // Swap in-place to convert to w, r, g, b order
+        r = display_data[i];     // Save r
+        g = display_data[i + 1]; // Save g
+        b = display_data[i + 2]; // Save b
+        w = display_data[i + 3]; // Save w
+
+        // Rearrange to w, r, g, b
+        display_data[i] = w;
+        display_data[i + 1] = r;
+        display_data[i + 2] = g;
+        display_data[i + 3] = b;
+    }
 }
 
 void RunController(Controller &controller) {
+    if (controller.is_rgbw) {
+        swapBytes();
+    }
     controller.output->show();
 }
 

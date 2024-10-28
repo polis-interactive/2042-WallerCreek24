@@ -13,7 +13,7 @@ public enum BaseFishState
 }
 
 [System.Serializable]
-public struct BaseFishConfig
+public struct BaseFishConfig: IConfigurable
 {
     public byte minLowValue;
     public byte maxLowValue;

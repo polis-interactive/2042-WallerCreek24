@@ -81,7 +81,7 @@ struct Artnet {
 
 void SetupArtnet(Artnet &artnet, const Config &config) {
     artnet.universe = config.universe;
-    artnet.data = std::vector<uint8_t>(config.channels, 0);
+    artnet.data = std::vector<uint8_t>(MaxLeds * (config.is_rgbw ? 4 : 3), 0);
     artnet.local_address = qn::Ethernet.localIP();
     artnet.broadcast_address = artnet.local_address;
     artnet.broadcast_address[0] = 255;

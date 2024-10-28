@@ -1,4 +1,5 @@
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,12 +24,12 @@ public class InstallationFinal : MonoBehaviour
     public int hogwireSpacingYInInches = 4;
 
     public List<FishStringConfigFinal> fishStrings = new List<FishStringConfigFinal>() {
-        new FishStringConfigFinal() { fishCount = 2, stringSpacingInCm = 20, stringTailInCm = 15 },
-        new FishStringConfigFinal() { fishCount = 2, stringSpacingInCm = 40, stringTailInCm = 15 },
-        new FishStringConfigFinal() { fishCount = 3, stringSpacingInCm = 20, stringTailInCm = 15 },
-        new FishStringConfigFinal() { fishCount = 3, stringSpacingInCm = 40, stringTailInCm = 15 },
-        new FishStringConfigFinal() { fishCount = 4, stringSpacingInCm = 20, stringTailInCm = 15 },
-        new FishStringConfigFinal() { fishCount = 4, stringSpacingInCm = 30, stringTailInCm = 15 },
+        new FishStringConfigFinal() { fishCount = 2, stringSpacingInCm = 20, stringTailInCm = 15, unit = 'A' },
+        new FishStringConfigFinal() { fishCount = 2, stringSpacingInCm = 40, stringTailInCm = 15, unit = 'B' },
+        new FishStringConfigFinal() { fishCount = 3, stringSpacingInCm = 20, stringTailInCm = 15, unit = 'C' },
+        new FishStringConfigFinal() { fishCount = 3, stringSpacingInCm = 40, stringTailInCm = 15, unit = 'D' },
+        new FishStringConfigFinal() { fishCount = 4, stringSpacingInCm = 20, stringTailInCm = 15, unit = 'E' },
+        new FishStringConfigFinal() { fishCount = 4, stringSpacingInCm = 30, stringTailInCm = 15, unit = 'F' },
     };
 
     public bool drawVolume = false;
@@ -153,6 +154,24 @@ public class InstallationFinal : MonoBehaviour
             manifestSheet.Cell(2, 1).Value = "All Sections";
             manifestSheet.Cell(2, 1).Style.Font.Bold = true;
             var manifestRow = 2;
+            var keySheet = workbook.Worksheets.Add("Unit Key");
+            keySheet.Cell(1, 1).Value = "Unit";
+            keySheet.Cell(1, 2).Value = "Avail";
+            keySheet.Cell(1, 3).Value = "Qty";
+            keySheet.Cell(1, 4).Value = "Fish Count";
+            keySheet.Cell(1, 5).Value = "OnCenterSpacingInCm";
+            keySheet.Row(1).Style.Font.Bold = true;
+            var keyRow = 1;
+            foreach (var stringConfig in layout.stringHelper.FishStringsUsed())
+            {
+                keyRow += 1;
+                keySheet.Cell(keyRow, 1).Value = stringConfig.Item1.unit.ToString();
+                keySheet.Cell(keyRow, 2).Value = stringConfig.Item1.available.ToString();
+                keySheet.Cell(keyRow, 3).Value = stringConfig.Item2.ToString();
+                keySheet.Cell(keyRow, 4).Value = stringConfig.Item1.fishCount.ToString();
+                keySheet.Cell(keyRow, 5).Value = stringConfig.Item1.onCenterSpacingInCm.ToString();
+            }
+            keySheet.Columns().AdjustToContents();
             foreach (var section in layout.scaffolding)
             {
                 // add to the manifest file
@@ -169,14 +188,13 @@ public class InstallationFinal : MonoBehaviour
                 worksheet.Row(1).Style.Font.Bold = true;
                 // titles
                 worksheet.Cell(4, 1).Value = "StringNumber";
-                worksheet.Cell(4, 2).Value = "FishCount";
-                worksheet.Cell(4, 3).Value = "StringSpacingInCm";
-                worksheet.Cell(4, 4).Value = "StringLengthInM";
-                worksheet.Cell(4, 5).Value = "StringToScaffoldingInM";
-                worksheet.Cell(4, 6).Value = "Y";
-                worksheet.Cell(4, 7).Value = "X";
-                worksheet.Cell(4, 8).Value = "Assembled?";
-                worksheet.Cell(4, 9).Value = "Mounted?";
+                worksheet.Cell(4, 2).Value = "Unit";
+                worksheet.Cell(4, 3).Value = "StringLengthInM";
+                worksheet.Cell(4, 4).Value = "StringToScaffoldingInM";
+                worksheet.Cell(4, 5).Value = "Y";
+                worksheet.Cell(4, 6).Value = "X";
+                worksheet.Cell(4, 7).Value = "Assembled?";
+                worksheet.Cell(4, 8).Value = "Mounted?";
                 worksheet.Row(4).Style.Font.Bold = true;
 
                 // body
@@ -187,19 +205,18 @@ public class InstallationFinal : MonoBehaviour
                     row++;
                     var line = fishString.GetManufacturingLine();
                     worksheet.Cell(row, 1).Value = line.stringNumber;
-                    worksheet.Cell(row, 2).Value = line.fishCount;
-                    worksheet.Cell(row, 3).Value = line.stringSpacingInCm.ToString();
-                    worksheet.Cell(row, 4).Value = line.stringLengthInM.ToString();
-                    worksheet.Cell(row, 5).Value = line.stringToScaffoldingInM.ToString("F2");
-                    worksheet.Cell(row, 6).Value = line.yPosition;
-                    worksheet.Cell(row, 7).Value = line.xPosition;
+                    worksheet.Cell(row, 2).Value = line.unit.ToString();
+                    worksheet.Cell(row, 3).Value = line.stringLengthInM.ToString();
+                    worksheet.Cell(row, 4).Value = line.stringToScaffoldingInM.ToString("F2");
+                    worksheet.Cell(row, 5).Value = line.yPosition;
+                    worksheet.Cell(row, 6).Value = line.xPosition;
                 }
                 worksheet.Range($"E4:E{row}").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
                 worksheet.Range($"F4:F{row}").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
                 worksheet.Cell(2, 3).FormulaA1 =
-                    $"=IF(COUNTA(H5:H{row}) = 0, \"No...\", IF(COUNTBLANK(H5:H{row}) > 0, \"Somewhat?\", \"YES!\"))";
+                    $"=IF(COUNTA(G5:G{row}) = 0, \"No...\", IF(COUNTBLANK(G5:G{row}) > 0, \"Somewhat?\", \"YES!\"))";
                 worksheet.Cell(2, 4).FormulaA1 =
-                    $"=IF(COUNTA(I5:I{row}) = 0, \"No...\", IF(COUNTBLANK(I5:I{row}) > 0, \"Somewhat?\", \"YES!\"))";
+                    $"=IF(COUNTA(H5:H{row}) = 0, \"No...\", IF(COUNTBLANK(H5:H{row}) > 0, \"Somewhat?\", \"YES!\"))";
                 worksheet.Columns().AdjustToContents();
                 foreach (var column in worksheet.ColumnsUsed())
                 {
@@ -231,7 +248,6 @@ public class InstallationFinal : MonoBehaviour
             var config = new ReceiverConfig()
             {
                 universe = universe.universe,
-                strings = section.transform.childCount,
                 is_rgbw = true,
                 use_dhcp = false,
                 local_ip = section.universe.address.ToString()

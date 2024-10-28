@@ -50,13 +50,14 @@ public class FishFinal : MonoBehaviour, ConfigurableObject
         material = renderer.material;
 
         var config = GetComponentInParent<InstallationConfig>();
-        config.AddConfigCallback(this);
+        config.RegisterForUpdates<BaseFishConfig>(this, false);
+        config.RegisterForUpdates<DisplayConfig>(this);
     }
 
     public void OnConfigChange(InstallationConfig config)
     {
         baseFish = new BaseFish(config.baseFishConfig);
-        lightTemperatureColor = config.lightTemperatureColor;
+        lightTemperatureColor = config.displayConfig.lightTemperatureColor;
     }
 
     public void RunUpdate(bool writeToFish)

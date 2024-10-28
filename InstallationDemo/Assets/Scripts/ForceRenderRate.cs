@@ -15,12 +15,12 @@ public class ForceRenderRate : MonoBehaviour, ConfigurableObject
         {
             throw new System.Exception("InstallationController.Start() config not found");
         }
-        config.AddConfigCallback(this);
+        config.RegisterForUpdates<RenderConfig>(this);
     }
 
     public void OnConfigChange(InstallationConfig config)
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = config.frameRate;
+        Application.targetFrameRate = config.renderConfig.frameRate;
     }
 }

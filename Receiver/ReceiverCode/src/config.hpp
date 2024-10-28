@@ -31,8 +31,6 @@ std::string config_file_suffix = ".json";
 
 struct Config {
     int universe;
-    int channels;
-    int strings;
     bool is_rgbw;
     bool use_dhcp;
     IPAddress local_ip;
@@ -98,13 +96,6 @@ void ReadConfig(Config &config) {
     if (universe < 0) {
         infinitePrint("Universe is either missing from config, or has a non positive value");
     }
-    
-    const int strings = doc["strings"] | 0;
-    if (strings <= 0) {
-        infinitePrint("Strings is either missing from config, or has a non positive value");
-    } else if (strings > MaxStrings) {
-        infinitePrint("Strings is larger than physical outputs");
-    }
 
     const bool is_rgbw = doc["is_rgbw"] | false;
 
@@ -118,8 +109,6 @@ void ReadConfig(Config &config) {
     }
 
     config.universe = universe;
-    config.channels = MaxLeds * (is_rgbw ? 4 : 3);
-    config.strings = strings;
     config.is_rgbw = is_rgbw;
     config.use_dhcp = use_dhcp;
 }

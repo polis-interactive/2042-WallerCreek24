@@ -26,9 +26,6 @@ byte pinList[MaxStrings] = {
 
 struct Controller {
     bool is_rgbw = false;
-    int led_count = 0;
-    int pixel_count = 0;
-    int strings = 0;
     std::unique_ptr<OctoWS2811> output = nullptr;
 };
 
@@ -36,11 +33,8 @@ void RunController(Controller &controller);
 
 
 void SetupController(Controller &controller, const Config &config) {
-    controller.strings = config.strings;
     controller.is_rgbw = config.is_rgbw;
-    controller.led_count = config.strings * MaxString;
     const auto led_pixels = controller.is_rgbw ? 4 : 3;
-    controller.pixel_count = led_pixels * controller.led_count;
     // setting doesn't matter, just know what you're doing?
     const int ws_config = (config.is_rgbw ? WS2811_GRBW : WS2811_GRB) | WS2811_800kHz;
     controller.output = std::make_unique<OctoWS2811>(
@@ -66,7 +60,7 @@ void SetupController(Controller &controller, const Config &config) {
             Serial.println("White Chase");
             color.w = 255;
         }
-        for (int j = 0; j < controller.led_count; ++j) {
+        for (int j = 0; j < MaxLeds; ++j) {
             memset(display_data, 0, sizeof(display_data));
             display_data[j * led_pixels] = color.r;
             display_data[j * led_pixels + 1] = color.g;
@@ -100,16 +94,16 @@ static void swapBytes() {
     for (size_t i = 0; i < sizeof(display_data); i += 4) {
         // Assuming data is in r, g, b, w order:
         // Swap in-place to convert to w, r, g, b order
-        r = display_data[i];     // Save r
+        // r = display_data[i];     // Save r
         g = display_data[i + 1]; // Save g
         b = display_data[i + 2]; // Save b
-        w = display_data[i + 3]; // Save w
+        // w = display_data[i + 3]; // Save w
 
         // Rearrange to w, r, g, b
-        display_data[i] = w;
-        display_data[i + 1] = r;
+        // display_data[i] = r;
+        display_data[i + 1] = b;
         display_data[i + 2] = g;
-        display_data[i + 3] = b;
+        // display_data[i + 3] = w;
     }
 }
 

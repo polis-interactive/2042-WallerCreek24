@@ -1,0 +1,51 @@
+{
+  "name": "interactionwifidesktop",
+  "productName": "interactionwifidesktop",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": ".vite/build/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron-forge/plugin-vite": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "electron": "33.0.1",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.31.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~4.5.4",
+    "vite": "^5.4.9"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Bruce Wilcoxon",
+    "email": "brucewilcoxon@twigi-bi.io"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@primevue/themes": "^4.1.1",
+    "@xstate/vue": "^3.1.4",
+    "electron-squirrel-startup": "^1.0.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.1.1",
+    "safe-stable-stringify": "^2.5.0",
+    "tailwind": "^4.0.0",
+    "vue": "^3.5.12",
+    "xstate": "^5.18.2"
+  }
+}

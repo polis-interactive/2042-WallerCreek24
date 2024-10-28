@@ -297,6 +297,9 @@ public struct FishStringConfigFinal : IComparable<FishStringConfigFinal>
     public int fishCount;
     public float stringSpacingInCm;
     public float stringTailInCm;
+    public char unit;
+    public float onCenterSpacingInCm;
+    public int available;
     public float stringLength
     {
         get
@@ -410,6 +413,14 @@ public class LayoutHelperFinal
         }
         Debug.Log($"Total strings used: {_stringsUsed.Sum()}");
         // Debug.Log($"Longest entry : {maxEntryDistance}; shortest entry: {minEntryDistance} Longest span: {maxSpan}");
+    }
+
+    public List<Tuple<FishStringConfigFinal, int>> FishStringsUsed()
+    {
+        return _fishStrings.Zip(
+            _stringsUsed,
+            (x, y) => new Tuple<FishStringConfigFinal, int>(x, y)
+        ).ToList();
     }
 
     private List<FishStringConfigFinal> _fishStrings;
@@ -613,14 +624,13 @@ public struct TPoint
 public struct ManufacturingLine
 {
     public ManufacturingLine(
-        int sectionNumber, int stringNumber, int fishCount, float stringSpacingInCm,
+        int sectionNumber, int stringNumber, char unit,
         int stringLengthInM, float stringToScaffoldingInM, int xPosition, string yPosition
     )
     {
         this.sectionNumber = sectionNumber;
         this.stringNumber = stringNumber;
-        this.fishCount = fishCount;
-        this.stringSpacingInCm = stringSpacingInCm;
+        this.unit = unit;
         this.stringLengthInM = stringLengthInM;
         this.stringToScaffoldingInM = stringToScaffoldingInM;
         this.xPosition = xPosition;
@@ -628,8 +638,7 @@ public struct ManufacturingLine
     }
     public int sectionNumber { get; }
     public int stringNumber { get; }
-    public int fishCount { get; }
-    public float stringSpacingInCm { get; }
+    public char unit { get; }
     public int stringLengthInM { get; }
     public float stringToScaffoldingInM { get; }
     public int xPosition { get; }
@@ -640,7 +649,6 @@ public struct ManufacturingLine
 public class ReceiverConfig
 {
     public int universe;
-    public int strings;
     public bool is_rgbw;
     public bool use_dhcp;
     public string local_ip;

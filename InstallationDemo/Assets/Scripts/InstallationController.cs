@@ -44,12 +44,12 @@ public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedS
         {
             throw new System.Exception("InstallationController.Start() config not found");
         }
-        config.AddConfigCallback(this);
+        config.RegisterForUpdates<ArtnetConfig>(this);
     }
 
     public void OnConfigChange(InstallationConfig config)
     {
-        loopbackArtnet = config.loopbackArtnet;
+        loopbackArtnet = config.artnetConfig.useLoopback;
         dmxSendQueue = new ConcurrentQueue<Dictionary<int, DmxSpecifier>>();
         dmxReceiveDict = new ConcurrentDictionary<int, byte[]>();
         var dmxDict = new Dictionary<int, DmxSpecifier>();

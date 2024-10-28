@@ -9,6 +9,9 @@ public class FishStringFinal : MonoBehaviour
     public int stringNumber;
 
     [HideInInspector]
+    public char unit;
+
+    [HideInInspector]
     public int fishCount;
 
     [HideInInspector]
@@ -36,6 +39,7 @@ public class FishStringFinal : MonoBehaviour
         int yPosition
     )
     {
+        unit = fishStringConfig.unit;
         fishCount = fishStringConfig.fishCount;
         stringSpacingInCm = (int) fishStringConfig.stringSpacingInCm;
         this.xPosition = xPosition;
@@ -90,7 +94,7 @@ public class FishStringFinal : MonoBehaviour
     {
         var useScaffoldingDistance = Mathf.Round(stringToScaffoldingInM * 100.0f) / 100.0f;
         return new ManufacturingLine(
-            sectionNumber, stringNumber, fishCount, stringSpacingInCm, strLength, useScaffoldingDistance, xPosition, yPosition
+            sectionNumber, stringNumber, unit, strLength, useScaffoldingDistance, xPosition, yPosition
         );
     }
 }

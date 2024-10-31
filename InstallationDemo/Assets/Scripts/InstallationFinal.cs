@@ -1,5 +1,6 @@
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Polis.UArtnet.Device;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -64,6 +65,7 @@ public class InstallationFinal : MonoBehaviour
         GenerateStrings();
         OrderStrings();
         GetPrintStats();
+        MarkSectionsDirty();
         EditorSceneManager.MarkSceneDirty(gameObject.scene);
         Debug.Log("InstallationFinal.Recreate() finished");
     }
@@ -130,6 +132,14 @@ public class InstallationFinal : MonoBehaviour
             }
         }
         Debug.Log("InstallationFinal.OrderStrings() finished!");
+    }
+
+    private void MarkSectionsDirty()
+    {
+        foreach (var section in layout.scaffolding)
+        {
+            EditorUtility.SetDirty(section.universe);
+        }
     }
 
     private void GetPrintStats()

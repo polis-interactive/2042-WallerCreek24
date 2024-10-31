@@ -154,6 +154,7 @@ public class InstallationFinal : MonoBehaviour
             manifestSheet.Cell(2, 1).Value = "All Sections";
             manifestSheet.Cell(2, 1).Style.Font.Bold = true;
             var manifestRow = 2;
+
             var keySheet = workbook.Worksheets.Add("Unit Key");
             keySheet.Cell(1, 1).Value = "Unit";
             keySheet.Cell(1, 2).Value = "Avail";
@@ -171,26 +172,52 @@ public class InstallationFinal : MonoBehaviour
                 keySheet.Cell(keyRow, 4).Value = stringConfig.Item1.fishCount.ToString();
                 keySheet.Cell(keyRow, 5).Value = stringConfig.Item1.onCenterSpacingInCm.ToString();
             }
+
+            keyRow += 2;
+            keySheet.Cell(keyRow, 1).Value = "WireLength";
+            keySheet.Cell(keyRow, 2).Value = "Avail";
+            keySheet.Cell(keyRow, 3).Value = "Qty";
+            keySheet.Row(keyRow).Style.Font.Bold = true;
+
+            keyRow += 1;
+            keySheet.Cell(keyRow, 1).Value = "2";
+            keySheet.Cell(keyRow, 2).Value = "115";
+            keySheet.Cell(keyRow, 3).Value = (layout.meterBuckets[0] + layout.meterBuckets[1]).ToString();
+
+            keyRow += 1;
+            keySheet.Cell(keyRow, 1).Value = "3";
+            keySheet.Cell(keyRow, 2).Value = "225";
+            keySheet.Cell(keyRow, 3).Value = layout.meterBuckets[2].ToString();
+
+            keyRow += 1;
+            keySheet.Cell(keyRow, 1).Value = "4";
+            keySheet.Cell(keyRow, 2).Value = "90";
+            keySheet.Cell(keyRow, 3).Value = (layout.meterBuckets[3] + layout.meterBuckets[4]).ToString();
+
             keySheet.Columns().AdjustToContents();
+
             foreach (var section in layout.scaffolding)
             {
+                // create section sheet
+                var worksheet = workbook.Worksheets.Add(section.name);
+
                 // add to the manifest file
                 manifestRow++;
                 manifestSheet.Cell(manifestRow, 1).Value = section.name;
                 manifestSheet.Cell(manifestRow, 2).FormulaA1 = $"='{section.name}'!C2";
                 manifestSheet.Cell(manifestRow, 3).FormulaA1 = $"='{section.name}'!D2";
-                // create section sheet
-                var worksheet = workbook.Worksheets.Add(section.name);
+
                 // header
                 worksheet.Cell(1, 1).Value = section.name;
                 worksheet.Cell(1, 3).Value = "Assembled?";
                 worksheet.Cell(1, 4).Value = "Mounted?";
                 worksheet.Row(1).Style.Font.Bold = true;
+
                 // titles
                 worksheet.Cell(4, 1).Value = "StringNumber";
                 worksheet.Cell(4, 2).Value = "Unit";
                 worksheet.Cell(4, 3).Value = "StringLengthInM";
-                worksheet.Cell(4, 4).Value = "StringToScaffoldingInM";
+                worksheet.Cell(4, 4).Value = "TopOfFishToScaffoldingInM";
                 worksheet.Cell(4, 5).Value = "Y";
                 worksheet.Cell(4, 6).Value = "X";
                 worksheet.Cell(4, 7).Value = "Assembled?";
@@ -207,7 +234,7 @@ public class InstallationFinal : MonoBehaviour
                     worksheet.Cell(row, 1).Value = line.stringNumber;
                     worksheet.Cell(row, 2).Value = line.unit.ToString();
                     worksheet.Cell(row, 3).Value = line.stringLengthInM.ToString();
-                    worksheet.Cell(row, 4).Value = line.stringToScaffoldingInM.ToString("F2");
+                    worksheet.Cell(row, 4).Value = (line.stringToScaffoldingInM - 0.106).ToString("F2");
                     worksheet.Cell(row, 5).Value = line.yPosition;
                     worksheet.Cell(row, 6).Value = line.xPosition;
                 }

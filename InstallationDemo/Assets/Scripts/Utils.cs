@@ -245,6 +245,31 @@ public class SectionFinal
         }
     }
 
+    public Vector3 Right
+    {
+        get
+        {
+            {
+                if (!isTriangle)
+                {
+                    return xAxisPoint + (furthestPoint - xAxisPoint) / 2.0f - xAxisDirection * 0.3048f * 100.0f;
+                }
+                // find which is the hyp
+                if ((finalPoint - xAxisPoint).magnitude > (finalPoint - originPoint).magnitude)
+                {
+                    var point = xAxisPoint + (finalPoint - xAxisPoint) / 2.0f;
+                    var dir = (point - originPoint).normalized;
+                    return point - dir * 0.3048f * 100.0f;
+                } else
+                {
+                    var hypPoint = originPoint + (finalPoint - originPoint) / 2.0f;
+                    var dir = (xAxisPoint - hypPoint).normalized;
+                    return  xAxisPoint - dir * 0.3048f * 100.0f;
+                }
+            }
+        }
+    }
+
     public Vector3 GetRandomPoint(float xSpacing, float ySpacing)
     {
         Vector3 randomPoint;

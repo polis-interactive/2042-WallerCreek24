@@ -35,7 +35,9 @@ public class LayoutFinal : MonoBehaviour
 
     private float minDistance;
     private float maxDistance;
-    private List<int> meterBuckets;
+
+    [HideInInspector]
+    public List<int> meterBuckets;
 
 
     public void Setup(LayoutFinalConfig config)

@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Text.RegularExpressions;
 using Polis.UArtnet.Device;
 using System.Net;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 
 [RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(Universe))]
@@ -22,6 +23,8 @@ public class ScaffoldingSectionFinal : MonoBehaviour
     public float area = 0.0f;
     [HideInInspector]
     public Vector3 center = Vector3.zero;
+    [HideInInspector]
+    public Vector3 right = Vector3.zero;
     [HideInInspector]
     public int sectionNumber;
 
@@ -58,6 +61,7 @@ public class ScaffoldingSectionFinal : MonoBehaviour
         Debug.Log($"{name} - Relative: {relativeSection.GetString()}");
         area = section.Area;
         center = section.Center;
+        right = section.Right;
         drawScaffolding = _drawScaffolding;
         drawGizmos = _drawGizmos;
         if (!drawScaffolding)
@@ -151,8 +155,10 @@ public class ScaffoldingSectionFinal : MonoBehaviour
         var downPosition = fishString.Initialize(
             layout.spline, fishPrefab, fishStringConfig, collision, sectionNumber, gridX, gridY
         );
-        var centerToPosition = (position - center).magnitude / 100.0f;
-        var strLength = downPosition + centerToPosition + 0.65f;
+        // var centerToPosition = (position - center).magnitude / 100.0f;
+        // var strLength = downPosition + centerToPosition + 0.65f;
+        var rightToPosition = (position - right).magnitude / 100.0f;
+        var strLength = downPosition + rightToPosition + 0.5f;
         fishString.SetStrLen(strLength);
         layout.SetStrLen(strLength);
         return fishStringConfig.fishCount;
@@ -182,6 +188,10 @@ public class ScaffoldingSectionFinal : MonoBehaviour
         }
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.TransformPoint(section.finalPoint), 0.1f);
+        Gizmos.DrawRay(transform.TransformPoint(section.originPoint), transform.TransformDirection(section.xAxisDirection));
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(transform.TransformPoint(section.Right), 0.1f);
         Gizmos.DrawRay(transform.TransformPoint(section.originPoint), transform.TransformDirection(section.xAxisDirection));
     }
 }

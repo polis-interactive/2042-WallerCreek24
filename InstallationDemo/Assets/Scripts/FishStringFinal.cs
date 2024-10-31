@@ -53,7 +53,7 @@ public class FishStringFinal : MonoBehaviour
         }
         this.sectionNumber = sectionNumber;
         var padding = collision.exitDistance - fishStringConfig.stringLength;
-        stringToScaffoldingInM = collision.entryDistance + FishStringConfigFinal.fishHeightInM + UnityEngine.Random.Range(0.0f, 1.0f) * padding;
+        stringToScaffoldingInM = Mathf.Max(collision.entryDistance + FishStringConfigFinal.fishHeightInM + UnityEngine.Random.Range(0.0f, 1.0f) * padding, FishStringConfigFinal.fishHeightInM);
         for (int i = 0; i < fishStringConfig.fishCount; i++)
         {
             var fish = Instantiate(fishPrefab);

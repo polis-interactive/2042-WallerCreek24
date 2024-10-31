@@ -16,3 +16,13 @@ needs parameters:
 - fish is 
 - 302 mm long
 - 165 mm from lips to COM
+
+Installation notes:
+- max fish per section: 71, 213W, 8.875A max, 10.65A with saftey factor (although maybe max is fine, since we won't be running full blast?)
+- all sections will fit in an individual universe!
+
+175mm x 115mm
+
+- change to 4mm clearance in the y on connectors
+- find a jlcpcb part for the teensy headers
+- check harder for upright ethernet jack

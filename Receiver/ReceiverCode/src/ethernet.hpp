@@ -15,6 +15,9 @@ namespace qn = qindesign::network;
 constexpr uint32_t kDHCPTimeout = 15'000;  // 15 seconds
 
 void SetupEthernet(qn::EthernetUDP &udp, const Config &config) {
+    if (!config.use_dhcp) {
+      qn::Ethernet.setDHCPEnabled(false);
+    }
     if (!qn::Ethernet.begin()) {
         infinitePrint("Failed to startup ethernet manager");
     }

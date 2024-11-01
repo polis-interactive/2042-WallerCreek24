@@ -84,11 +84,6 @@ void SetupController(Controller &controller, const Config &config) {
     }
 }
 
-void UpdateController(Controller &controller, std::vector<uint8_t> data) {
-    memset(display_data, 0, sizeof(display_data));
-    memcpy(display_data, data.data(), data.size());
-}
-
 static void swapBytes() {
     uint8_t r, g, b, w;
     for (size_t i = 0; i < sizeof(display_data); i += 4) {
@@ -107,10 +102,15 @@ static void swapBytes() {
     }
 }
 
-void RunController(Controller &controller) {
+void UpdateController(Controller &controller, std::vector<uint8_t> data) {
+    memset(display_data, 0, sizeof(display_data));
+    memcpy(display_data, data.data(), data.size());
     if (controller.is_rgbw) {
-        swapBytes();
+      swapBytes();
     }
+}
+
+void RunController(Controller &controller) {
     controller.output->show();
 }
 

@@ -1,7 +1,5 @@
 
-
-using Polis.UArtnet;
-using Polis.UArtnet.Network;
+using System.Net;
 using Polis.UArtnet.Packets;
 using System.Collections.Generic;
 using System;
@@ -24,9 +22,14 @@ namespace Polis.UArtnet.Network
         private CancellationTokenSource cancellationTokenSource;
         private Task sendingTask;
         public bool IsRunning => sendingTask is { IsCanceled: false, IsCompleted: false };
-        private UdpSender sender = new UdpSender(6454);
         private ConcurrentQueue<(QueuedSender, Dictionary<int, DmxSpecifier>)> sendQueue = new();
         readonly object syncPrimitive = new object();
+        private UdpSender sender;
+
+        public ArtNetSender(IPAddress? localAddress = null)
+        {
+            sender = new UdpSender(6454, localAddress);
+        }
 
         public void IntializeSender(int universes)
         {

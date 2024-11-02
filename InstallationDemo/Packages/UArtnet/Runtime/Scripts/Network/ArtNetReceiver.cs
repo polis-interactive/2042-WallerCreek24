@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 namespace Polis.UArtnet.Network
 {
-    public interface DmxReceiver
+    public interface ArtNetReceiverCallback
     {
         public void ReceiveDmxPacket(DmxPacket packet);
     }
@@ -16,14 +16,20 @@ namespace Polis.UArtnet.Network
     public class ArtNetReceiver
     {
 
-        private UdpReceiver UdpReceiver { get; } = new(6454);
-        private DmxReceiver receiver;
+        private UdpReceiver udpReceiver;
+        private ArtNetReceiverCallback receiver;
+        private bool ignoreSelf;
 
-        public void InitializeReceiver(DmxReceiver receiver)
+        public ArtNetReceiver(bool ignoreSelf = true)
+        {
+            udpReceiver = new(6454, ignoreSelf);
+        }
+
+        public void InitializeReceiver(ArtNetReceiverCallback receiver)
         {
             this.receiver = receiver;
-            UdpReceiver.OnReceivedPacket = OnReceivedPacket;
-            UdpReceiver.StartReceive();
+            udpReceiver.OnReceivedPacket = OnReceivedPacket;
+            udpReceiver.StartReceive();
         }
 
         private void OnReceivedPacket(byte[] receiveBuffer, int length, EndPoint remoteEp)

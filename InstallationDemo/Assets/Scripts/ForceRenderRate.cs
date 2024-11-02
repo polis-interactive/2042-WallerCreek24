@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class ForceRenderRate : MonoBehaviour, ConfigurableObject
+public class ForceRenderRate : MonoBehaviour
 {
 
     void Start()
@@ -15,12 +15,12 @@ public class ForceRenderRate : MonoBehaviour, ConfigurableObject
         {
             throw new System.Exception("InstallationController.Start() config not found");
         }
-        config.RegisterForUpdates<RenderConfig>(this);
+        config.RegisterForUpdates<FrameRateConfig>(OnFrameRateConfigChange);
     }
 
-    public void OnConfigChange(InstallationConfig config)
+    public void OnFrameRateConfigChange(InstallationConfig config)
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = config.renderConfig.frameRate;
+        Application.targetFrameRate = config.frameRateConfig.frameRate;
     }
 }

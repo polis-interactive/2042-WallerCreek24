@@ -7,19 +7,21 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using UnityEngine;
 
-public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedSender, DmxReceiver
+public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceiverCallback
 {
-    private bool loopbackArtnet = false;
+    private ArtnetStrategy artnetStrategy = ArtnetStrategy.Loopback;
 
     private List<Universe> universes;
     private List<FishFinal> fishes;
 
     private ConcurrentQueue<Dictionary<int, DmxSpecifier>> dmxSendQueue;
     private ConcurrentDictionary<int, byte[]> dmxReceiveDict;
-    private ArtNetSender sender = new();
-    private ArtNetReceiver receiver = new();
+    private ArtNetSender sender;
+    private ArtNetReceiver receiver;
 
     void Start()
     {
@@ -32,8 +34,6 @@ public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedS
         {
             universe.Attach();
         }
-        sender.IntializeSender(universes.Count);
-        receiver.InitializeReceiver(this);
         fishes = GetComponentsInChildren<FishFinal>().ToList();
         if (fishes.Count == 0)
         {
@@ -44,18 +44,42 @@ public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedS
         {
             throw new System.Exception("InstallationController.Start() config not found");
         }
-        config.RegisterForUpdates<ArtnetConfig>(this);
+        config.RegisterForUpdates<ArtnetConfig>(OnArtnetConfigChange);
     }
 
-    public void OnConfigChange(InstallationConfig config)
+    IPAddress tryGetLocalIp()
     {
-        loopbackArtnet = config.artnetConfig.useLoopback;
+        var interfaces = NetworkInterface
+            .GetAllNetworkInterfaces()
+            .Where(i => i.OperationalStatus == OperationalStatus.Up)
+            .SelectMany(i => i.GetIPProperties().UnicastAddresses)
+            .Where(ip => ip.Address.AddressFamily == AddressFamily.InterNetwork);
+
+        foreach (var ipInfo in interfaces)
+        {
+            if (ipInfo.Address.ToString().StartsWith("10."))
+            {
+                return ipInfo.Address;
+            }
+        }
+        Debug.Log("InstallationController.tryGetLocalIp() couldn't find ethernet; you're going to have a bad time");
+        return null;
+    }
+
+    public void OnArtnetConfigChange(InstallationConfig config)
+    {
+        artnetStrategy = config.artnetConfig.artnetStrategy;
         dmxSendQueue = new ConcurrentQueue<Dictionary<int, DmxSpecifier>>();
         dmxReceiveDict = new ConcurrentDictionary<int, byte[]>();
         var dmxDict = new Dictionary<int, DmxSpecifier>();
         foreach(var universe in universes)
         {
-            var ipAddress = loopbackArtnet ? new IPAddress(new byte[] { 127, 0, 0, 1 }) : universe.ipAddress;
+            var ipAddress = artnetStrategy == ArtnetStrategy.Loopback
+                ? new IPAddress(new byte[] { 127, 0, 0, 1 })
+                : artnetStrategy == ArtnetStrategy.Broadcast
+                ? new IPAddress(new byte[] { 255, 255, 255, 255 })
+                : universe.ipAddress
+            ;
             var dmxEntry = new DmxSpecifier()
             {
                 ipAddress = ipAddress,
@@ -68,12 +92,37 @@ public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedS
         var dmxDictCopy = new Dictionary<int, DmxSpecifier>(dmxDict);
         EnqueueDmxDict(dmxDictCopy);
         EnqueueDmxDict(dmxDict);
+        IPAddress localAddr = null;
+        if (!loopbackArtnet)
+        {
+            localAddr = tryGetLocalIp();
+        }
+        sender = new(localAddr);
+        sender.IntializeSender(universes.Count);
+        // ignoreSelf if !loopbackArtnet
+        receiver = new(!loopbackArtnet);
+        receiver.InitializeReceiver(this);
+        // start polling task if not loopback artnet
     }
 
     public void EnqueueDmxDict(Dictionary<int, DmxSpecifier> dmxDict)
     {
         var isLoopback = IPAddress.IsLoopback(dmxDict[0].ipAddress);
-        if (isLoopback == loopbackArtnet)
+        var isBroadcast = IPAddress.Broadcast.Equals(dmxDict[0].ipAddress);
+        bool doEnqueue;
+        switch(artnetStrategy)
+        {
+            case ArtnetStrategy.Broadcast:
+                doEnqueue = isBroadcast;
+                break;
+            case ArtnetStrategy.Loopback:
+                doEnqueue = isLoopback;
+                break;
+            default:
+                doEnqueue = !isBroadcast && !isLoopback;
+                break;
+        }
+        if (doEnqueue)
         {
             dmxSendQueue.Enqueue(dmxDict);
         }
@@ -87,6 +136,14 @@ public class InstallationController : MonoBehaviour, ConfigurableObject, QueuedS
         } else
         {
             Debug.LogWarning($"InstallationController.ReceiveDmxPacket() dmxReceiveDict doesn't have universe {packet.Universe}");
+        }
+    }
+
+    bool loopbackArtnet
+    {
+        get
+        {
+            return artnetStrategy == ArtnetStrategy.Loopback;
         }
     }
 

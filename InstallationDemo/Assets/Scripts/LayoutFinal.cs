@@ -23,6 +23,8 @@ public class LayoutFinal : MonoBehaviour
     [HideInInspector]
     public FusionSplineFinal spline;
     [HideInInspector]
+    public TSplineFinal tSpline;
+    [HideInInspector]
     public List<ScaffoldingSectionFinal> scaffolding;
 
     [HideInInspector]
@@ -57,14 +59,27 @@ public class LayoutFinal : MonoBehaviour
         var splines = GetComponentsInChildren<FusionSplineFinal>();
         if (splines.Length == 0)
         {
-            throw new System.Exception("Layout.Setup() Requires a child that implements Scaffolding");
+            throw new System.Exception("Layout.Setup() Requires a child that implements FusionSplineFinal");
         }
         else if (splines.Length > 1)
         {
-            throw new System.Exception("Layout.Setup() Multiple children implementing Scaffolding found");
+            throw new System.Exception("Layout.Setup() Multiple children implementing FusionSplineFinal found");
         }
         spline = splines[0];
         spline.Setup(config.drawSplineGizmos);
+
+        var tSplines = GetComponentsInChildren<TSplineFinal>();
+        if (tSplines.Length == 0)
+        {
+            throw new System.Exception("Layout.Setup() Requires a child that implements TSplineFinal");
+        }
+        else if (tSplines.Length > 1)
+        {
+            throw new System.Exception("Layout.Setup() Multiple children implementing TSplineFinal found");
+        }
+        tSpline = tSplines[0];
+        tSpline.Setup(config.drawSplineGizmos);
+
         SetupScaffoldingSections(config);
         xSpacing = config.xSpacingInInches * 0.0254f;
         ySpacing = config.ySpacingInInches * 0.0254f;

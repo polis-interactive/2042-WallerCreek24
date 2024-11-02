@@ -38,6 +38,7 @@ public class FusionSplineData
     public List<FusionSplineKnot> spline;
 }
 
+[RequireComponent(typeof(SplineContainer))]
 public class FusionSplineFinal : MonoBehaviour
 {
     [HideInInspector]

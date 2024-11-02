@@ -2059,6 +2059,7 @@ Transform:
   - {fileID: 8455034766952118615}
   - {fileID: 2293322140766880297}
   - {fileID: 4578451583881176771}
+  - {fileID: 6815343927674320882}
   - {fileID: 3731035782651756614}
   m_Father: {fileID: 4010633101563188565}
   m_LocalEulerAnglesHint: {x: 270, y: 90, z: 0}
@@ -2329,11 +2330,20 @@ MonoBehaviour:
     maxTransitionOutTimeInMs: 1500
     weightChoseHigh: 0.6
   artnetConfig:
-    useLoopback: 0
-  renderConfig:
+    artnetStrategy: 1
+  frameRateConfig:
     frameRate: 30
   displayConfig:
     lightTemperatureColor: {r: 1, g: 0.7049574, b: 0.39811313, a: 1}
+  renderConfig:
+    gamma: 1.4
+    gammaWhite: 1.4
+    whiteColor: {r: 0, g: 0, b: 0, a: 1}
+  renderGammaTable: 
+  renderInverseGammaTable: 
+  renderGammaWhiteTable: 
+  renderInverseGammaWhiteTable: 
+  renderWhiteColor: 
 --- !u!114 &2262849729155639971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,6 +2617,52 @@ Transform:
   - {fileID: 2141834600786307363}
   m_Father: {fileID: 8416543995839690531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8800123322876176784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6815343927674320882}
+  - component: {fileID: 7778671845338702456}
+  m_Layer: 0
+  m_Name: TSpline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6815343927674320882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800123322876176784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8416543995839690531}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &7778671845338702456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800123322876176784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989b7f8ca5f4742898a325af7d3a5a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 0}
+  jsonFile: {fileID: 4900000, guid: a99f0ca9db491481f9b19f7bb5f0606f, type: 3}
 --- !u!1 &8829811791349618589
 GameObject:
   m_ObjectHideFlags: 0

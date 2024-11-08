@@ -1,4 +1,6 @@
 
+use core::sync::atomic::AtomicBool;
+
 use portable_atomic::{AtomicU8, AtomicU16, Ordering};
 
 const BRIGHTNESS_INCREMENT: u8 = 8;
@@ -14,18 +16,21 @@ const VALUE_MAX: u16 = 1000;
 
 #[derive(Default, Debug)]
 struct AtomicStore {
+  is_on: AtomicBool,
   brightness: AtomicU8,
   color: AtomicU16,
   value: AtomicU16,
 }
 
 pub struct Store {
+  pub is_on: bool,
   pub brightness: u8,
   pub color: u16,
   pub value: u16
 }
 
 static STORE: AtomicStore = AtomicStore {
+  is_on: AtomicBool::new(false),
   brightness: AtomicU8::new(192),
   color: AtomicU16::new(0),
   value: AtomicU16::new(0),
@@ -39,6 +44,7 @@ pub fn reset_state() {
 
 pub fn get_store() -> Store {
   return Store {
+    is_on: STORE.is_on.load(Ordering::Relaxed),
     brightness: STORE.brightness.load(Ordering::Relaxed),
     color: STORE.color.load(Ordering::Relaxed),
     value: STORE.value.load(Ordering::Relaxed)
@@ -46,9 +52,14 @@ pub fn get_store() -> Store {
 }
 
 pub fn update_store(store: &mut Store) {
+  store.is_on = STORE.is_on.load(Ordering::Relaxed);
   store.brightness = STORE.brightness.load(Ordering::Relaxed);
   store.color = STORE.color.load(Ordering::Relaxed);
   store.value = STORE.value.load(Ordering::Relaxed);
+}
+
+pub fn update_is_on(is_on: bool) {
+  STORE.is_on.store(is_on, Ordering::Relaxed);
 }
 
 pub fn update_brightness(is_increment: bool) {

@@ -8,7 +8,7 @@ use embassy_time::{Duration, Timer};
 
 use crate::{
   common::{Events, EVENT_CHANNEL},
-  store::{reset_state, update_brightness, update_color, update_value}
+  store::{reset_state, update_brightness, update_color, update_is_on, update_value}
 };
 
 // 3.5 minutes, meh
@@ -87,6 +87,9 @@ pub async fn manager_task(spawner: Spawner, mut led: Output<'static>) {
             ManagerStates::Value => update_value(is_increment),
             ManagerStates::Color => update_color(is_increment),
         }
+      }
+      Events::SwitchToggle(is_on) => {
+        update_is_on(is_on);
       }
     }
     // used for debug

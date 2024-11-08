@@ -30,6 +30,10 @@ impl<'a> Debouncer<'a> {
     }
   }
 
+  pub fn get_level(&mut self) -> Level {
+    self.input.get_level()
+  }
+
   pub async fn wait_high(&mut self) {
     self.input.wait_for_high().await;
   }

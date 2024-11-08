@@ -62,16 +62,18 @@ pub fn hsv2rgbw(hsv: Hsv, a: u8) -> RGBA8 {
 
 fn set_from_store(store: &Store, data: &mut [RGBA<u8>; LED_COUNT]) {
   let mut color = RGBA8{ r: 0, g: 0, b: 0, a: 0 };
-  if store.color == 0 {
-    color.a = 255;
-  } else {
-    let (c, w) = (store.color - 1).div_rem(&WHITE_STEPS);
-    let hsv = Hsv{
-      hue: (c.saturating_mul(COLOR_MUL)) as u8,
-      sat: 255,
-      val: 255
-    };
-    color = hsv2rgbw(hsv, w.saturating_mul(WHITE_MUL) as u8);
+  if store.is_on {
+    if store.color == 0 {
+      color.a = 255;
+    } else {
+      let (c, w) = (store.color - 1).div_rem(&WHITE_STEPS);
+      let hsv = Hsv{
+        hue: (c.saturating_mul(COLOR_MUL)) as u8,
+        sat: 255,
+        val: 255
+      };
+      color = hsv2rgbw(hsv, w.saturating_mul(WHITE_MUL) as u8);
+    }
   }
   for led in data.iter_mut() {
     led.r = GAMMA8[scale8(color.r, store.brightness) as usize];

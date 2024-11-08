@@ -6,6 +6,9 @@ mod common;
 mod button;
 use button::{button_task, Debouncer};
 
+mod switch;
+use switch::switch_task;
+
 mod encoder;
 use embassy_rp::pio_programs::ws2812::{PioWs2812, PioWs2812Program};
 use embassy_rp::watchdog::Watchdog;
@@ -47,6 +50,10 @@ assign_resources! {
   manager: ManagerResources {
     led_pin: PIN_25
   }
+  switch: SwitchResources {
+    pin: PIN_14,
+    led_pin: PIN_13
+  }
   led: LedResources {
     led_pin: PIN_15,
     dma_chan: DMA_CH0,
@@ -67,6 +74,11 @@ async fn main(spawner: Spawner) {
 
   // initialize state
   reset_state();
+
+  // intialize switch
+  let switch = Debouncer::new(Input::new(r.switch.pin, Pull::Up), Duration::from_millis(20));  
+  let btn_led = Output::new(r.switch.led_pin, Level::Low);
+  spawner.must_spawn(switch_task(switch, btn_led));
 
   // initialize button
   let btn = Debouncer::new(Input::new(r.button.pin, Pull::Up), Duration::from_millis(20));  

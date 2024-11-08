@@ -44,6 +44,7 @@ public class InstallationEffects : MonoBehaviour
         }
         effectPool = new List<IEffect>(longLivedEffects);
         effectPool.Add(new ColorWheel());
+        // effectPool.Add(new Bulging());
         foreach (var effect in effectPool)
         {
             effect.InitializeEffect(config);

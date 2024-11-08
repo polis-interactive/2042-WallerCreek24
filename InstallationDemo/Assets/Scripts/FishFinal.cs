@@ -26,6 +26,10 @@ public class FishFinal : MonoBehaviour
     [HideInInspector]
     public float rValue;
     [HideInInspector]
+    public int rValueInt;
+    [HideInInspector]
+    public float rRaw;
+    [HideInInspector]
     public float thetaValue;
     [HideInInspector]
     public int thetaValueInt;
@@ -101,6 +105,7 @@ public class FishFinal : MonoBehaviour
         this.rValue = MathF.Round(rValue / parameterConfig.rBucketStep) * parameterConfig.rBucketStep;
         this.thetaValue = MathF.Round(thetaValue / parameterConfig.thetaBucketStep) * parameterConfig.thetaBucketStep;
         thetaValueInt = (int)(this.thetaValue / parameterConfig.thetaBucketStep);
+        this.rRaw = rValue;
     }
 
     public void SetWhite(byte whiteValue)
@@ -131,22 +136,6 @@ public class FishFinal : MonoBehaviour
         node.data[3] = data[3];
 
         // apply white correction
-        if (data[3] != 0 && !isLoopback)
-        {
-            node.data[3] = (byte)Math.Min((int)(data[3] * renderWhiteColor.a), 255);
-            if (renderWhiteColor.r != 0.0f)
-            {
-                node.data[0] = (byte)Math.Min(node.data[0] + data[3] * renderWhiteColor.r, 255);
-            }
-            if (renderWhiteColor.g != 0.0f)
-            {
-                node.data[1] = (byte)Math.Min(node.data[1] + data[3] * renderWhiteColor.g, 255);
-            }
-            if (renderWhiteColor.b != 0.0f)
-            {
-                node.data[2] = (byte)Math.Min(node.data[2] + data[3] * renderWhiteColor.b, 255);
-            }
-        }
 
         // apply gammas
         node.data[0] = gamma[node.data[0]];

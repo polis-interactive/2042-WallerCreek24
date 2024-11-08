@@ -5,12 +5,18 @@ using Polis.UArtnet.Packets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using UnityEngine;
 
+[Serializable]
+public class RValuesContainer
+{
+    public List<float> rValues;
+}
 
 [RequireComponent(typeof(InstallationEffects))]
 public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceiverCallback
@@ -20,6 +26,7 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
     private List<Universe> universes;
     public List<FishFinal> fishes;
     public List<List<FishFinal>> tThenThetaSortedFishes;
+    public List<float> rValues;
 
     private TSplineFinal spline;
 
@@ -139,10 +146,9 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
 
     public void OnParameterConfigChange(InstallationConfig config)
     {
-        var minR = 10000000.0f;
-        var maxR = 0.0f;
         var tBucketCount = (int)(1.0f / config.parameterConfig.tBucketStep);
         tThenThetaSortedFishes = new List<List<FishFinal>>(tBucketCount);
+        rValues = new();
         for (int i = 0; i < tBucketCount; i++)
         {
             tThenThetaSortedFishes.Add(new List<FishFinal>());
@@ -150,15 +156,15 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
         foreach (var fish in fishes)
         {
             fish.SetParameterValues(spline, ref config.parameterConfig);
-            minR = Mathf.Min(minR, fish.rValue);
-            maxR = Mathf.Max(maxR, fish.rValue);
             var tValue = fish.tValueInt;
             tThenThetaSortedFishes[tValue].Add(fish);
+            rValues.Add(fish.rValue);
         }
         foreach (var tBucket in tThenThetaSortedFishes)
         {
             tBucket.Sort((a, b) => a.thetaValue.CompareTo(b.thetaValue));
         }
+        rValues.Sort();
     }
 
     public void EnqueueDmxDict(Dictionary<int, DmxSpecifier> dmxDict)

@@ -7,7 +7,7 @@ public class Wave
     public float StartTime;
     public int CurrentOffset;
     public int NodeCount;
-    public int NodeDuration;
+    public float NodeDuration;
     public float MaxFraction;
     public int WaveTailPointer;
     public int WaveLength;
@@ -28,14 +28,14 @@ public class Wave
 
     private bool IncrementPointer()
     {
-        var currentOffset = (Time.time - StartTime) * 1000f;
+        var currentOffset = (Time.time - StartTime);
         var tailPointer = Mathf.FloorToInt(currentOffset / NodeDuration) - NodeCount + 1;
         if (tailPointer > WaveTailPointer)
         {
             ++WaveTailPointer;
             if (IsFinished()) return false;
         }
-        var timeStep = currentOffset % NodeDuration;
+        var timeStep = Mathf.Repeat(currentOffset, NodeDuration);
         TimeConst = timeStep / NodeDuration + WaveTailPointer - 1.0f;
         return true;
     }
@@ -68,7 +68,7 @@ public class WaveGenerator
         var wave = new Wave();
         wave.StartTime = Time.time;
         wave.NodeCount = Random.Range(minNodes, maxNodes);
-        wave.NodeDuration = durationMult * Random.Range(minDurations, maxDurations);
+        wave.NodeDuration = durationMult * Random.Range(minDurations, maxDurations) / 1000f;
         wave.MaxFraction = minHeight + heightMult * Random.Range(minHeightMult, maxHeightMult);
         wave.WaveIsLight = Random.Range(0f, 1f) > 0.5f;
         wave.WaveTailPointer = -wave.NodeCount + 1;

@@ -18,12 +18,43 @@ pub const LED_COUNT: usize = 5;
 pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>) {
   let mut ticker = Ticker::every(Duration::from_millis(10));
   let mut data = [RGBA8::default(); LED_COUNT];
-  let mut store = get_store();
+  let mut local_store = get_store();
+  local_store.is_on = true;
+  let mut target_store = get_store();
+  let mut last_target_store = get_store();
   loop {
-    update_store(&mut store);
-    set_from_store(&store, &mut data);
+    update_store(&mut target_store);
+    if !target_store.is_on {
+      set_off(&mut data);
+    } else if target_store == local_store {
+      set_from_store(&target_store, &mut data);
+    } else {
+      step_toward_store(&target_store, &mut local_store);
+      set_from_store(&local_store, &mut data);
+    }
     lights.write_rgba(&data).await;
     ticker.next().await;
+  }
+}
+
+fn step_toward_store(target_store: &Store, local_store: &mut Store) {
+  if (target_store.brightness != local_store.brightness) {
+    if (target_store.brightness > local_store.brightness) {
+      local_store.brightness += 1;
+    } else {
+      local_store.brightness -= 1;
+    }
+  }
+  if (target_store.color)
+}
+
+fn set_off(data: &mut [RGBA<u8>; LED_COUNT]) {
+  let mut color = RGBA8{ r: 0, g: 0, b: 0, a: 0 };
+  for led in data.iter_mut() {
+    led.r = 0;
+    led.g = 0;
+    led.b = 0;
+    led.a = 0;
   }
 }
 

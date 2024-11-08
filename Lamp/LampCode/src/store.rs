@@ -22,6 +22,7 @@ struct AtomicStore {
   value: AtomicU16,
 }
 
+#[derive(PartialEq)]
 pub struct Store {
   pub is_on: bool,
   pub brightness: u8,

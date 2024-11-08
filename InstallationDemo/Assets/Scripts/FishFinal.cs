@@ -7,19 +7,28 @@ public class FishFinal : MonoBehaviour
 {
     private Material material;
 
-    private bool hasWhiteDisplay = false;
-    private BaseFish baseFish;
-
     private byte[] gamma;
     private byte[] inverseGamma;
     private byte[] gammaWhite;
     private byte[] inverseGammaWhite;
     private Color renderWhiteColor;
 
-    private byte[] data;
+    [HideInInspector]
+    public byte[] data;
 
     [SerializeField]
     private Node node;
+
+    [HideInInspector]
+    public float tValue;
+    [HideInInspector]
+    public int tValueInt;
+    [HideInInspector]
+    public float rValue;
+    [HideInInspector]
+    public float thetaValue;
+    [HideInInspector]
+    public int thetaValueInt;
 
     private Color fishColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -41,9 +50,9 @@ public class FishFinal : MonoBehaviour
         {
             throw new System.Exception("FishFinal.Setup() Matieral not found in object or children");
         }
-        if (renderer.sharedMaterial.name != "Fish")
+        if (!renderer.sharedMaterial.name.StartsWith("Fish"))
         {
-            throw new System.Exception($"FishFinal.Setup() material {material.name} is not Fish");
+            throw new System.Exception($"FishFinal.Setup() material {renderer.sharedMaterial.name} is not Fish");
         }
     }
 
@@ -57,15 +66,9 @@ public class FishFinal : MonoBehaviour
         {
             throw new System.Exception($"FishFinal.Start() config not found");
         }
-        config.RegisterForUpdates<BaseFishConfig>(OnBaseFishConfigChange);
         config.RegisterForUpdates<DisplayConfig>(OnDisplayConfigChange);
         config.RegisterForUpdates<RenderConfig>(OnRenderConfigChange);
         data = new byte[4] { 0, 0, 0, 0 };
-    }
-
-    public void OnBaseFishConfigChange(InstallationConfig config)
-    {
-        baseFish = new BaseFish(config.baseFishConfig);
     }
 
     public void OnDisplayConfigChange(InstallationConfig config)
@@ -86,37 +89,62 @@ public class FishFinal : MonoBehaviour
         }
     }
 
-    public void RunUpdate(bool writeToFish)
+    public void SetParameterValues(
+        TSplineFinal spline, ref ParameterConfig parameterConfig
+    )
     {
-        Array.Clear(data, 0, data.Length);
-        // run and maybe apply base animation
-        baseFish.RunUpdate();
-        if (!hasWhiteDisplay)
-        {
-            data[3] = baseFish.value;
-        }
+        spline.GetParameters(
+            transform.position, out float tValue, out float rValue, out float thetaValue
+        );
+        this.tValue = MathF.Round(tValue / parameterConfig.tBucketStep) * parameterConfig.tBucketStep;
+        tValueInt = (int)(this.tValue / parameterConfig.tBucketStep);
+        this.rValue = MathF.Round(rValue / parameterConfig.rBucketStep) * parameterConfig.rBucketStep;
+        this.thetaValue = MathF.Round(thetaValue / parameterConfig.thetaBucketStep) * parameterConfig.thetaBucketStep;
+        thetaValueInt = (int)(this.thetaValue / parameterConfig.thetaBucketStep);
+    }
 
-        if (writeToFish)
+    public void SetWhite(byte whiteValue)
+    {
+        data[3] = whiteValue;
+    }
+
+    public void FadeFish(float pctVal)
+    {
+        // ensure 0.0 < pctVal < 1.0
+        data[0] = (byte)Mathf.Floor(data[0] * pctVal);
+        data[1] = (byte)Mathf.Floor(data[1] * pctVal);
+        data[2] = (byte)Mathf.Floor(data[2] * pctVal);
+        data[3] = (byte)Mathf.Floor(data[3] * pctVal);
+    }
+
+    public void WriteToArtnet(bool isLoopback)
+    {
+        if (!isLoopback)
         {
             // doing this here before we apply post processing
             ColorUtils.ByteToColor(data, ref fishColor);
         }
 
+        node.data[0] = data[0];
+        node.data[1] = data[1];
+        node.data[2] = data[2];
+        node.data[3] = data[3];
+
         // apply white correction
-        if (data[3] != 0)
+        if (data[3] != 0 && !isLoopback)
         {
             node.data[3] = (byte)Math.Min((int)(data[3] * renderWhiteColor.a), 255);
             if (renderWhiteColor.r != 0.0f)
             {
-                node.data[0] = (byte)Math.Min(data[0] + data[3] * renderWhiteColor.r, 255);
+                node.data[0] = (byte)Math.Min(node.data[0] + data[3] * renderWhiteColor.r, 255);
             }
             if (renderWhiteColor.g != 0.0f)
             {
-                node.data[1] = (byte)Math.Min(data[1] + data[3] * renderWhiteColor.g, 255);
+                node.data[1] = (byte)Math.Min(node.data[1] + data[3] * renderWhiteColor.g, 255);
             }
             if (renderWhiteColor.b != 0.0f)
             {
-                node.data[2] = (byte)Math.Min(data[2] + data[3] * renderWhiteColor.b, 255);
+                node.data[2] = (byte)Math.Min(node.data[2] + data[3] * renderWhiteColor.b, 255);
             }
         }
 
@@ -135,25 +163,24 @@ public class FishFinal : MonoBehaviour
         data[2] = inverseGamma[node.data[2]];
         data[3] = inverseGammaWhite[node.data[3]];
 
-        // deapply white correction
-        if (data[3] != 0)
-        {
-            data[3] = (byte)(data[3] / renderWhiteColor.a);
-            if (renderWhiteColor.r != 0)
-            {
-                data[0] = (byte)Math.Min(0, data[0] - data[3] * renderWhiteColor.r);
-            }
-            if (renderWhiteColor.g != 0)
-            {
-
-                data[1] = (byte)Math.Min(0, data[1] - data[3] * renderWhiteColor.g);
-            }
-            if (renderWhiteColor.b != 0)
-            {
-
-                data[2] = (byte)Math.Min(0, data[2] - data[3] * renderWhiteColor.b);
-            }
-        }
+        // since white clips, pretend white correction doesn't exist?
+        data[3] = (byte)(data[3] / renderWhiteColor.a);
+        // if (data[3] != 0)
+        //{
+        //    data[3] = (byte)(data[3] / renderWhiteColor.a);
+        //    if (renderWhiteColor.r != 0)
+        //    {
+        //        data[0] = (byte)Math.Min(0, data[0] - data[3] * renderWhiteColor.r);
+        //    }
+        //    if (renderWhiteColor.g != 0)
+        //    {
+        //        data[1] = (byte)Math.Min(0, data[1] - data[3] * renderWhiteColor.g);
+        //    }
+        //    if (renderWhiteColor.b != 0)
+        //    {
+        //        data[2] = (byte)Math.Min(0, data[2] - data[3] * renderWhiteColor.b);
+        //   }
+        // }
         // Debug.Log($"{node.data[0]} -> {data[0]} {node.data[1]} -> {data[1]} {node.data[2]} -> {data[2]} {node.data[3]} -> {data[3]}");
         ColorUtils.ByteToColor(data, ref fishColor);
     }
@@ -166,7 +193,8 @@ public class FishFinal : MonoBehaviour
         displayWhiteColor = displayLightTemperatureColor * fishColor.a;
         material.SetColor("_EmissionColor", displayWhiteColor);
 
-        hasWhiteDisplay = false;
+        // reset data here so next loop is clean
+        Array.Clear(data, 0, data.Length);
     }
 
 }

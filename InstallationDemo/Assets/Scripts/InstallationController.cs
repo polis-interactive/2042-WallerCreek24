@@ -11,20 +11,37 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using UnityEngine;
 
+
+[RequireComponent(typeof(InstallationEffects))]
 public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceiverCallback
 {
     private ArtnetStrategy artnetStrategy = ArtnetStrategy.Loopback;
 
     private List<Universe> universes;
-    private List<FishFinal> fishes;
+    public List<FishFinal> fishes;
+    public List<List<FishFinal>> tThenThetaSortedFishes;
+
+    private TSplineFinal spline;
 
     private ConcurrentQueue<Dictionary<int, DmxSpecifier>> dmxSendQueue;
     private ConcurrentDictionary<int, byte[]> dmxReceiveDict;
     private ArtNetSender sender;
     private ArtNetReceiver receiver;
 
+    private InstallationEffects installationEffects;
+
     void Start()
     {
+        var splines = GetComponentsInChildren<TSplineFinal>();
+        if (splines.Length == 0)
+        {
+            throw new System.Exception("InstallationController.Start() Requires a child that implements TSplineFinal");
+        }
+        else if (splines.Length > 1)
+        {
+            throw new System.Exception("InstallationController.Start() Multiple children implementing TSplineFinal found");
+        }
+        spline = splines[0];
         universes = GetComponentsInChildren<Universe>().ToList();
         if (universes.Count == 0)
         {
@@ -39,12 +56,23 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
         {
             throw new System.Exception("InstallationController.Start() no fishes found");
         }
+        var installationEffects = GetComponentsInChildren<InstallationEffects>();
+        if (installationEffects.Length == 0)
+        {
+            throw new System.Exception("InstallationController.Start() Requires a child that implements InstallationEffects");
+        }
+        else if (installationEffects.Length > 1)
+        {
+            throw new System.Exception("InstallationController.Start() Multiple children implementing InstallationEffects found");
+        }
+        this.installationEffects = installationEffects[0];
         var config = GetComponent<InstallationConfig>();
         if (!config)
         {
             throw new System.Exception("InstallationController.Start() config not found");
         }
         config.RegisterForUpdates<ArtnetConfig>(OnArtnetConfigChange);
+        config.RegisterForUpdates<ParameterConfig>(OnParameterConfigChange);
     }
 
     IPAddress tryGetLocalIp()
@@ -69,6 +97,10 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
     public void OnArtnetConfigChange(InstallationConfig config)
     {
         artnetStrategy = config.artnetConfig.artnetStrategy;
+        if (noArtnet)
+        {
+            return;
+        }
         dmxSendQueue = new ConcurrentQueue<Dictionary<int, DmxSpecifier>>();
         dmxReceiveDict = new ConcurrentDictionary<int, byte[]>();
         var dmxDict = new Dictionary<int, DmxSpecifier>();
@@ -105,8 +137,36 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
         // start polling task if not loopback artnet
     }
 
+    public void OnParameterConfigChange(InstallationConfig config)
+    {
+        var minR = 10000000.0f;
+        var maxR = 0.0f;
+        var tBucketCount = (int)(1.0f / config.parameterConfig.tBucketStep);
+        tThenThetaSortedFishes = new List<List<FishFinal>>(tBucketCount);
+        for (int i = 0; i < tBucketCount; i++)
+        {
+            tThenThetaSortedFishes.Add(new List<FishFinal>());
+        }
+        foreach (var fish in fishes)
+        {
+            fish.SetParameterValues(spline, ref config.parameterConfig);
+            minR = Mathf.Min(minR, fish.rValue);
+            maxR = Mathf.Max(maxR, fish.rValue);
+            var tValue = fish.tValueInt;
+            tThenThetaSortedFishes[tValue].Add(fish);
+        }
+        foreach (var tBucket in tThenThetaSortedFishes)
+        {
+            tBucket.Sort((a, b) => a.thetaValue.CompareTo(b.thetaValue));
+        }
+    }
+
     public void EnqueueDmxDict(Dictionary<int, DmxSpecifier> dmxDict)
     {
+        if (noArtnet)
+        {
+            return;
+        }
         var isLoopback = IPAddress.IsLoopback(dmxDict[0].ipAddress);
         var isBroadcast = IPAddress.Broadcast.Equals(dmxDict[0].ipAddress);
         bool doEnqueue;
@@ -147,12 +207,20 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
         }
     }
 
+    bool noArtnet
+    {
+        get
+        {
+            return artnetStrategy == ArtnetStrategy.None;
+        }
+    }
+
     void Update()
     {
-        // need to parallelize these calls probably
-        foreach(var fish in fishes)
+        installationEffects.RunEffects(this);
+        foreach (var fish in fishes)
         {
-            fish.RunUpdate(!loopbackArtnet);
+            fish.WriteToArtnet(loopbackArtnet);
         }
         TrySendArtnet();
         if (!loopbackArtnet)
@@ -182,6 +250,10 @@ public class InstallationController : MonoBehaviour, QueuedSender, ArtNetReceive
 
     void TrySendArtnet()
     {
+        if (noArtnet)
+        {
+            return;
+        }
         if (dmxSendQueue.TryDequeue(out var dmxDict))
         {
             foreach (var universe in universes)

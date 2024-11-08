@@ -10,24 +10,6 @@ public class InstallationConfig : MonoBehaviour
     private Dictionary<Type, List<Action<InstallationConfig>>> onUpdateCallbacks =
            new Dictionary<Type, List<Action<InstallationConfig>>>();
 
-    public BaseFishConfig baseFishConfig = new BaseFishConfig()
-    {
-        minLowValue = 20,
-        maxLowValue = 60,
-        holdValue = 128,
-        minHighValue = 190,
-        maxHighValue = 220,
-        minHoldTimeInMs = 2000,
-        maxHoldTimeInMs = 5000,
-        minTransitionInTimeInMs = 350,
-        maxTransitionInTimeInMs = 1000,
-        minPauseTimeInMs = 1500,
-        maxPauseTimeInMs = 3000,
-        minTransitionOutTimeInMs = 500,
-        maxTransitionOutTimeInMs = 1500,
-        weightChoseHigh = 0.6f
-    };
-
     public ArtnetConfig artnetConfig = new ArtnetConfig()
     {
         artnetStrategy = ArtnetStrategy.Loopback
@@ -50,6 +32,49 @@ public class InstallationConfig : MonoBehaviour
         whiteColor = new Color(0, 0, 0, 1.0f)
     };
 
+    public ParameterConfig parameterConfig = new ParameterConfig()
+    {
+        tBucketStep = 0.01f,
+        rBucketStep = 0.5f,
+        thetaBucketStep = 5
+    };
+
+    public EffectConfig effectConfig = new EffectConfig()
+    {
+        minFadeTime = 3.0f,
+        maxFadeTime = 5.0f,
+    };
+
+    public WaterShaderConfig waterShaderConfig = new WaterShaderConfig()
+    {
+        gamma = 2.0f,
+        speed = 2.0f,
+        scale = 1.0f,
+        brightness = 0.3f,
+        contrast = 2.2f,
+
+        minFadeTime = 1.0f,
+        maxFadeTime = 3.0f,
+        minHoldTime = 3.0f,
+        maxHoldTime = 5.0f,
+        minCycles = 3,
+        maxCycles = 6
+    };
+
+    public ColorWheelConfig colorWheelConfig = new ColorWheelConfig()
+    {
+        minSpread = 2f,
+        maxSpread = 10f,
+        minHoldTime = 1f,
+        maxHoldTime = 5f,
+        minFadeTime = 5f,
+        maxFadeTime = 10f,
+        rotationMult = 0.2f,
+        speedDivisor = 15f,
+        spreadSpeed = true,
+        spreadRotation = true,
+    };
+
     [HideInInspector]
     public byte[] renderGammaTable;
     [HideInInspector]
@@ -64,7 +89,6 @@ public class InstallationConfig : MonoBehaviour
     // not really sure what to do here
     public void Awake()
     {
-        Debug.Log($"{renderConfig.whiteColor.r}, {renderConfig.whiteColor.g}, {renderConfig.whiteColor.b}, {renderConfig.whiteColor.a}");
         updateRenderTables();
     }
 
@@ -80,7 +104,7 @@ public class InstallationConfig : MonoBehaviour
         callback(this);
     }
 
-    void updateRenderTables()
+    public void updateRenderTables()
     {
         var (gamma, inverseGamma) = generateGammaTables(renderConfig.gamma);
         var (gammaWhite, inverseGammaWhite) = generateGammaTables(renderConfig.gammaWhite);

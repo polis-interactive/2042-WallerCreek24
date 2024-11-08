@@ -1,6 +1,7 @@
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Polis.UArtnet.Device;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,6 +49,7 @@ public class InstallationFinal : MonoBehaviour
     private string manufacturingPath = "Manufacturing";
     private string configPath = Path.Combine("Manufacturing", "Config");
     private string manifestFile = "assembly_manifest.xlsx";
+    private string whiteValuesFile = "white_values.xlsx";
 
     public void Recreate()
     {
@@ -76,6 +78,7 @@ public class InstallationFinal : MonoBehaviour
         AssetManager.CreateOrResetFolder(manufacturingPath);
         CreateManifest();
         CreateConfigs();
+        CreateWhiteTable();
         Debug.Log("InstallationFinal.GenerateManufacturing() finished");
     }
 
@@ -101,7 +104,7 @@ public class InstallationFinal : MonoBehaviour
 
         Debug.Log("InstallationFinal.GenerateStrings() running");
         var weights = new WeightHelperFinal(layout.scaffolding, maxStringsPerSection);
-        Random.InitState(randomSeed);
+        UnityEngine.Random.InitState(randomSeed);
         while (weights.totalFish < targetFishCount)
         {
             var useSection = weights.GetSection();
@@ -292,6 +295,66 @@ public class InstallationFinal : MonoBehaviour
             AssetManager.WriteOutFile(configPath, config.ToFileName(), JsonUtility.ToJson(config));
         }
         Debug.Log("InstallationFinal.CreateConfigs() finished!");
+    }
+
+    private void CreateWhiteTable()
+    {
+        Debug.Log("InstallationFinal.CreateWhiteTable() started!");
+        var configs = GetComponentsInChildren<InstallationConfig>();
+        if (configs.Length == 0)
+        {
+            throw new System.Exception("InstallationFinal.CreateConfigs() Requires a child that implements InstallationConfig");
+        }
+        else if (configs.Length > 1)
+        {
+            throw new System.Exception("InstallationFinal.CreateConfigs() Multiple children implementing InstallationConfig found");
+        }
+        var config = configs[0];
+        config.updateRenderTables();
+        var whiteColor = config.renderConfig.whiteColor;
+        var whiteGamma = config.renderGammaWhiteTable;
+        var gamma = config.renderGammaTable;
+        var filePath = AssetManager.PrepareLocation(manufacturingPath, whiteValuesFile);
+        using (var workbook = new XLWorkbook())
+        {
+            var whiteValueSheet = workbook.Worksheets.Add("White Values");
+            whiteValueSheet.Cell(1, 1).Value = "Value";
+            whiteValueSheet.Cell(1, 2).Value = "R";
+            whiteValueSheet.Cell(1, 3).Value = "G";
+            whiteValueSheet.Cell(1, 4).Value = "B";
+            whiteValueSheet.Cell(1, 5).Value = "W";
+            whiteValueSheet.Cell(1, 6).Value = "Rx";
+            whiteValueSheet.Cell(1, 7).Value = "Gx";
+            whiteValueSheet.Cell(1, 8).Value = "Bx";
+            whiteValueSheet.Cell(1, 9).Value = "Wx";
+            whiteValueSheet.Row(1).Style.Font.Bold = true;
+            for (var i = 0; i < 256; i++)
+            {
+                if ((i & (i - 1)) == 0)
+                {
+                    whiteValueSheet.Row(2 + i).Style.Font.Bold = true;
+
+                }
+                var white = whiteGamma[(byte)Math.Min((int)(i * whiteColor.a), 255)];
+                var red = gamma[(byte)Math.Min(i * whiteColor.r, 255)];
+                var green = gamma[(byte)Math.Min(i * whiteColor.g, 255)];
+                var blue = gamma[(byte)Math.Min(i * whiteColor.b, 255)];
+                
+                whiteValueSheet.Cell(2 + i, 1).Value = i;
+                whiteValueSheet.Cell(2 + i, 2).Value = red;
+                whiteValueSheet.Cell(2 + i, 3).Value = green;
+                whiteValueSheet.Cell(2 + i, 4).Value = blue;
+                whiteValueSheet.Cell(2 + i, 5).Value = white;
+                whiteValueSheet.Cell(2 + i, 6).Value = red.ToString("X2");
+                whiteValueSheet.Cell(2 + i, 7).Value = green.ToString("X2");
+                whiteValueSheet.Cell(2 + i, 8).Value = blue.ToString("X2");
+                whiteValueSheet.Cell(2 + i, 9).Value = white.ToString("X2");
+            }
+            workbook.SaveAs(filePath);
+        }
+        AssetManager.LoadLocation(manufacturingPath, whiteValuesFile);
+        Debug.Log("InstallationFinal.CreateWhiteTable() finished!");
+
     }
 }
 

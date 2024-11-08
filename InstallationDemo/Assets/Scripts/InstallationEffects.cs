@@ -69,29 +69,27 @@ public class InstallationEffects : MonoBehaviour
         if (state == EffectState.FadingIn)
         {
             var pctVal = (Time.time - lastStateChangeTimestamp) / fadeTime;
+            pctVal = Mathf.Clamp(pctVal, 0f, 1f);
             if (pctVal >= 1.0f)
             {
                 lastStateChangeTimestamp = Time.time;
                 state = EffectState.Running;
-            } else
+            }
+            foreach (var fish in controller.fishes)
             {
-                foreach (var fish in controller.fishes)
-                {
-                    fish.FadeFish(pctVal);
-                }
+                fish.FadeFish(pctVal);
             }
         } else if (state == EffectState.FadingOut)
         {
             var pctVal = 1.0f - (Time.time - lastStateChangeTimestamp) / fadeTime;
+            pctVal = Mathf.Clamp(pctVal, 0f, 1f);
             if (pctVal <= 0.0f)
             {
                 SetupNextEffect();
-            } else
+            }
+            foreach (var fish in controller.fishes)
             {
-                foreach (var fish in controller.fishes)
-                {
-                    fish.FadeFish(pctVal);
-                }
+                fish.FadeFish(pctVal);
             }
         } else
         {

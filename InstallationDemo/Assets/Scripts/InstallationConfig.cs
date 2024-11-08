@@ -73,6 +73,8 @@ public class InstallationConfig : MonoBehaviour
         speedDivisor = 15f,
         spreadSpeed = true,
         spreadRotation = true,
+        minCycles = 6,
+        maxCycles = 10,
     };
 
     [HideInInspector]

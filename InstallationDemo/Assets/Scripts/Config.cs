@@ -81,4 +81,6 @@ public struct ColorWheelConfig : IConfigurable
     public bool spreadSpeed;
     public float rotationMult;
     public bool spreadRotation;
+    public int minCycles;
+    public int maxCycles;
 }

@@ -13,7 +13,7 @@ public class ColorWheel : IEffect
     {
         get
         {
-            return waveCount > 0;
+            return cycles > 0;
         }
     }
 
@@ -41,24 +41,13 @@ public class ColorWheel : IEffect
     private float startTimestamp = 0.0f;
     private float offset = 0.0f;
 
-    private WaveGenerator waveGenerator;
-    private Wave wave;
-    private float lastWaveTimetamp = 0.0f;
-
-    private int minWaveCount;
-    private int maxWaveCount;
-    private int waveCount;
-
-
-    private float minNoWaveTime;
-    private float maxNoWaveTime;
-    private float noWaveTime;
-
+    private int minCycles = 6;
+    private int maxCycles = 10;
+    private int cycles = 7;
 
     public void InitializeEffect(InstallationConfig config)
     {
         // wheel config
-
         minSpread = config.colorWheelConfig.minSpread;
         maxSpread = config.colorWheelConfig.maxSpread;
         minHoldTime = config.colorWheelConfig.minHoldTime;
@@ -69,24 +58,8 @@ public class ColorWheel : IEffect
         spreadSpeed = config.colorWheelConfig.spreadSpeed;
         rotationMult = config.colorWheelConfig.rotationMult;
         spreadRotation = config.colorWheelConfig.spreadRotation;
-
-        // wave config
-        minNoWaveTime = 7.0f;
-        maxNoWaveTime = 15.0f;
-        minWaveCount = 3;
-        maxWaveCount = 7;
-        waveGenerator = new WaveGenerator();
-        waveGenerator.minDurations = 1;
-        waveGenerator.maxDurations = 9;
-        waveGenerator.durationMult = 50;
-        waveGenerator.minHeight = 0.8f;
-        waveGenerator.minHeightMult = 0;
-        waveGenerator.maxHeightMult = 5;
-        waveGenerator.heightMult = 0.1f;
-        var segements = 1.0f / config.parameterConfig.tBucketStep;
-        waveGenerator.segments = Mathf.FloorToInt(segements);
-        waveGenerator.minNodes = Mathf.FloorToInt(segements * 0.75f);
-        waveGenerator.maxNodes = Mathf.FloorToInt(segements * 1.3f);
+        minCycles = config.colorWheelConfig.minCycles;
+        maxCycles = config.colorWheelConfig.maxCycles;
     }
 
     public void ApplyEffect(InstallationController controller)
@@ -100,6 +73,7 @@ public class ColorWheel : IEffect
             if (isHolding)
             {
                 changeTime = Random.Range(minHoldTime, maxHoldTime);
+                cycles--;
                 currentSpread = nextSpread;
             } else
             {
@@ -109,19 +83,6 @@ public class ColorWheel : IEffect
             }
 
         }
-        var waveStamp = Time.time - lastWaveTimetamp;
-        if (wave == null && waveStamp > noWaveTime)
-        {
-            wave = waveGenerator.GenerateWave();
-            Debug.Log($"Created new wave is light? {wave.WaveIsLight}");
-        }
-        if (wave != null && !wave.ShouldWaveRun())
-        {
-            Debug.Log("Wave has run");
-            wave = null;
-            --waveCount;
-            noWaveTime = Random.Range(minNoWaveTime, maxNoWaveTime);
-        }
         var tStamp = Time.time - startTimestamp;
         var spread = isHolding
             ? currentSpread
@@ -129,44 +90,19 @@ public class ColorWheel : IEffect
         ;
         var useRotation = spreadRotation ? rotationMult * spread : rotationMult;
         var useTstamp = spreadSpeed ? tStamp / speedDivisor / spread : tStamp / speedDivisor;
-        var node = 0;
         foreach (var tBucket in controller.tThenThetaSortedFishes)
         {
-            int wavePosition = wave == null ? -1 : node + wave.WaveTailPointer;
-            float waveFraction = wave == null
-                ? 0f
-                : wavePosition < 0 || wavePosition >= wave.WaveLength
-                ? 0f
-                : wave.GetWaveFraction(wavePosition)
-            ;
-            bool isLightWave = wave == null ? false : wave.WaveIsLight;
             foreach (var fish in tBucket)
             {
                 Color32 c = Color.HSVToRGB(
                     Mathf.Repeat((fish.tValue - fish.thetaValue / 360.0f * useRotation) / spread - offset - useTstamp, 1.0f),
                     1f, 1f
                 );
-                if (waveFraction <= 0f)
-                {
-                    fish.data[0] = c.r;
-                    fish.data[1] = c.g;
-                    fish.data[2] = c.b;
-                    fish.data[3] = 0;
-                } else if (isLightWave)
-                {
-                    fish.data[0] = c.r;
-                    fish.data[1] = c.g;
-                    fish.data[2] = c.b;
-                    fish.data[3] = (byte)Mathf.FloorToInt(Mathf.Min(waveFraction * 255f, 255f));
-                } else
-                {
-                    fish.data[0] = (byte)Mathf.FloorToInt(Mathf.Max(c.r - waveFraction * 255f, 0f));
-                    fish.data[1] = (byte)Mathf.FloorToInt(Mathf.Max(c.g - waveFraction * 255f, 0f)); 
-                    fish.data[2] = (byte)Mathf.FloorToInt(Mathf.Max(c.b - waveFraction * 255f, 0f)); 
-                    fish.data[3] = 0;
-                }
+                fish.data[0] = c.r;
+                fish.data[1] = c.g;
+                fish.data[2] = c.b;
+                fish.data[3] = 0;
             }
-            node++;
         }
     }
 
@@ -177,11 +113,7 @@ public class ColorWheel : IEffect
         changeTime = Random.Range(minHoldTime, maxHoldTime);
         currentSpread = Random.Range(minSpread, maxSpread);
         startTimestamp = Time.time;
-        lastWaveTimetamp = Time.time;
-        noWaveTime = Random.Range(minNoWaveTime, maxNoWaveTime);
-        waveCount = Random.Range(minWaveCount, maxWaveCount);
-        wave = null;
-        Debug.Log($"waveCount {waveCount}");
+        cycles = Random.Range(minCycles, maxCycles);
     }
 
     public void StopEffect()

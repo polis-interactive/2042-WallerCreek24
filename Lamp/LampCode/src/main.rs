@@ -10,27 +10,29 @@ mod switch;
 use switch::switch_task;
 
 mod encoder;
-use embassy_rp::pio_programs::ws2812::{PioWs2812, PioWs2812Program};
-use embassy_rp::watchdog::Watchdog;
-use embassy_time::{Duration, Timer};
 use encoder::encoder_task;
 
+mod color;
+
 mod store;
-use lights::lights_task;
 use store::reset_state;
+
+mod lights;
+use lights::lights_task;
 
 mod manager;
 use manager::manager_task;
 
-mod lights;
 
 use embassy_executor::Spawner;
-use embassy_rp::gpio::{Input, Level, Output, Pull};
+use embassy_time::{Duration, Timer};
 use embassy_rp::bind_interrupts;
-
+use embassy_rp::gpio::{Input, Level, Output, Pull};
 use embassy_rp::peripherals::{self, PIO0};
 use embassy_rp::pio::{InterruptHandler, Pio};
+use embassy_rp::pio_programs::ws2812::{PioWs2812, PioWs2812Program};
 use embassy_rp::pio_programs::rotary_encoder::{PioEncoder, PioEncoderProgram};
+use embassy_rp::watchdog::Watchdog;
 
 use {defmt_rtt as _, panic_probe as _};
 

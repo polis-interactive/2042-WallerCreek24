@@ -1,12 +1,12 @@
 
-use num_integer::Integer;
+//use num_integer::Integer;
 use smart_leds::{hsv::{hsv2rgb, Hsv}, RGBA};
 
 pub type RGBA8 = RGBA<u8>;
 
 // hue value with 6 steps of warm white + 32 colors + just warm white at 0
-pub const WHITE_STEPS: u8 = 6;
-pub const WHITE_MUL: u8 = 51;
+//pub const WHITE_STEPS: u8 = 6;
+//pub const WHITE_MUL: u8 = 51;
 pub const COLOR_STEPS: u8 = 32;
 pub const COLOR_MUL: u8 = 8;
 // could add 1 for this, but just do exclusive checks

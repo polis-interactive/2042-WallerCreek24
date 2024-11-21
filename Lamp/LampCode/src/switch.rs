@@ -1,6 +1,5 @@
 
-use embassy_rp::gpio::{Input, Level, Output};
-use embassy_time::{with_deadline, Duration, Instant, Timer};
+use embassy_rp::gpio::{Level, Output};
 
 use crate::common::{EVENT_CHANNEL, Events};
 

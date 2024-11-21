@@ -1,16 +1,10 @@
 
-use core::sync::atomic::AtomicBool;
 
-use portable_atomic::{AtomicU8, AtomicU16, Ordering};
+use portable_atomic::{AtomicBool, AtomicU8, AtomicU16, Ordering};
 
-const BRIGHTNESS_INCREMENT: u8 = 8;
+use crate::color::{eased_step, LampColor, COLOR_MAX, EASE_STEP, RGBA8}; 
 
-// hue value with 6 steps of warm white + 32 colors + just warm white at 0
-pub const WHITE_STEPS: u16 = 4;
-pub const WHITE_MUL: u16 = 64;
-pub const COLOR_STEPS: u16 = 16;
-pub const COLOR_MUL: u16 = 16;
-const COLOR_MAX: u16 = WHITE_STEPS * COLOR_STEPS;
+const BRIGHTNESS_INCREMENT: u8 = 12;
 
 const VALUE_MAX: u16 = 1000;
 
@@ -18,21 +12,14 @@ const VALUE_MAX: u16 = 1000;
 struct AtomicStore {
   is_on: AtomicBool,
   brightness: AtomicU8,
-  color: AtomicU16,
+  color: AtomicU8,
   value: AtomicU16,
-}
-
-pub struct Store {
-  pub is_on: bool,
-  pub brightness: u8,
-  pub color: u16,
-  pub value: u16
 }
 
 static STORE: AtomicStore = AtomicStore {
   is_on: AtomicBool::new(false),
   brightness: AtomicU8::new(192),
-  color: AtomicU16::new(0),
+  color: AtomicU8::new(0),
   value: AtomicU16::new(0),
 };
 
@@ -40,22 +27,6 @@ pub fn reset_state() {
   STORE.brightness.store(192, Ordering::Relaxed);
   STORE.color.store(0, Ordering::Relaxed);
   STORE.value.store(0, Ordering::Relaxed);
-}
-
-pub fn get_store() -> Store {
-  return Store {
-    is_on: STORE.is_on.load(Ordering::Relaxed),
-    brightness: STORE.brightness.load(Ordering::Relaxed),
-    color: STORE.color.load(Ordering::Relaxed),
-    value: STORE.value.load(Ordering::Relaxed)
-  }
-}
-
-pub fn update_store(store: &mut Store) {
-  store.is_on = STORE.is_on.load(Ordering::Relaxed);
-  store.brightness = STORE.brightness.load(Ordering::Relaxed);
-  store.color = STORE.color.load(Ordering::Relaxed);
-  store.value = STORE.value.load(Ordering::Relaxed);
 }
 
 pub fn update_is_on(is_on: bool) {
@@ -75,7 +46,7 @@ pub fn update_brightness(is_increment: bool) {
 pub fn update_color(is_increment: bool) {
   let mut color = STORE.color.load(Ordering::Relaxed);
   if is_increment {
-    color = if color >= COLOR_MAX { 0 } else { color + 1 };
+    color = if color > COLOR_MAX { 0 } else { color + 1 };
   } else {
     color = if color == 0 { COLOR_MAX } else { color - 1 };
   }
@@ -90,4 +61,47 @@ pub fn update_value(is_increment: bool) {
     value = if value == 0 { VALUE_MAX - 1 } else { value - 1 };
   }
   STORE.value.store(value, Ordering::Relaxed);
+}
+
+#[derive(PartialEq)]
+pub struct Store {
+  pub is_on: bool,
+  pub brightness: u8,
+  pub color: RGBA8,
+  pub value: u16
+}
+
+pub fn get_store() -> Store {
+  let mut color = RGBA8 {
+    r: 0,
+    b: 0,
+    g: 0,
+    a: 0
+  };
+  color.from_u16(STORE.color.load(Ordering::Relaxed));
+  return Store {
+    is_on: STORE.is_on.load(Ordering::Relaxed),
+    brightness: STORE.brightness.load(Ordering::Relaxed),
+    color: color,
+    value: STORE.value.load(Ordering::Relaxed)
+  }
+}
+
+pub fn update_store(store: &mut Store) {
+  store.is_on = STORE.is_on.load(Ordering::Relaxed);
+  store.brightness = STORE.brightness.load(Ordering::Relaxed);
+  store.color.from_u16(STORE.color.load(Ordering::Relaxed));
+  store.value = STORE.value.load(Ordering::Relaxed);
+}
+
+pub fn step_toward_store(target_store: &Store, local_store: &mut Store) {
+  if target_store.brightness != local_store.brightness {
+    local_store.brightness = eased_step(local_store.brightness, target_store.brightness, EASE_STEP);
+  }
+  if target_store.color != local_store.color {
+    local_store.color.walk_toward(&target_store.color);
+  }
+  if target_store.value != local_store.value {
+    local_store.value = target_store.value;
+  }
 }

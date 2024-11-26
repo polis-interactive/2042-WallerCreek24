@@ -23,6 +23,7 @@ use lights::lights_task;
 mod manager;
 use manager::manager_task;
 
+use defmt::*;
 
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
@@ -68,21 +69,44 @@ bind_interrupts!(struct Irqs {
 
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
+
+  info!("Running main");
+
+  
+  info!("Initializing embassy");
+
   let p = embassy_rp::init(Default::default());
   let r = split_resources! {p};
+
+  // tmp just testing
+  
+  let mng_led = Output::new(r.manager.led_pin, Level::Low);
+  // let duration = Duration::from_millis(100);
+  // for _ in 0..5 {
+  //   mng_led.set_high();
+  //   Timer::after(duration).await;
+  //   mng_led.set_low();
+  //   Timer::after(duration).await;
+  // }
+  
+  info!("Start Watchdog");
 
   let mut watchdog = Watchdog::new(p.WATCHDOG);
   watchdog.start(Duration::from_millis(1_050));
 
-  // initialize state
+
+  info!("Initialize State");
+
   reset_state();
 
-  // intialize switch
+  info!("Initialize, start up switch");
+
   let switch = Debouncer::new(Input::new(r.switch.pin, Pull::Up), Duration::from_millis(20));  
   let btn_led = Output::new(r.switch.led_pin, Level::Low);
   spawner.must_spawn(switch_task(switch, btn_led));
 
-  // initialize button
+  info!("Initialize, start up button");
+
   let btn = Debouncer::new(Input::new(r.button.pin, Pull::Up), Duration::from_millis(20));  
   let btn_led = Output::new(r.button.led_pin, Level::Low);
   spawner.must_spawn(button_task(btn, btn_led));
@@ -93,22 +117,25 @@ async fn main(spawner: Spawner) {
     mut common, sm0, sm1, ..
   } = Pio::new(p.PIO0, Irqs);
 
-  // initialize encoder
+  info!("Initialize, start up encoder");
+
   let enc_prg = PioEncoderProgram::new(&mut common);
   let enc = PioEncoder::new(&mut common, sm0, r.encoder.a_pin, r.encoder.b_pin, &enc_prg);
   let enc_led = Output::new(r.encoder.led_pin, Level::Low);
   spawner.must_spawn(encoder_task(enc, enc_led));
 
-  // initialize leds
+  info!("Initialize, start up leds");
+
   let lts_prg = PioWs2812Program::new(&mut common);
   let lts = PioWs2812::new(&mut common, sm1, r.led.dma_chan, r.led.led_pin, &lts_prg);
   spawner.must_spawn(lights_task(lts));
 
-  // initialize state
-  let mng_led = Output::new(r.manager.led_pin, Level::Low);
+  info!("Initialize, start manager");
+
   spawner.must_spawn(manager_task(spawner, mng_led));
 
-  // run watchdog
+  info!("Main task finished; feeding watchdog");
+
   loop {
     Timer::after_secs(1).await;
     watchdog.feed();

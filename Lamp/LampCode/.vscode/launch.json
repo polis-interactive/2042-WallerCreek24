@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "preLaunchTask": "${defaultBuildTask}",
+      "type": "probe-rs-debug",
+      "request": "launch",
+      "name": "probe_rs Run",
+      "flashingConfig": {
+        "flashingEnabled": true,
+      },
+      //!MODIFY
+      "chip": "rp2040",
+      "coreConfigs": [
+        {
+          //!MODIFY
+          "programBinary": "${workspaceFolder}/target/thumbv6m-none-eabi/release/lamp"
+        }
+      ],
+      "env": {
+        //!MODIFY (or remove)
+        // If you set this variable, check the VSCode console log window for the location of the log file.
+        "RUST_LOG": "info"
+      },
+       // Info, Debug
+      "consoleLogLevel": "Console"
+    }
+  ]
+}

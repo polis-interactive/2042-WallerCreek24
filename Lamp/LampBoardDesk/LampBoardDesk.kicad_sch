@@ -5,175 +5,6 @@
 	(uuid "2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b")
 	(paper "A3")
 	(lib_symbols
-		(symbol "284514-3:284514-3"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 16.51 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Value" "284514-3"
-				(at 16.51 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Footprint" "SHDR3W80P0X350_1X3_1250X725X940P"
-				(at 16.51 -94.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1-1773458-1_EURO_STYLE_QRG&DocType=Data%20Sheet&DocLang=English&PartCntxt=284514-3&DocFormat=pdf"
-				(at 16.51 -194.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Description" "Body Features: Primary Product Color Green | Product Orientation Vertical | Configuration Features: Number of Positions 3 | Number of Rows 1 | Contact Features: Contact Base Material Phosphor Bronze | Contact Current Rating (Max) 11 AMP | Contact Mating Area Plating Material Tin | Dimensions: Wire Size 30  14 AWG | Wire Size .05  2 MMSQ | Electrical Characteristics: Operating Voltage 300 VAC | Housing Features: Housing Material PA 66 | Centerline (Pitch) 3.5 MM | Centerline (Pitch) .138 INCH | Mechani"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Height" "9.4"
-				(at 16.51 -394.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "571-284514-3"
-				(at 16.51 -494.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/284514-3?qs=woBvfblj%2FzwGS50caoQlYA%3D%3D"
-				(at 16.51 -594.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "TE Connectivity"
-				(at 16.51 -694.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "284514-3"
-				(at 16.51 -794.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(symbol "284514-3_1_1"
-				(rectangle
-					(start 5.08 2.54)
-					(end 15.24 -7.62)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "ABM8-272-T3:ABM8-272-T3"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3365,6 +3196,141 @@
 				)
 			)
 		)
+		(symbol "easyeda2kicad:15EDGRC-3.5-03P-14-00A(H)"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "CN"
+				(at 0 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "15EDGRC-3.5-03P-14-00A(H)"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "easyeda2kicad:CONN-TH_3P-P3.50_15EDGRC-3.5-03P"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C5160226"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "15EDGRC-3.5-03P-14-00A(H)_0_1"
+				(rectangle
+					(start -2.54 5.08)
+					(end 2.54 -5.08)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center -1.27 3.81)
+					(radius 0.38)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 2.54 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 -2.54 0)
+					(length 2.54)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "easyeda2kicad:470UF50V"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3523,6 +3489,166 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "easyeda2kicad:BM03B-SRSS-TB(LF)(SN)"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0 10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "BM03B-SRSS-TB(LF)(SN)"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "easyeda2kicad:CONN-SMD-3P-P1.00_BM03B-SRSS-TB-LF-SN"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://lcsc.com/product-detail/Others_JST-Sales-America__JST-Sales-America-BM03B-SRSS-TB-LF-SN_C160389.html"
+				(at 0 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C160389"
+				(at 0 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "BM03B-SRSS-TB(LF)(SN)_0_1"
+				(rectangle
+					(start -5.08 0)
+					(end 5.08 -7.62)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 5.08 270)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 5.08 270)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 2.54 5.08 270)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 10.16 -5.08 180)
+					(length 5.08)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -10.16 -5.08 0)
+					(length 5.08)
+					(name "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3985,141 +4111,6 @@
 				)
 			)
 		)
-		(symbol "easyeda2kicad:DS1023-1X3SF11"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at 0 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "DS1023-1X3SF11"
-				(at 0 -7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "easyeda2kicad:HDR-TH_3P-P2.54-V-F-1"
-				(at 0 -10.16 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "LCSC Part" "C7509516"
-				(at 0 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "DS1023-1X3SF11_0_1"
-				(rectangle
-					(start -2.54 5.08)
-					(end 2.54 -5.08)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(circle
-					(center -1.27 3.81)
-					(radius 0.38)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin unspecified line
-					(at -5.08 2.54 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin unspecified line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin unspecified line
-					(at -5.08 -2.54 0)
-					(length 2.54)
-					(name "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "easyeda2kicad:LTV357T-B"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -4394,11 +4385,11 @@
 				)
 			)
 		)
-		(symbol "easyeda2kicad:MT-0-102-E001-T000-RS"
+		(symbol "easyeda2kicad:MT-0-102-C004-N004-RS"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U"
+			(property "Reference" "SW"
 				(at 0 7.62 0)
 				(effects
 					(font
@@ -4406,16 +4397,16 @@
 					)
 				)
 			)
-			(property "Value" "MT-0-102-E001-T000-RS"
-				(at 0 -7.62 0)
+			(property "Value" "MT-0-102-C004-N004-RS"
+				(at 0 -10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "easyeda2kicad:SW-TH_MT-0-102-E001-T000-RS-PJ"
-				(at 0 -10.16 0)
+			(property "Footprint" "easyeda2kicad:SW-TH_MT-0-102-C004-N004-RS"
+				(at 0 -12.7 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -4441,8 +4432,8 @@
 					(hide yes)
 				)
 			)
-			(property "LCSC Part" "C1788499"
-				(at 0 -12.7 0)
+			(property "LCSC Part" "C1788496"
+				(at 0 -15.24 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -4450,21 +4441,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "MT-0-102-E001-T000-RS_0_1"
-				(rectangle
-					(start -2.54 5.08)
-					(end 2.54 -5.08)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
+			(symbol "MT-0-102-C004-N004-RS_0_1"
 				(circle
-					(center -1.27 3.81)
-					(radius 0.38)
+					(center -2.54 0)
+					(radius 0.64)
 					(stroke
 						(width 0)
 						(type default)
@@ -4473,8 +4453,54 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
-					(at -5.08 2.54 0)
+				(polyline
+					(pts
+						(xy -2.54 -5.08) (xy 2.54 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 0) (xy 1.27 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 -2.54)
+					(radius 0.64)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 2.54)
+					(radius 0.64)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin input line
+					(at 5.08 2.54 180)
 					(length 2.54)
 					(name "1"
 						(effects
@@ -4491,7 +4517,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
 					(name "2"
@@ -4509,8 +4535,8 @@
 						)
 					)
 				)
-				(pin unspecified line
-					(at -5.08 -2.54 0)
+				(pin input line
+					(at 5.08 -2.54 180)
 					(length 2.54)
 					(name "3"
 						(effects
@@ -4520,6 +4546,42 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 -5.08 0)
+					(length 2.54)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 5.08 -5.08 180)
+					(length 2.54)
+					(name "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5125,12 +5187,6 @@
 		(uuid "09ed9167-01d7-4c96-819b-d6d3013a7598")
 	)
 	(junction
-		(at 273.05 191.77)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1428102a-b7f7-4529-a1ac-aeb0db39514f")
-	)
-	(junction
 		(at 82.55 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5143,7 +5199,7 @@
 		(uuid "16753cdd-f7c5-452a-b084-840ab3902d41")
 	)
 	(junction
-		(at 335.28 36.83)
+		(at 337.82 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "198bf9a5-81ce-43cb-ab5e-2538731a695a")
@@ -5155,7 +5211,7 @@
 		(uuid "1a84aee0-c39b-437a-b60b-e3caf3a0615b")
 	)
 	(junction
-		(at 298.45 50.8)
+		(at 300.99 24.13)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1d05f14f-3019-4590-878d-02cdd6505c29")
@@ -5269,7 +5325,7 @@
 		(uuid "7d93b042-2e1f-4214-b3cf-7b756a11330a")
 	)
 	(junction
-		(at 325.12 34.29)
+		(at 327.66 49.53)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "822148f0-3bcc-4527-a3ed-aa5b781e6e7e")
@@ -5297,6 +5353,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a0cda494-c899-40b3-9cb7-549968c0a34e")
+	)
+	(junction
+		(at 382.27 191.77)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6f8c987-9bae-4091-a93e-0d16886a1427")
 	)
 	(junction
 		(at 302.26 110.49)
@@ -5335,7 +5397,7 @@
 		(uuid "d800daf5-609a-4458-bd55-09ba7b185aa6")
 	)
 	(junction
-		(at 275.59 44.45)
+		(at 274.32 52.07)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dd26ee22-370d-4ee2-a6d3-e0e6aa9e6e9f")
@@ -5351,6 +5413,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e7c907f0-4a86-4983-ae7f-3c6f6294796c")
+	)
+	(junction
+		(at 381 74.93)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "edbe007f-6182-475a-874f-44ec9f08fea6")
 	)
 	(junction
 		(at 118.11 27.94)
@@ -5371,12 +5439,6 @@
 		(uuid "f646405d-741d-4507-999f-d79ea344c3d3")
 	)
 	(junction
-		(at 378.46 170.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f823c3fb-a789-4f1d-809d-9472c2ddac92")
-	)
-	(junction
 		(at 77.47 27.94)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5395,16 +5457,16 @@
 		(uuid "102c5831-3805-4319-b75a-65a0c1ef38ce")
 	)
 	(no_connect
+		(at 105.41 72.39)
+		(uuid "2e1f76c4-4d3d-484e-86ce-88e30b38a7fa")
+	)
+	(no_connect
 		(at 105.41 113.03)
 		(uuid "49887f1b-8bac-44b9-9cea-a77466fd6229")
 	)
 	(no_connect
-		(at 105.41 130.81)
-		(uuid "62c593e2-e6ae-43ee-a7ef-765308b1ca64")
-	)
-	(no_connect
-		(at 105.41 105.41)
-		(uuid "6c5dc1e1-0268-4a12-ada6-cc4a954bd94b")
+		(at 105.41 62.23)
+		(uuid "8069b3a0-a235-4cea-9e64-ce218141ad80")
 	)
 	(no_connect
 		(at 105.41 97.79)
@@ -5419,10 +5481,6 @@
 		(uuid "99d30ea9-fdd8-4674-a078-9a89ebbe8d9d")
 	)
 	(no_connect
-		(at 105.41 133.35)
-		(uuid "99f1746d-d693-4488-b3ac-68ce8c869def")
-	)
-	(no_connect
 		(at 105.41 135.89)
 		(uuid "a1b8eb03-ae34-4743-914f-9ec9119adce5")
 	)
@@ -5435,8 +5493,12 @@
 		(uuid "b12e327e-3985-40bd-b5a3-59fbdfbc7090")
 	)
 	(no_connect
-		(at 105.41 107.95)
-		(uuid "cb9b8a03-c0f1-4ebe-a547-397bf8e268f1")
+		(at 105.41 67.31)
+		(uuid "b53850ae-ad9e-4a98-bba1-b7740228a7fb")
+	)
+	(no_connect
+		(at 105.41 90.17)
+		(uuid "c0d4a613-d1a9-4158-bff7-a6cd5c390453")
 	)
 	(no_connect
 		(at 105.41 95.25)
@@ -5447,16 +5509,12 @@
 		(uuid "df03dfd1-c956-4d1d-8d96-27e85d523707")
 	)
 	(no_connect
-		(at 105.41 80.01)
-		(uuid "e0ac31c6-0aa5-4a72-9de6-80218781f7fc")
-	)
-	(no_connect
-		(at 105.41 82.55)
-		(uuid "e96b2314-fb52-4b49-afba-a2d5e39997c6")
-	)
-	(no_connect
 		(at 105.41 115.57)
 		(uuid "ec82ed6e-ab7f-4d2c-8119-3df65d75901d")
+	)
+	(no_connect
+		(at 105.41 133.35)
+		(uuid "f6925275-8bb7-4500-bf5c-4d097457bc71")
 	)
 	(wire
 		(pts
@@ -5470,16 +5528,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 59.69) (xy 111.76 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "01096d6b-3f64-4968-8575-46b3776700ab")
-	)
-	(wire
-		(pts
 			(xy 342.9 114.3) (xy 342.9 118.11)
 		)
 		(stroke
@@ -5490,13 +5538,13 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 62.23) (xy 111.76 62.23)
+			(xy 378.46 179.07) (xy 382.27 179.07)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "02fa72aa-8ac3-40d5-bde8-34686d4b4931")
+		(uuid "03d490e6-2f6e-4d7e-970f-3cfea4d13dc6")
 	)
 	(wire
 		(pts
@@ -5550,26 +5598,6 @@
 	)
 	(wire
 		(pts
-			(xy 375.92 181.61) (xy 378.46 181.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a2a3b62-f317-4802-be2b-0acfc7675289")
-	)
-	(wire
-		(pts
-			(xy 378.46 170.18) (xy 387.35 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0b5f8328-2447-4c61-963e-62c0371c3ef9")
-	)
-	(wire
-		(pts
 			(xy 276.86 105.41) (xy 276.86 110.49)
 		)
 		(stroke
@@ -5577,16 +5605,6 @@
 			(type default)
 		)
 		(uuid "0cc07303-4d05-46cf-8e08-e7114f70f0af")
-	)
-	(wire
-		(pts
-			(xy 289.56 53.34) (xy 283.21 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0d5d1d60-1d95-431a-991d-27626ea95d6b")
 	)
 	(wire
 		(pts
@@ -5610,6 +5628,16 @@
 	)
 	(wire
 		(pts
+			(xy 378.46 74.93) (xy 381 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "101198cc-9b1c-4f88-8037-697a34e6b6ff")
+	)
+	(wire
+		(pts
 			(xy 57.15 35.56) (xy 57.15 38.1)
 		)
 		(stroke
@@ -5617,26 +5645,6 @@
 			(type default)
 		)
 		(uuid "117cec94-1a9f-4d76-a4dd-2e78306c9983")
-	)
-	(wire
-		(pts
-			(xy 373.38 184.15) (xy 373.38 176.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "11cb3ddd-2704-4460-bba6-8d87c7a3f378")
-	)
-	(wire
-		(pts
-			(xy 105.41 90.17) (xy 111.76 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1675102f-8aff-4288-b038-59b7d61a932b")
 	)
 	(wire
 		(pts
@@ -5667,16 +5675,6 @@
 			(type default)
 		)
 		(uuid "1918a1f0-4cc1-4be4-9265-fe8737a312eb")
-	)
-	(wire
-		(pts
-			(xy 375.92 175.26) (xy 375.92 181.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ac5448b-f6dd-40aa-ba68-3d159aa7bed2")
 	)
 	(wire
 		(pts
@@ -5740,7 +5738,27 @@
 	)
 	(wire
 		(pts
-			(xy 335.28 36.83) (xy 335.28 39.37)
+			(xy 105.41 120.65) (xy 110.49 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "245701d0-bbf1-4bb3-83d0-2ddcf8fc9fe7")
+	)
+	(wire
+		(pts
+			(xy 279.4 43.18) (xy 279.4 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25bc40e8-d686-42e8-b5d7-95b20dae139f")
+	)
+	(wire
+		(pts
+			(xy 337.82 52.07) (xy 337.82 54.61)
 		)
 		(stroke
 			(width 0)
@@ -5757,16 +5775,6 @@
 			(type default)
 		)
 		(uuid "2982ff6f-c1d6-4b16-a688-15e50b349caf")
-	)
-	(wire
-		(pts
-			(xy 377.19 170.18) (xy 378.46 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "29f33b15-8636-4a96-ae22-2cca08fc8d0c")
 	)
 	(wire
 		(pts
@@ -5810,16 +5818,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 87.63) (xy 111.76 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2db2dc76-28b9-49b1-8d16-fee0e81b6276")
-	)
-	(wire
-		(pts
 			(xy 48.26 128.27) (xy 54.61 128.27)
 		)
 		(stroke
@@ -5830,7 +5828,7 @@
 	)
 	(wire
 		(pts
-			(xy 275.59 43.18) (xy 275.59 44.45)
+			(xy 273.05 52.07) (xy 274.32 52.07)
 		)
 		(stroke
 			(width 0)
@@ -5910,6 +5908,16 @@
 	)
 	(wire
 		(pts
+			(xy 382.27 181.61) (xy 382.27 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39f0fd5a-d0b8-4d62-b2ee-882646b34a1c")
+	)
+	(wire
+		(pts
 			(xy 384.81 109.22) (xy 384.81 111.76)
 		)
 		(stroke
@@ -5920,13 +5928,13 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 69.85) (xy 111.76 69.85)
+			(xy 105.41 74.93) (xy 111.76 74.93)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3c7a48cc-3562-4980-8772-8dc414edac31")
+		(uuid "3d189dbc-7de5-4210-a733-0e907dc40da6")
 	)
 	(wire
 		(pts
@@ -5940,6 +5948,16 @@
 	)
 	(wire
 		(pts
+			(xy 382.27 191.77) (xy 387.35 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4029a4b8-9862-4b2f-badb-2a5b271cac8a")
+	)
+	(wire
+		(pts
 			(xy 289.56 97.79) (xy 289.56 100.33)
 		)
 		(stroke
@@ -5950,7 +5968,7 @@
 	)
 	(wire
 		(pts
-			(xy 290.83 34.29) (xy 292.1 34.29)
+			(xy 293.37 49.53) (xy 294.64 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6040,7 +6058,7 @@
 	)
 	(wire
 		(pts
-			(xy 302.26 53.34) (xy 297.18 53.34)
+			(xy 304.8 26.67) (xy 299.72 26.67)
 		)
 		(stroke
 			(width 0)
@@ -6110,23 +6128,13 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 185.42) (xy 273.05 191.77)
+			(xy 273.05 185.42) (xy 273.05 195.58)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "50209893-bab0-42ab-95e6-65435f8a5a1d")
-	)
-	(wire
-		(pts
-			(xy 378.46 76.2) (xy 379.73 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "503313c3-25bd-4e14-824c-b0ce9bcbf5d1")
 	)
 	(wire
 		(pts
@@ -6140,7 +6148,17 @@
 	)
 	(wire
 		(pts
-			(xy 322.58 34.29) (xy 325.12 34.29)
+			(xy 373.38 85.09) (xy 370.84 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53b374da-6588-4011-b8c0-d407a9236dee")
+	)
+	(wire
+		(pts
+			(xy 325.12 49.53) (xy 327.66 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6160,6 +6178,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 82.55) (xy 105.41 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56d872b6-05ad-41c7-a5ca-b7d6b442dab0")
+	)
+	(wire
+		(pts
 			(xy 77.47 27.94) (xy 77.47 39.37)
 		)
 		(stroke
@@ -6170,17 +6198,7 @@
 	)
 	(wire
 		(pts
-			(xy 283.21 53.34) (xy 283.21 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5750e5c3-faad-4f59-b5b2-51d2b3d681e0")
-	)
-	(wire
-		(pts
-			(xy 325.12 34.29) (xy 340.36 34.29)
+			(xy 327.66 49.53) (xy 342.9 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6220,16 +6238,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 74.93) (xy 111.76 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "59829bec-8c4a-4654-a86d-c2b0f1d93ca7")
-	)
-	(wire
-		(pts
 			(xy 350.52 143.51) (xy 353.06 143.51)
 		)
 		(stroke
@@ -6240,17 +6248,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 120.65) (xy 111.76 120.65)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5a9b74ab-0fa0-4f7f-8565-fe3520e65e03")
-	)
-	(wire
-		(pts
-			(xy 373.38 176.53) (xy 356.87 176.53)
+			(xy 356.87 176.53) (xy 382.27 176.53)
 		)
 		(stroke
 			(width 0)
@@ -6290,7 +6288,7 @@
 	)
 	(wire
 		(pts
-			(xy 335.28 36.83) (xy 340.36 36.83)
+			(xy 337.82 52.07) (xy 342.9 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6320,16 +6318,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 64.77) (xy 111.76 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6546d4ca-face-4dba-9db2-49f2ff7c6438")
-	)
-	(wire
-		(pts
 			(xy 383.54 153.67) (xy 386.08 153.67)
 		)
 		(stroke
@@ -6350,13 +6338,13 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 72.39) (xy 111.76 72.39)
+			(xy 276.86 26.67) (xy 276.86 30.48)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6a00c613-3a9c-4b63-af36-c69b3d480602")
+		(uuid "69ef7fc8-d320-4476-ad39-7b5419e9dc46")
 	)
 	(wire
 		(pts
@@ -6397,26 +6385,6 @@
 			(type default)
 		)
 		(uuid "6f8e7c68-3005-4d7b-8895-7426e991a934")
-	)
-	(wire
-		(pts
-			(xy 378.46 71.12) (xy 379.73 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "70591293-ef99-4cdc-937b-82a0a0764ab8")
-	)
-	(wire
-		(pts
-			(xy 105.41 128.27) (xy 111.76 128.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7220a537-6089-4c88-98a2-0dd7ca224d04")
 	)
 	(wire
 		(pts
@@ -6500,6 +6468,16 @@
 	)
 	(wire
 		(pts
+			(xy 381 74.93) (xy 383.54 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7c201588-628f-4ecf-bf29-8224433d6ef3")
+	)
+	(wire
+		(pts
 			(xy 278.13 71.12) (xy 288.29 71.12)
 		)
 		(stroke
@@ -6530,7 +6508,7 @@
 	)
 	(wire
 		(pts
-			(xy 335.28 46.99) (xy 335.28 44.45)
+			(xy 337.82 62.23) (xy 337.82 59.69)
 		)
 		(stroke
 			(width 0)
@@ -6540,7 +6518,7 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 25.4) (xy 325.12 26.67)
+			(xy 327.66 40.64) (xy 327.66 41.91)
 		)
 		(stroke
 			(width 0)
@@ -6600,13 +6578,33 @@
 	)
 	(wire
 		(pts
-			(xy 325.12 31.75) (xy 325.12 34.29)
+			(xy 105.41 123.19) (xy 110.49 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89088f3c-437a-483d-8325-7893c9e4709b")
+	)
+	(wire
+		(pts
+			(xy 327.66 46.99) (xy 327.66 49.53)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "8940407f-04fe-4bdd-b2a4-212a7c384c90")
+	)
+	(wire
+		(pts
+			(xy 105.41 69.85) (xy 111.76 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8957e53b-dd85-446d-ad8b-80aa48e89988")
 	)
 	(wire
 		(pts
@@ -6660,6 +6658,16 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 130.81) (xy 110.49 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "946df835-29af-4cc2-911b-7f4128a6c7c8")
+	)
+	(wire
+		(pts
 			(xy 288.29 71.12) (xy 290.83 71.12)
 		)
 		(stroke
@@ -6667,16 +6675,6 @@
 			(type default)
 		)
 		(uuid "9502a7b2-abd6-40c5-bc47-c1fda5777f9d")
-	)
-	(wire
-		(pts
-			(xy 378.46 184.15) (xy 373.38 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "956488df-55d3-4044-b536-ed6ce36c7b8b")
 	)
 	(wire
 		(pts
@@ -6710,7 +6708,7 @@
 	)
 	(wire
 		(pts
-			(xy 290.83 31.75) (xy 290.83 34.29)
+			(xy 293.37 50.8) (xy 293.37 49.53)
 		)
 		(stroke
 			(width 0)
@@ -6740,13 +6738,13 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 67.31) (xy 111.76 67.31)
+			(xy 105.41 59.69) (xy 111.76 59.69)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "99bfe665-cc9f-415c-b628-e742830fc2a1")
+		(uuid "99961703-73be-4c82-8df2-557f60e13377")
 	)
 	(wire
 		(pts
@@ -6760,7 +6758,7 @@
 	)
 	(wire
 		(pts
-			(xy 275.59 44.45) (xy 280.67 44.45)
+			(xy 274.32 40.64) (xy 274.32 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6780,6 +6778,26 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 64.77) (xy 111.76 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9bee79fe-4c63-423d-8933-fc4806d9a58f")
+	)
+	(wire
+		(pts
+			(xy 105.41 128.27) (xy 110.49 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9fc5cbb8-8bf8-40ef-89ea-e61072910a49")
+	)
+	(wire
+		(pts
 			(xy 82.55 39.37) (xy 82.55 45.72)
 		)
 		(stroke
@@ -6790,7 +6808,17 @@
 	)
 	(wire
 		(pts
-			(xy 394.97 170.18) (xy 396.24 170.18)
+			(xy 377.19 191.77) (xy 382.27 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a129c6f9-bcfc-4437-9692-56c83608f8a5")
+	)
+	(wire
+		(pts
+			(xy 394.97 191.77) (xy 396.24 191.77)
 		)
 		(stroke
 			(width 0)
@@ -6860,7 +6888,7 @@
 	)
 	(wire
 		(pts
-			(xy 322.58 36.83) (xy 335.28 36.83)
+			(xy 325.12 52.07) (xy 337.82 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6880,7 +6908,7 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 44.45) (xy 275.59 44.45)
+			(xy 274.32 54.61) (xy 274.32 52.07)
 		)
 		(stroke
 			(width 0)
@@ -6890,23 +6918,13 @@
 	)
 	(wire
 		(pts
-			(xy 298.45 50.8) (xy 298.45 48.26)
+			(xy 300.99 24.13) (xy 300.99 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "a78323b9-34a1-43b8-9ded-9961cc02ed07")
-	)
-	(wire
-		(pts
-			(xy 372.11 73.66) (xy 379.73 73.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a8109f69-c2c7-44c1-b082-202ee111b68a")
 	)
 	(wire
 		(pts
@@ -6920,7 +6938,7 @@
 	)
 	(wire
 		(pts
-			(xy 298.45 48.26) (xy 302.26 48.26)
+			(xy 300.99 21.59) (xy 304.8 21.59)
 		)
 		(stroke
 			(width 0)
@@ -6960,16 +6978,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 85.09) (xy 111.76 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0c9f4b2-7457-430b-b868-b6a6457fc05f")
-	)
-	(wire
-		(pts
 			(xy 90.17 39.37) (xy 90.17 52.07)
 		)
 		(stroke
@@ -6980,7 +6988,7 @@
 	)
 	(wire
 		(pts
-			(xy 302.26 50.8) (xy 298.45 50.8)
+			(xy 304.8 24.13) (xy 300.99 24.13)
 		)
 		(stroke
 			(width 0)
@@ -7070,6 +7078,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 80.01) (xy 105.41 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be8e8af9-1919-4955-b77f-564c7c7ae4f9")
+	)
+	(wire
+		(pts
 			(xy 353.06 143.51) (xy 353.06 146.05)
 		)
 		(stroke
@@ -7140,6 +7158,26 @@
 	)
 	(wire
 		(pts
+			(xy 105.41 107.95) (xy 111.76 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd7c5283-b610-4ba7-b736-57d7c1bd1f95")
+	)
+	(wire
+		(pts
+			(xy 105.41 105.41) (xy 111.76 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce5d97e1-bcaf-4ecd-b1c1-ad0201cbf6d3")
+	)
+	(wire
+		(pts
 			(xy 332.74 182.88) (xy 331.47 182.88)
 		)
 		(stroke
@@ -7157,16 +7195,6 @@
 			(type default)
 		)
 		(uuid "cf1de7a9-a0a1-4e57-b94b-fe2e0a603b7a")
-	)
-	(wire
-		(pts
-			(xy 273.05 191.77) (xy 273.05 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d5ba5a2c-9d3f-43b7-b2da-4ea597b59ced")
 	)
 	(wire
 		(pts
@@ -7260,13 +7288,23 @@
 	)
 	(wire
 		(pts
-			(xy 378.46 170.18) (xy 378.46 179.07)
+			(xy 276.86 26.67) (xy 292.1 26.67)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e735dc59-1dcc-4ef6-850b-b9ff4d3b7707")
+		(uuid "e8a88d5a-db7c-4bb7-9043-8897b93cbe6e")
+	)
+	(wire
+		(pts
+			(xy 398.78 85.09) (xy 396.24 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ea10e474-951d-400f-8b06-5fe5b5fa9e05")
 	)
 	(wire
 		(pts
@@ -7290,16 +7328,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 123.19) (xy 111.76 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eed8eb04-1cd0-4df3-b15c-409a7c8a1b86")
-	)
-	(wire
-		(pts
 			(xy 302.26 113.03) (xy 302.26 116.84)
 		)
 		(stroke
@@ -7310,13 +7338,13 @@
 	)
 	(wire
 		(pts
-			(xy 372.11 83.82) (xy 379.73 83.82)
+			(xy 105.41 87.63) (xy 111.76 87.63)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f836e288-4a8e-40c1-b5d4-35d4006e6cd0")
+		(uuid "f2487733-25c3-4273-8839-7e4475f5be8b")
 	)
 	(wire
 		(pts
@@ -7528,9 +7556,9 @@
 		)
 		(uuid "dd7e2400-2b73-4e2b-a463-bf324104cbe8")
 	)
-	(text "Program"
+	(text "Prog"
 		(exclude_from_sim no)
-		(at 362.458 90.17 0)
+		(at 357.632 91.186 0)
 		(effects
 			(font
 				(size 3 3)
@@ -7603,7 +7631,7 @@
 		(uuid "1e67701d-cb73-4b7b-bf57-516fd27ed815")
 	)
 	(label "P_SEN_O"
-		(at 111.76 128.27 0)
+		(at 111.76 59.69 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7614,7 +7642,7 @@
 		(uuid "204fae9d-2e1d-4c58-812e-b20dc6a7c709")
 	)
 	(label "BTN"
-		(at 111.76 74.93 0)
+		(at 110.49 128.27 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7636,18 +7664,18 @@
 		(uuid "2c5dc44a-ab8a-4cb7-92a9-f9ef6d48ea95")
 	)
 	(label "P_SEN"
-		(at 275.59 43.18 90)
+		(at 273.05 52.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "2ed9b401-19a7-4e03-bb4a-8da7a895bc15")
 	)
 	(label "ENC_A"
-		(at 111.76 87.63 0)
+		(at 110.49 120.65 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7757,7 +7785,7 @@
 		(uuid "477f9ccb-2b94-4b9c-89ba-291bfc181dbb")
 	)
 	(label "ENC_B"
-		(at 111.76 85.09 0)
+		(at 110.49 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7768,7 +7796,7 @@
 		(uuid "4d07a2cd-53fd-472e-8d2d-424eb06c6536")
 	)
 	(label "UART_TX"
-		(at 379.73 86.36 180)
+		(at 398.78 85.09 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7812,7 +7840,7 @@
 		(uuid "69b4435b-0a22-4dd7-be4d-06d621f04ea9")
 	)
 	(label "LED_EN"
-		(at 111.76 90.17 0)
+		(at 111.76 105.41 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7856,7 +7884,7 @@
 		(uuid "8cfa796a-bfb9-4682-8e46-7c0592dcb11e")
 	)
 	(label "UART_RX"
-		(at 379.73 81.28 180)
+		(at 391.16 85.09 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7889,7 +7917,7 @@
 		(uuid "96ef67e3-b1d2-4016-85a3-be30acd29ae7")
 	)
 	(label "UART_TX"
-		(at 111.76 59.69 0)
+		(at 111.76 80.01 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7900,7 +7928,7 @@
 		(uuid "9bca476f-1fec-42fe-adca-ecae93892d6e")
 	)
 	(label "BOOT_LED"
-		(at 111.76 120.65 0)
+		(at 111.76 107.95 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7966,7 +7994,7 @@
 		(uuid "c36e11f6-6bad-4bf4-ae88-c8efe6c4fc5c")
 	)
 	(label "LED_EN_LED"
-		(at 111.76 64.77 0)
+		(at 111.76 87.63 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8021,7 +8049,7 @@
 		(uuid "cc231ef0-d7c8-41eb-a8c2-c3e571a59368")
 	)
 	(label "P_SEN_LED"
-		(at 111.76 123.19 0)
+		(at 111.76 74.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8043,7 +8071,7 @@
 		(uuid "d277b047-dd17-43ef-bb42-f6ef268c1da9")
 	)
 	(label "UART_RX"
-		(at 111.76 62.23 0)
+		(at 111.76 82.55 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8065,7 +8093,7 @@
 		(uuid "d4a7f7a7-8154-4b5c-a2ee-164eaab6bc72")
 	)
 	(label "BTN_LED"
-		(at 111.76 72.39 0)
+		(at 110.49 130.81 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8076,7 +8104,7 @@
 		(uuid "dcae7175-046e-4c50-a85c-c61609474f7a")
 	)
 	(label "SW_CLK"
-		(at 378.46 76.2 180)
+		(at 373.38 85.09 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8109,7 +8137,7 @@
 		(uuid "ea0c67fc-c23e-4e2c-a799-f16f8704d625")
 	)
 	(label "MGR_LED"
-		(at 111.76 67.31 0)
+		(at 111.76 64.77 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8131,7 +8159,7 @@
 		(uuid "f6f66651-1fbd-4398-a1f8-72fecf7d78c2")
 	)
 	(label "SW_D"
-		(at 378.46 71.12 180)
+		(at 365.76 85.09 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8142,7 +8170,7 @@
 		(uuid "fc47dd28-c8ab-4b58-a7cb-6509dd51b592")
 	)
 	(label "LED_D_O"
-		(at 375.92 175.26 180)
+		(at 378.46 179.07 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8211,7 +8239,7 @@
 			(uuid "8c7a567a-121c-47dc-837b-0a1e14c860c3")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR047")
 					(unit 1)
@@ -8238,7 +8266,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 278.638 66.548 90)
+			(at 280.924 66.548 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8276,7 +8304,7 @@
 			(uuid "3b2b9bdf-742c-4b41-afd1-4e07a79c6d75")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR024")
 					(unit 1)
@@ -8363,9 +8391,75 @@
 			(uuid "e634018b-0eb7-4884-b541-121357054dbb")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 271.78 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "04aec3a3-072e-48fa-bb76-686d09c58ea0")
+		(property "Reference" "#PWR073"
+			(at 271.78 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 271.78 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 271.78 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 271.78 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 271.78 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "954137fa-b8bf-47b2-a966-11d2ea8315b5")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -8429,7 +8523,7 @@
 			(uuid "16ac212c-0332-4c7e-b97b-fec6bf178bc1")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR030")
 					(unit 1)
@@ -8516,7 +8610,7 @@
 			(uuid "4def5e66-cd81-43dc-a1d6-e4fde0e77ca9")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R24")
 					(unit 1)
@@ -8604,7 +8698,7 @@
 			(uuid "44272946-2486-4819-94ce-95444d1ea855")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D2")
 					(unit 1)
@@ -8670,7 +8764,7 @@
 			(uuid "5e6da30b-0566-4c42-b536-dfb1ef3cce45")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR06")
 					(unit 1)
@@ -8923,7 +9017,7 @@
 			(uuid "ab4a66ac-2d19-44cf-aad9-308cfcedc729")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "U1")
 					(unit 1)
@@ -9011,7 +9105,7 @@
 			(uuid "e621172f-7eed-4afd-b31d-3838a7bfb78e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D3")
 					(unit 1)
@@ -9077,7 +9171,7 @@
 			(uuid "793c8ffc-913d-4d05-a376-03f8e319398c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR067")
 					(unit 1)
@@ -9164,7 +9258,7 @@
 			(uuid "17835b46-4bf1-48c5-95d7-fb8fb74b80ce")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R2")
 					(unit 1)
@@ -9252,7 +9346,7 @@
 			(uuid "dbe042f7-ac4a-4926-ac55-5a7f72029ff1")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C15")
 					(unit 1)
@@ -9339,7 +9433,7 @@
 			(uuid "3a26ad24-98c9-4d45-8497-1d7509aec65f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C14")
 					(unit 1)
@@ -9426,7 +9520,7 @@
 			(uuid "ec638f8f-3ad1-4ae8-b714-15a657806821")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R15")
 					(unit 1)
@@ -9492,7 +9586,7 @@
 			(uuid "1505c098-7ff2-4e0f-b1ab-97f6f88e378d")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR058")
 					(unit 1)
@@ -9579,7 +9673,7 @@
 			(uuid "d9afa65e-4b74-49a4-b6b0-a493899f9721")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C16")
 					(unit 1)
@@ -9645,7 +9739,7 @@
 			(uuid "3ba1d61b-a36c-4bf2-9dfa-e33e03d167f5")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR036")
 					(unit 1)
@@ -9655,7 +9749,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 298.45 50.8 270)
+		(at 300.99 24.13 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9663,7 +9757,7 @@
 		(dnp no)
 		(uuid "20e22cf7-67ea-420a-aac8-1fbdd35afc0a")
 		(property "Reference" "#PWR028"
-			(at 292.1 50.8 0)
+			(at 294.64 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9672,7 +9766,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 296.418 48.26 90)
+			(at 298.958 21.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9681,7 +9775,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 298.45 50.8 0)
+			(at 300.99 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9690,7 +9784,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 298.45 50.8 0)
+			(at 300.99 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9699,7 +9793,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 298.45 50.8 0)
+			(at 300.99 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9711,7 +9805,7 @@
 			(uuid "a2e881c7-0507-4db6-ac62-f1a93eb892c3")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR028")
 					(unit 1)
@@ -9799,7 +9893,7 @@
 			(uuid "a93a67cb-ba9d-495c-8e73-b62c780d3c13")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R20")
 					(unit 1)
@@ -9865,7 +9959,7 @@
 			(uuid "c72cb0d1-38fe-4a1d-bbee-b9260421a54a")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR022")
 					(unit 1)
@@ -9952,7 +10046,7 @@
 			(uuid "28fb4332-3ac8-43b2-873b-ba90e9615ff3")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C11")
 					(unit 1)
@@ -10039,7 +10133,7 @@
 			(uuid "d07965dc-43ac-4ddd-b6a1-079e1bba8448")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R18")
 					(unit 1)
@@ -10105,7 +10199,7 @@
 			(uuid "aadeb92e-54c9-4bc2-bf4b-c28024b7cf94")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR043")
 					(unit 1)
@@ -10171,7 +10265,7 @@
 			(uuid "7eafd674-35c3-4c04-b44e-e02c86ba446f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR037")
 					(unit 1)
@@ -10181,16 +10275,15 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 290.83 31.75 180)
+		(at 293.37 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "2bd88039-a56c-4aae-9390-89603ceacc02")
 		(property "Reference" "#PWR023"
-			(at 290.83 25.4 0)
+			(at 293.37 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10199,15 +10292,16 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 290.83 26.67 0)
+			(at 291.338 54.864 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 290.83 31.75 0)
+			(at 293.37 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10216,7 +10310,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 290.83 31.75 0)
+			(at 293.37 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10225,7 +10319,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 290.83 31.75 0)
+			(at 293.37 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10237,7 +10331,7 @@
 			(uuid "43b26138-4ad9-4cac-a858-c522b8acd380")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR023")
 					(unit 1)
@@ -10324,7 +10418,7 @@
 			(uuid "10291e7f-557e-4949-9932-30956b818940")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C19")
 					(unit 1)
@@ -10409,7 +10503,7 @@
 			(uuid "7c842491-76b6-4b94-959c-b572879edef4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R19")
 					(unit 1)
@@ -10515,7 +10609,7 @@
 			(uuid "34e6cc4c-f32a-46d2-91f6-9cc36b90b48b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "U2")
 					(unit 1)
@@ -10525,7 +10619,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Schottky")
-		(at 293.37 53.34 0)
+		(at 295.91 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10533,7 +10627,7 @@
 		(dnp no)
 		(uuid "325520b0-d44b-45af-89f3-4f175c7415d6")
 		(property "Reference" "D11"
-			(at 293.878 57.15 0)
+			(at 296.418 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10541,7 +10635,7 @@
 			)
 		)
 		(property "Value" "D_Schottky"
-			(at 294.64 59.69 0)
+			(at 297.18 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10549,7 +10643,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA"
-			(at 293.37 53.34 0)
+			(at 295.91 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10558,7 +10652,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 293.37 53.34 0)
+			(at 295.91 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10567,7 +10661,7 @@
 			)
 		)
 		(property "Description" "Schottky diode"
-			(at 293.37 53.34 0)
+			(at 295.91 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10576,7 +10670,7 @@
 			)
 		)
 		(property "LCSC" "C8678"
-			(at 293.37 53.34 0)
+			(at 295.91 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10585,7 +10679,7 @@
 			)
 		)
 		(property "LCSC Part" "C8678"
-			(at 293.37 53.34 0)
+			(at 295.91 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10600,7 +10694,7 @@
 			(uuid "648e0974-9cb0-481d-9bb1-e96a85022b25")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D11")
 					(unit 1)
@@ -10687,7 +10781,7 @@
 			(uuid "1627e2a2-98e6-40e1-805c-bd7ed59404f6")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R21")
 					(unit 1)
@@ -10753,7 +10847,7 @@
 			(uuid "b6b6ddb0-988e-4e03-9dc3-df54b70bea34")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR064")
 					(unit 1)
@@ -10763,7 +10857,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 335.28 46.99 0)
+		(at 337.82 62.23 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10772,7 +10866,7 @@
 		(fields_autoplaced yes)
 		(uuid "3ab1aab6-79d8-4698-955d-8bb76fb0a68c")
 		(property "Reference" "#PWR018"
-			(at 335.28 53.34 0)
+			(at 337.82 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10781,7 +10875,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 335.28 52.07 0)
+			(at 337.82 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10789,7 +10883,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 335.28 46.99 0)
+			(at 337.82 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10798,7 +10892,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 335.28 46.99 0)
+			(at 337.82 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10807,7 +10901,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 335.28 46.99 0)
+			(at 337.82 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10819,7 +10913,7 @@
 			(uuid "42231700-d6f3-4283-b14d-84a4722ec858")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR018")
 					(unit 1)
@@ -10906,7 +11000,7 @@
 			(uuid "4490b638-8642-497a-8044-e56c7a882698")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R4")
 					(unit 1)
@@ -10972,7 +11066,7 @@
 			(uuid "1908a2a1-56e8-4f04-b26c-af491cc840f7")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR044")
 					(unit 1)
@@ -11059,7 +11153,7 @@
 			(uuid "b0176de7-6736-4aaa-a57d-562e4036b21c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R12")
 					(unit 1)
@@ -11146,7 +11240,7 @@
 			(uuid "f25bc677-a0d0-44fa-8674-bca104b86b9f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R30")
 					(unit 1)
@@ -11156,7 +11250,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 325.12 25.4 180)
+		(at 327.66 40.64 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11165,7 +11259,7 @@
 		(fields_autoplaced yes)
 		(uuid "41f12c39-5791-409f-91ad-37fd4e2ac70d")
 		(property "Reference" "#PWR019"
-			(at 325.12 19.05 0)
+			(at 327.66 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11174,7 +11268,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 325.12 20.32 0)
+			(at 327.66 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11182,7 +11276,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 325.12 25.4 0)
+			(at 327.66 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11191,7 +11285,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 325.12 25.4 0)
+			(at 327.66 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11200,7 +11294,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 325.12 25.4 0)
+			(at 327.66 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11212,7 +11306,7 @@
 			(uuid "d54dcc98-a857-4326-8de4-8b17cdece86d")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR019")
 					(unit 1)
@@ -11299,7 +11393,7 @@
 			(uuid "4d0c9f04-7f12-47ff-8181-29c8f7bf0d83")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R16")
 					(unit 1)
@@ -11386,7 +11480,7 @@
 			(uuid "32b5dd48-6d66-4daa-8a51-da2cdbd93467")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R25")
 					(unit 1)
@@ -11474,7 +11568,7 @@
 			(uuid "6da52c2d-edb5-4622-b62e-c491ea6f2813")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C21")
 					(unit 1)
@@ -11540,7 +11634,7 @@
 			(uuid "cb1bb34b-043f-486a-8e69-a8346a1b2bca")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR027")
 					(unit 1)
@@ -11606,7 +11700,7 @@
 			(uuid "a0912f79-5e7a-4ddd-9510-b00e9d5bdf9c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR062")
 					(unit 1)
@@ -11616,7 +11710,7 @@
 	)
 	(symbol
 		(lib_id "L7805ABD2T-TR:L7805ABD2T-TR")
-		(at 292.1 34.29 0)
+		(at 294.64 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11625,7 +11719,7 @@
 		(fields_autoplaced yes)
 		(uuid "4891a9c3-2713-4361-b9c0-542eacb7c8a1")
 		(property "Reference" "IC1"
-			(at 307.34 26.67 0)
+			(at 309.88 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11633,7 +11727,7 @@
 			)
 		)
 		(property "Value" "L7805ABD2T-TR"
-			(at 307.34 29.21 0)
+			(at 309.88 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11641,7 +11735,7 @@
 			)
 		)
 		(property "Footprint" "L7805ABD2T-TR:D2PAK-STB35NF10T4"
-			(at 318.77 129.21 0)
+			(at 321.31 144.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11651,7 +11745,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/l78.pdf"
-			(at 318.77 229.21 0)
+			(at 321.31 244.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11661,7 +11755,7 @@
 			)
 		)
 		(property "Description" "Linear Voltage Regulators 5.0V 1.0A Positive"
-			(at 292.1 34.29 0)
+			(at 294.64 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11670,7 +11764,7 @@
 			)
 		)
 		(property "Height" ""
-			(at 318.77 429.21 0)
+			(at 321.31 444.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11680,7 +11774,7 @@
 			)
 		)
 		(property "Mouser Part Number" "511-L7805ABD2T-TR"
-			(at 318.77 529.21 0)
+			(at 321.31 544.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11690,7 +11784,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/L7805ABD2T-TR?qs=LL%252BsqOK9SqOQ%2FfZD5ZsNqA%3D%3D"
-			(at 318.77 629.21 0)
+			(at 321.31 644.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11700,7 +11794,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "STMicroelectronics"
-			(at 318.77 729.21 0)
+			(at 321.31 744.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11710,7 +11804,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "L7805ABD2T-TR"
-			(at 318.77 829.21 0)
+			(at 321.31 844.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11720,7 +11814,7 @@
 			)
 		)
 		(property "LCSC" "C86206"
-			(at 292.1 34.29 0)
+			(at 294.64 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11729,7 +11823,7 @@
 			)
 		)
 		(property "LCSC Part" "C86206"
-			(at 292.1 34.29 0)
+			(at 294.64 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11747,7 +11841,7 @@
 			(uuid "4ea6b4dd-994e-4192-a005-6f12d92d25e9")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "IC1")
 					(unit 1)
@@ -11839,7 +11933,7 @@
 			(uuid "70e69b31-0f9f-4cbd-a2ac-c77c702b6368")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "U3")
 					(unit 1)
@@ -11906,7 +12000,7 @@
 			(uuid "e7261f82-da91-4ca6-b616-8891d8bd0c7e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR049")
 					(unit 1)
@@ -11915,8 +12009,8 @@
 		)
 	)
 	(symbol
-		(lib_id "easyeda2kicad:MT-0-102-E001-T000-RS")
-		(at 283.21 39.37 90)
+		(lib_id "easyeda2kicad:MT-0-102-C004-N004-RS")
+		(at 276.86 35.56 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11924,7 +12018,7 @@
 		(dnp no)
 		(uuid "4b380931-c097-443f-b90b-8c6eeea12f09")
 		(property "Reference" "SW2"
-			(at 281.432 32.766 90)
+			(at 283.972 29.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11933,7 +12027,7 @@
 			)
 		)
 		(property "Value" "MT-0-102"
-			(at 277.622 35.56 90)
+			(at 282.956 41.402 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11941,8 +12035,8 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:SW-TH_MT-0-102-E001-T000-RS-PJ"
-			(at 293.37 39.37 0)
+		(property "Footprint" "easyeda2kicad:SW-TH_MT-0-102-C004-N004-RS"
+			(at 264.16 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11951,7 +12045,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 283.21 39.37 0)
+			(at 276.86 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11960,7 +12054,7 @@
 			)
 		)
 		(property "Description" "Single Pole Single Throw (SPST) switch"
-			(at 283.21 39.37 0)
+			(at 276.86 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11968,8 +12062,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C1788499"
-			(at 295.91 39.37 0)
+		(property "LCSC Part" "C1788496"
+			(at 261.62 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11977,8 +12071,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1788499"
-			(at 283.21 39.37 0)
+		(property "LCSC" "C1788496"
+			(at 276.86 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11995,8 +12089,14 @@
 		(pin "3"
 			(uuid "974b5ac7-9581-45f6-a755-c32921186d73")
 		)
+		(pin "5"
+			(uuid "c7242e25-1b34-4b33-acf6-5dfea283de8b")
+		)
+		(pin "4"
+			(uuid "946de8cb-8b3f-4bbf-9b89-e6146046ea8c")
+		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "SW2")
 					(unit 1)
@@ -12083,7 +12183,7 @@
 			(uuid "2504f995-63ac-48fb-8a13-b61c9694a25c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R7")
 					(unit 1)
@@ -12093,7 +12193,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 396.24 170.18 90)
+		(at 396.24 191.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12102,7 +12202,7 @@
 		(fields_autoplaced yes)
 		(uuid "4e47ff87-5b86-401b-a562-a4c57bad4533")
 		(property "Reference" "#PWR014"
-			(at 402.59 170.18 0)
+			(at 402.59 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12111,7 +12211,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 400.05 170.1799 90)
+			(at 400.05 191.7699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12120,7 +12220,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 396.24 170.18 0)
+			(at 396.24 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12129,7 +12229,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 396.24 170.18 0)
+			(at 396.24 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12138,7 +12238,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 396.24 170.18 0)
+			(at 396.24 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12150,7 +12250,7 @@
 			(uuid "aa3be041-276a-4181-bbfe-c9e19437d520")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR014")
 					(unit 1)
@@ -12237,7 +12337,7 @@
 			(uuid "dd246969-275b-4b51-a754-e38980f68bd3")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R6")
 					(unit 1)
@@ -12324,7 +12424,7 @@
 			(uuid "af0320f0-7edf-4144-95d3-3f2b5e67d433")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C9")
 					(unit 1)
@@ -12390,7 +12490,7 @@
 			(uuid "75d18f4d-a2e6-48cd-90ce-fd8853c67a0b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR059")
 					(unit 1)
@@ -12400,7 +12500,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 325.12 29.21 180)
+		(at 327.66 44.45 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12409,7 +12509,7 @@
 		(fields_autoplaced yes)
 		(uuid "56776548-94cf-4160-a411-e4f0c8e01523")
 		(property "Reference" "C6"
-			(at 327.66 27.9335 0)
+			(at 330.2 43.1735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12418,7 +12518,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 327.66 30.4735 0)
+			(at 330.2 45.7135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12427,7 +12527,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 325.12 29.21 0)
+			(at 327.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12436,7 +12536,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 325.12 29.21 0)
+			(at 327.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12445,7 +12545,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 325.12 29.21 0)
+			(at 327.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12454,7 +12554,7 @@
 			)
 		)
 		(property "LCSC" "C1525"
-			(at 325.12 29.21 0)
+			(at 327.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12463,7 +12563,7 @@
 			)
 		)
 		(property "LCSC Part" "C1525"
-			(at 325.12 29.21 0)
+			(at 327.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12478,7 +12578,7 @@
 			(uuid "dc3017d5-25fb-4aca-888e-339fc72b4501")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C6")
 					(unit 1)
@@ -12545,7 +12645,7 @@
 			(uuid "b9eb1ef3-cbf1-4df7-b54a-b60d0a84f40e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR021")
 					(unit 1)
@@ -12611,7 +12711,7 @@
 			(uuid "a8c00bb4-b770-43b3-9f73-b8186fa860d5")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR057")
 					(unit 1)
@@ -12621,7 +12721,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_Schottky")
-		(at 269.24 44.45 0)
+		(at 278.13 54.61 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12629,7 +12729,7 @@
 		(dnp no)
 		(uuid "5a141618-3f10-46dc-b725-0c3e3031d8b8")
 		(property "Reference" "D12"
-			(at 269.748 48.26 0)
+			(at 278.638 59.944 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12637,7 +12737,7 @@
 			)
 		)
 		(property "Value" "D_Schottky"
-			(at 270.51 50.8 0)
+			(at 277.876 57.404 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12645,7 +12745,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA"
-			(at 269.24 44.45 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12654,7 +12754,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 269.24 44.45 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12663,7 +12763,7 @@
 			)
 		)
 		(property "Description" "Schottky diode"
-			(at 269.24 44.45 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12672,7 +12772,7 @@
 			)
 		)
 		(property "LCSC" "C8678"
-			(at 269.24 44.45 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12681,7 +12781,7 @@
 			)
 		)
 		(property "LCSC Part" "C8678"
-			(at 269.24 44.45 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12696,7 +12796,7 @@
 			(uuid "372df876-ce32-4d3d-9be5-fa42221cb32b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D12")
 					(unit 1)
@@ -12783,7 +12883,7 @@
 			(uuid "a93bacf1-82ec-4852-a563-f4d05acda717")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C18")
 					(unit 1)
@@ -12871,7 +12971,7 @@
 			(uuid "35132219-df6e-47b3-82fd-ff1b4ce352c9")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C22")
 					(unit 1)
@@ -12881,7 +12981,7 @@
 	)
 	(symbol
 		(lib_id "easyeda2kicad:DC-005-A250")
-		(at 307.34 50.8 180)
+		(at 309.88 24.13 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12889,7 +12989,7 @@
 		(dnp no)
 		(uuid "5c2a63e5-c039-46b5-9572-ae033bfe3d5e")
 		(property "Reference" "J4"
-			(at 309.118 42.926 0)
+			(at 311.658 16.256 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12898,7 +12998,7 @@
 			)
 		)
 		(property "Value" "DC-005-A250"
-			(at 315.722 45.466 0)
+			(at 318.262 18.796 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12907,7 +13007,7 @@
 			)
 		)
 		(property "Footprint" "easyeda2kicad:DC-IN-TH_DC-005-A250"
-			(at 307.34 40.64 0)
+			(at 309.88 13.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12916,7 +13016,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 307.34 50.8 0)
+			(at 309.88 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12925,7 +13025,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 307.34 50.8 0)
+			(at 309.88 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12934,7 +13034,7 @@
 			)
 		)
 		(property "LCSC Part" "C720558"
-			(at 307.34 38.1 0)
+			(at 309.88 11.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12943,7 +13043,7 @@
 			)
 		)
 		(property "LCSC" "C720558"
-			(at 307.34 50.8 0)
+			(at 309.88 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12961,7 +13061,7 @@
 			(uuid "6e256dda-75d7-4065-8cda-7d73170d7bcb")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "J4")
 					(unit 1)
@@ -13048,7 +13148,7 @@
 			(uuid "6c4ce3e6-b04a-433e-a835-3b44b6ccc2b8")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R5")
 					(unit 1)
@@ -13115,7 +13215,7 @@
 			(uuid "a1d62fa7-4446-4cbf-891a-507a682b45a8")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR038")
 					(unit 1)
@@ -13249,7 +13349,7 @@
 			(uuid "8bbca950-0953-4bbd-b28b-c40efa429339")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "SW1")
 					(unit 1)
@@ -13336,7 +13436,7 @@
 			(uuid "e6ba843c-af6e-4ff0-892b-44f1ba061fbd")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R27")
 					(unit 1)
@@ -13345,8 +13445,8 @@
 		)
 	)
 	(symbol
-		(lib_id "easyeda2kicad:DS1023-1X3SF11")
-		(at 384.81 73.66 0)
+		(lib_id "easyeda2kicad:BM03B-SRSS-TB(LF)(SN)")
+		(at 368.3 80.01 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13355,25 +13455,23 @@
 		(fields_autoplaced yes)
 		(uuid "5fc0974e-5b4d-4c52-8d97-cb39b7a096ae")
 		(property "Reference" "J1"
-			(at 388.62 72.3899 0)
+			(at 368.3 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "DS1023-1x3SF11"
-			(at 388.62 74.9299 0)
+			(at 368.3 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:HDR-TH_3P-P2.54-V-F-1"
-			(at 384.81 83.82 0)
+		(property "Footprint" "easyeda2kicad:CONN-SMD-3P-P1.00_BM03B-SRSS-TB-LF-SN"
+			(at 368.3 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13381,8 +13479,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 384.81 73.66 0)
+		(property "Datasheet" "https://lcsc.com/product-detail/Others_JST-Sales-America__JST-Sales-America-BM03B-SRSS-TB-LF-SN_C160389.html"
+			(at 368.3 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13391,7 +13489,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 384.81 73.66 0)
+			(at 368.3 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13399,8 +13497,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C7509516"
-			(at 384.81 86.36 0)
+		(property "LCSC Part" "C160389"
+			(at 368.3 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13408,8 +13506,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7509516"
-			(at 384.81 73.66 0)
+		(property "LCSC" "C160389"
+			(at 368.3 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13426,8 +13524,14 @@
 		(pin "3"
 			(uuid "24d580a9-b974-489e-a9e4-7c9c40839bea")
 		)
+		(pin "4"
+			(uuid "38177b4c-6803-4433-a0b9-8c123f5a9aae")
+		)
+		(pin "5"
+			(uuid "3764e72a-33f4-4b97-b8bb-abfc8ee4c59f")
+		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "J1")
 					(unit 1)
@@ -13515,9 +13619,150 @@
 			(uuid "14051264-817b-4286-bb79-254831baf1ef")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "easyeda2kicad:15EDGRC-3.5-03P-14-00A(H)")
+		(at 387.35 179.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "616c1ef8-73dc-4d39-b205-1d134711995e")
+		(property "Reference" "J3"
+			(at 391.16 177.7999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "284514-3"
+			(at 391.16 180.3399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "easyeda2kicad:CONN-TH_3P-P3.50_15EDGRC-3.5-03P"
+			(at 387.35 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1-1773458-1_EURO_STYLE_QRG&DocType=Data%20Sheet&DocLang=English&PartCntxt=284514-3&DocFormat=pdf"
+			(at 387.35 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Body Features: Primary Product Color Green | Product Orientation Vertical | Configuration Features: Number of Positions 3 | Number of Rows 1 | Contact Features: Contact Base Material Phosphor Bronze | Contact Current Rating (Max) 11 AMP | Contact Mating Area Plating Material Tin | Dimensions: Wire Size 30  14 AWG | Wire Size .05  2 MMSQ | Electrical Characteristics: Operating Voltage 300 VAC | Housing Features: Housing Material PA 66 | Centerline (Pitch) 3.5 MM | Centerline (Pitch) .138 INCH | Mechani"
+			(at 387.35 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Height" "9.4"
+			(at 403.86 573.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-284514-3"
+			(at 403.86 673.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/284514-3?qs=woBvfblj%2FzwGS50caoQlYA%3D%3D"
+			(at 403.86 773.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 403.86 873.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "284514-3"
+			(at 403.86 973.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C7466034"
+			(at 387.35 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C5160226"
+			(at 387.35 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0fb1090e-5680-4f7d-a2ec-f00c5f70cda8")
+		)
+		(pin "3"
+			(uuid "bc21058c-264f-4eff-a8bd-46b74f1e2ef4")
+		)
+		(pin "1"
+			(uuid "ec2d4f05-ba2e-44a8-bda8-528cfd6722c7")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -13603,7 +13848,7 @@
 			(uuid "75b04157-ce8c-494b-8b92-65b52e709793")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D7")
 					(unit 1)
@@ -13668,7 +13913,7 @@
 			(uuid "2e6a24e5-a88f-4bb7-9199-95566a2e4e46")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR052")
 					(unit 1)
@@ -13678,7 +13923,7 @@
 	)
 	(symbol
 		(lib_id "power:+24V")
-		(at 340.36 36.83 270)
+		(at 342.9 52.07 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13687,7 +13932,7 @@
 		(fields_autoplaced yes)
 		(uuid "6199f3bf-7637-4f8d-a1b4-0f53e636de04")
 		(property "Reference" "#PWR016"
-			(at 336.55 36.83 0)
+			(at 339.09 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13696,7 +13941,7 @@
 			)
 		)
 		(property "Value" "+24V"
-			(at 344.17 36.8299 90)
+			(at 346.71 52.0699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13705,7 +13950,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 340.36 36.83 0)
+			(at 342.9 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13714,7 +13959,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 340.36 36.83 0)
+			(at 342.9 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13723,7 +13968,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+24V\""
-			(at 340.36 36.83 0)
+			(at 342.9 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13735,7 +13980,7 @@
 			(uuid "c4441d30-2e9f-4c4a-9297-d025980f011b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR016")
 					(unit 1)
@@ -13801,7 +14046,7 @@
 			(uuid "6b452fd3-715e-407b-82f9-4557e7fd7ce5")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR07")
 					(unit 1)
@@ -13868,7 +14113,7 @@
 			(uuid "f1748e17-7bd9-4ed6-acdf-d020160d9f7c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR010")
 					(unit 1)
@@ -13956,152 +14201,9 @@
 			(uuid "81b8a15a-bcd7-4262-8f58-dbc893410056")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "284514-3:284514-3")
-		(at 378.46 179.07 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "66b5a05e-4af3-4f3f-bbaa-ddbd82febf75")
-		(property "Reference" "J3"
-			(at 394.97 180.3399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "284514-3"
-			(at 394.97 182.8799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "284514-3:SHDR3W80P0X350_1X3_1250X725X940P"
-			(at 394.97 273.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1-1773458-1_EURO_STYLE_QRG&DocType=Data%20Sheet&DocLang=English&PartCntxt=284514-3&DocFormat=pdf"
-			(at 394.97 373.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Description" "Body Features: Primary Product Color Green | Product Orientation Vertical | Configuration Features: Number of Positions 3 | Number of Rows 1 | Contact Features: Contact Base Material Phosphor Bronze | Contact Current Rating (Max) 11 AMP | Contact Mating Area Plating Material Tin | Dimensions: Wire Size 30  14 AWG | Wire Size .05  2 MMSQ | Electrical Characteristics: Operating Voltage 300 VAC | Housing Features: Housing Material PA 66 | Centerline (Pitch) 3.5 MM | Centerline (Pitch) .138 INCH | Mechani"
-			(at 378.46 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Height" "9.4"
-			(at 394.97 573.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "571-284514-3"
-			(at 394.97 673.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/284514-3?qs=woBvfblj%2FzwGS50caoQlYA%3D%3D"
-			(at 394.97 773.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "TE Connectivity"
-			(at 394.97 873.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "284514-3"
-			(at 394.97 973.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C7466034"
-			(at 378.46 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part" "C7466034"
-			(at 378.46 179.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d86c4d10-bea9-46da-8d96-7699c3dacb4e")
-		)
-		(pin "3"
-			(uuid "ade3df95-87f0-4ef0-a834-3bc742c6e962")
-		)
-		(pin "1"
-			(uuid "6143aa76-146e-4fed-805b-7cdc7eed3da3")
-		)
-		(instances
-			(project "LampBoardModule"
-				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
-					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -14187,7 +14289,7 @@
 			(uuid "cf9b5290-35f7-4360-8c9a-9d5baf59d608")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D13")
 					(unit 1)
@@ -14254,7 +14356,7 @@
 			(uuid "c15c0d94-6e77-4e90-bb6a-284266e5e715")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "H2")
 					(unit 1)
@@ -14341,7 +14443,7 @@
 			(uuid "cb7e165a-5f51-41e2-87bc-e7157588d92e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C24")
 					(unit 1)
@@ -14428,9 +14530,75 @@
 			(uuid "ebcef173-f140-46be-9caa-6692284c12d6")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 381 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6bfd8d9d-8faa-4fb3-bea1-9012f899b24e")
+		(property "Reference" "#PWR070"
+			(at 381 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 381 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 381 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 381 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 381 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ad21e35d-466b-457a-9152-f0a2aff465e4")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -14515,9 +14683,75 @@
 			(uuid "528e8de6-1543-4324-87a5-1ca5201abecc")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R28")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 358.14 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "730dd86c-a329-461c-b88d-4206ababd04b")
+		(property "Reference" "#PWR071"
+			(at 358.14 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 358.14 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 358.14 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 358.14 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 358.14 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "04e57fb3-0aef-4252-8011-9e4e917232ce")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -14602,9 +14836,75 @@
 			(uuid "c426b1f8-ceb5-45b9-9df0-ce0596602fd6")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 271.78 30.48 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "783fc67c-dac5-4dc4-8288-d071a3670f21")
+		(property "Reference" "#PWR074"
+			(at 271.78 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 271.78 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 271.78 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 271.78 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 271.78 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f4f00c4f-570e-421e-ab71-f7d430352b54")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
@@ -14690,7 +14990,7 @@
 			(uuid "8b1a834b-4e36-4524-a6e7-ecc37c58c066")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R26")
 					(unit 1)
@@ -14756,7 +15056,7 @@
 			(uuid "3d3825cf-6a88-40fb-822c-3547e8c3baf3")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR04")
 					(unit 1)
@@ -14848,7 +15148,7 @@
 			(uuid "418ab2f5-26dc-45d7-a876-8d395b266fd0")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "U4")
 					(unit 1)
@@ -14915,7 +15215,7 @@
 			(uuid "f1c5bf8e-a42f-4944-82b3-213c16005f81")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "H3")
 					(unit 1)
@@ -14981,7 +15281,7 @@
 			(uuid "92b4f147-055c-4ddd-9fdb-a49bf0151bda")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR05")
 					(unit 1)
@@ -15048,7 +15348,7 @@
 			(uuid "5e26c4ac-3caf-4325-ac3a-22c0dc38dbfc")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR020")
 					(unit 1)
@@ -15114,7 +15414,7 @@
 			(uuid "ac16c4f3-8228-4929-a994-f03865481688")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR03")
 					(unit 1)
@@ -15180,9 +15480,74 @@
 			(uuid "16b5d890-24c6-4199-8e22-5b71d6f620ca")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR046")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 403.86 74.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8716998d-dad5-4016-a3e2-bca9ef6f3e22")
+		(property "Reference" "#PWR072"
+			(at 403.86 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 403.86 78.994 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 403.86 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 403.86 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 403.86 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f15cf304-018d-443a-a856-b464048231e7")
+		)
+		(instances
+			(project "LampBoardDesk"
+				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -15270,7 +15635,7 @@
 			(uuid "103bb386-1523-408f-a5c4-ed32dadea79c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "Q1")
 					(unit 1)
@@ -15358,7 +15723,7 @@
 			(uuid "193f922d-9af9-4e6a-a17a-8e6aebe91a5d")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D10")
 					(unit 1)
@@ -15445,7 +15810,7 @@
 			(uuid "088feb32-2981-418f-ae66-a86194cd4850")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C13")
 					(unit 1)
@@ -15455,7 +15820,7 @@
 	)
 	(symbol
 		(lib_id "easyeda2kicad:470UF50V")
-		(at 391.16 170.18 0)
+		(at 391.16 191.77 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15463,7 +15828,7 @@
 		(dnp no)
 		(uuid "89eb387e-a2d3-4777-80a6-c6bd0fa4ce1c")
 		(property "Reference" "C4"
-			(at 392.938 173.736 0)
+			(at 392.938 195.326 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15471,7 +15836,7 @@
 			)
 		)
 		(property "Value" "470u"
-			(at 387.35 172.72 0)
+			(at 387.35 194.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15479,7 +15844,7 @@
 			)
 		)
 		(property "Footprint" "easyeda2kicad:CAP-TH_BD10.0-P5.00-D1.0-FD"
-			(at 391.16 177.8 0)
+			(at 391.16 199.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15488,7 +15853,7 @@
 			)
 		)
 		(property "Datasheet" "https://lcsc.com/product-detail/Aluminum-Electrolytic-Capacitors-Leaded_470uF-50V_C34642.html"
-			(at 391.16 180.34 0)
+			(at 391.16 201.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15497,7 +15862,7 @@
 			)
 		)
 		(property "Description" "Polarized capacitor, small US symbol"
-			(at 391.16 170.18 0)
+			(at 391.16 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15506,7 +15871,7 @@
 			)
 		)
 		(property "LCSC Part" "C34642"
-			(at 391.16 182.88 0)
+			(at 391.16 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15515,7 +15880,7 @@
 			)
 		)
 		(property "LCSC" "C34642"
-			(at 391.16 170.18 0)
+			(at 391.16 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15530,7 +15895,7 @@
 			(uuid "8abc4ee2-25bd-42d7-911e-1c9fa7d0f89e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C4")
 					(unit 1)
@@ -15596,7 +15961,7 @@
 			(uuid "734b588a-e4b9-4803-91a5-1cd2b8ba6d28")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR056")
 					(unit 1)
@@ -15606,16 +15971,15 @@
 	)
 	(symbol
 		(lib_id "power:+24V")
-		(at 285.75 44.45 270)
+		(at 279.4 43.18 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "8fc2ddbc-8993-4ee6-81d5-44052aa6e8d4")
 		(property "Reference" "#PWR029"
-			(at 281.94 44.45 0)
+			(at 279.4 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15624,16 +15988,16 @@
 			)
 		)
 		(property "Value" "+24V"
-			(at 289.56 44.4499 90)
+			(at 280.162 46.228 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 285.75 44.45 0)
+			(at 279.4 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15642,7 +16006,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 285.75 44.45 0)
+			(at 279.4 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15651,7 +16015,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+24V\""
-			(at 285.75 44.45 0)
+			(at 279.4 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15663,7 +16027,7 @@
 			(uuid "65e1f755-c85b-4eac-9704-80b8455b62c6")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR029")
 					(unit 1)
@@ -15729,7 +16093,7 @@
 			(uuid "4c743978-7990-4cbb-9fcc-ae7beda15528")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR031")
 					(unit 1)
@@ -15816,7 +16180,7 @@
 			(uuid "4bf129da-55fb-4b34-9cb8-3e7663b8e203")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C3")
 					(unit 1)
@@ -15904,7 +16268,7 @@
 			(uuid "fc414ca1-dbe9-4020-a055-d0c00cdc552c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D6")
 					(unit 1)
@@ -15970,7 +16334,7 @@
 			(uuid "7a9ef1cb-18c9-4e83-9f67-c62be6fbb29f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR032")
 					(unit 1)
@@ -16036,7 +16400,7 @@
 			(uuid "3ecbaa44-5f87-455f-a94b-7d66b759fb9c")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR061")
 					(unit 1)
@@ -16102,7 +16466,7 @@
 			(uuid "a980f2eb-0d58-4874-b28b-919cae8f72e8")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR063")
 					(unit 1)
@@ -16168,7 +16532,7 @@
 			(uuid "8844492c-d99f-444a-ba71-cff7880ce78b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR060")
 					(unit 1)
@@ -16234,7 +16598,7 @@
 			(uuid "96cc5c2d-096f-45c8-ba20-46696982bf8d")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR034")
 					(unit 1)
@@ -16301,7 +16665,7 @@
 			(uuid "1afb36ce-202f-4a36-8662-a7448ee6f575")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "H1")
 					(unit 1)
@@ -16388,7 +16752,7 @@
 			(uuid "bcfd85a2-3534-475a-b0fd-eda0d7875d7f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R31")
 					(unit 1)
@@ -16476,7 +16840,7 @@
 			(uuid "84b4b5d6-ca14-4b17-a2df-a7d92791231a")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D1")
 					(unit 1)
@@ -16542,7 +16906,7 @@
 			(uuid "f8a74314-5e34-4b65-bbe4-66c3a99efb7f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR055")
 					(unit 1)
@@ -16629,7 +16993,7 @@
 			(uuid "96e84a7c-5525-4881-9141-c075e4e8b8a7")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R29")
 					(unit 1)
@@ -16695,7 +17059,7 @@
 			(uuid "72506dd2-b8cf-4942-9b1a-a7eefaa06973")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR042")
 					(unit 1)
@@ -16761,7 +17125,7 @@
 			(uuid "3274831e-417a-409d-a374-cb5cb5283206")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR039")
 					(unit 1)
@@ -16848,7 +17212,7 @@
 			(uuid "c6c45fa3-9b91-4dcc-ac9d-1ba1e26248db")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C12")
 					(unit 1)
@@ -16915,7 +17279,7 @@
 			(uuid "1b397de9-080d-407c-9f15-bcbc588bb349")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR025")
 					(unit 1)
@@ -16981,7 +17345,7 @@
 			(uuid "5756083e-f7cf-4809-9530-6c599645ab52")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR069")
 					(unit 1)
@@ -17047,7 +17411,7 @@
 			(uuid "615bbf5f-2248-4cda-82f6-c66de4c18d36")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR011")
 					(unit 1)
@@ -17134,7 +17498,7 @@
 			(uuid "2097decc-eecf-4b68-8c06-7838c1c4eade")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R10")
 					(unit 1)
@@ -17221,7 +17585,7 @@
 			(uuid "1f3110b1-cabe-4fd1-99ad-60da5cfb087b")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R8")
 					(unit 1)
@@ -17377,7 +17741,7 @@
 			(uuid "4d83b790-afc7-48d1-8060-58e81c1c2379")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "IC2")
 					(unit 1)
@@ -17387,7 +17751,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 372.11 73.66 270)
+		(at 368.3 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17396,7 +17760,7 @@
 		(fields_autoplaced yes)
 		(uuid "bc8eea21-e617-417c-a558-34c93d90774b")
 		(property "Reference" "#PWR01"
-			(at 365.76 73.66 0)
+			(at 368.3 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17405,16 +17769,15 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 368.3 73.6599 90)
+			(at 368.3 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 372.11 73.66 0)
+			(at 368.3 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17423,7 +17786,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 372.11 73.66 0)
+			(at 368.3 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17432,7 +17795,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 372.11 73.66 0)
+			(at 368.3 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17444,7 +17807,7 @@
 			(uuid "c6f57c3e-f55e-4e82-a7c4-a83f60cadb56")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR01")
 					(unit 1)
@@ -17532,7 +17895,7 @@
 			(uuid "cb72d7ff-e692-4579-a042-9752d5931ac0")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C1")
 					(unit 1)
@@ -17598,7 +17961,7 @@
 			(uuid "09ef68b4-d4bb-43df-8924-5f713687f87a")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR015")
 					(unit 1)
@@ -17616,7 +17979,7 @@
 		(dnp no)
 		(uuid "bdaf30f5-e53f-4fcc-9e9d-45eff55e995f")
 		(property "Reference" "CR1"
-			(at 313.69 58.42 0)
+			(at 316.23 31.75 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -17688,7 +18051,7 @@
 			(uuid "b7f8b6ff-cc4f-42e1-89fd-b51b551078fe")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "CR1")
 					(unit 1)
@@ -17831,7 +18194,7 @@
 			(uuid "7dfe435b-a72b-45de-b7dc-1dfd46369a8e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "Y1")
 					(unit 1)
@@ -17898,7 +18261,7 @@
 			(uuid "894a270c-3d52-42da-aefe-dcc4bf082dcf")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR048")
 					(unit 1)
@@ -17908,7 +18271,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 372.11 83.82 270)
+		(at 393.7 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17917,7 +18280,7 @@
 		(fields_autoplaced yes)
 		(uuid "c2c39b87-db1a-422e-b648-f142f8a54b5d")
 		(property "Reference" "#PWR02"
-			(at 365.76 83.82 0)
+			(at 393.7 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17926,16 +18289,15 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 368.3 83.8199 90)
+			(at 393.7 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 372.11 83.82 0)
+			(at 393.7 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17944,7 +18306,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 372.11 83.82 0)
+			(at 393.7 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17953,7 +18315,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 372.11 83.82 0)
+			(at 393.7 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17965,7 +18327,7 @@
 			(uuid "1d767361-a17e-42ca-84d5-22314e9c6f51")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR02")
 					(unit 1)
@@ -18031,7 +18393,7 @@
 			(uuid "3787b7ae-edf8-443d-a33c-d640f8ef5496")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR040")
 					(unit 1)
@@ -18118,7 +18480,7 @@
 			(uuid "456103f4-6d96-4aa6-adc8-127f56e3f7a8")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R23")
 					(unit 1)
@@ -18185,7 +18547,7 @@
 			(uuid "171116a6-c7af-44be-a54c-c62f88f54575")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR041")
 					(unit 1)
@@ -18195,7 +18557,7 @@
 	)
 	(symbol
 		(lib_id "power:+24V")
-		(at 377.19 170.18 90)
+		(at 377.19 191.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18203,7 +18565,7 @@
 		(dnp no)
 		(uuid "c9fbac0e-3145-44ee-9d39-c3daebfe3c1b")
 		(property "Reference" "#PWR012"
-			(at 381 170.18 0)
+			(at 381 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18212,7 +18574,7 @@
 			)
 		)
 		(property "Value" "+24V"
-			(at 373.38 170.1799 90)
+			(at 373.38 191.7699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18221,7 +18583,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 377.19 170.18 0)
+			(at 377.19 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18230,7 +18592,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 377.19 170.18 0)
+			(at 377.19 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18239,7 +18601,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+24V\""
-			(at 377.19 170.18 0)
+			(at 377.19 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18251,7 +18613,7 @@
 			(uuid "f2e36704-e964-44de-b18f-0f0959a5f164")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR012")
 					(unit 1)
@@ -18316,7 +18678,7 @@
 			(uuid "969acf28-e86d-4c7b-8ed2-141d28455635")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR013")
 					(unit 1)
@@ -18382,7 +18744,7 @@
 			(uuid "0687da04-13b5-4bb8-af79-6b4976148927")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR054")
 					(unit 1)
@@ -18448,7 +18810,7 @@
 			(uuid "0e1958e4-237a-4bce-a371-7abfde4338ca")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR050")
 					(unit 1)
@@ -18514,7 +18876,7 @@
 			(uuid "0af8757a-4733-4a27-8452-1a1ddf7dd83d")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR066")
 					(unit 1)
@@ -18523,8 +18885,8 @@
 		)
 	)
 	(symbol
-		(lib_id "easyeda2kicad:DS1023-1X3SF11")
-		(at 384.81 83.82 0)
+		(lib_id "easyeda2kicad:BM03B-SRSS-TB(LF)(SN)")
+		(at 393.7 80.01 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18533,25 +18895,23 @@
 		(fields_autoplaced yes)
 		(uuid "d51871d5-12c9-4ad3-a2b8-e0c2f99f6942")
 		(property "Reference" "J2"
-			(at 388.62 82.5499 0)
+			(at 393.7 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "DS1023-1x3SF11"
-			(at 388.62 85.0899 0)
+			(at 393.7 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "easyeda2kicad:HDR-TH_3P-P2.54-V-F-1"
-			(at 384.81 93.98 0)
+		(property "Footprint" "easyeda2kicad:CONN-SMD-3P-P1.00_BM03B-SRSS-TB-LF-SN"
+			(at 393.7 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18559,8 +18919,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 384.81 83.82 0)
+		(property "Datasheet" "https://lcsc.com/product-detail/Others_JST-Sales-America__JST-Sales-America-BM03B-SRSS-TB-LF-SN_C160389.html"
+			(at 393.7 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18569,7 +18929,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 384.81 83.82 0)
+			(at 393.7 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18577,8 +18937,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C7509516"
-			(at 384.81 96.52 0)
+		(property "LCSC Part" "C160389"
+			(at 393.7 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18586,8 +18946,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7509516"
-			(at 384.81 83.82 0)
+		(property "LCSC" "C160389"
+			(at 393.7 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18604,8 +18964,14 @@
 		(pin "3"
 			(uuid "6be313f1-67ff-4b28-919d-64bfab99f3d5")
 		)
+		(pin "5"
+			(uuid "dbbb2b53-6a61-4c6a-bc07-6f3d5bab2578")
+		)
+		(pin "4"
+			(uuid "62a7b1f0-895b-4b47-b67d-34ebf0817497")
+		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "J2")
 					(unit 1)
@@ -18615,16 +18981,15 @@
 	)
 	(symbol
 		(lib_id "power:+24V")
-		(at 265.43 44.45 0)
+		(at 281.94 54.61 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d63969e9-bdf1-4c95-936d-f491b79ea23e")
 		(property "Reference" "#PWR065"
-			(at 265.43 48.26 0)
+			(at 278.13 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18633,15 +18998,16 @@
 			)
 		)
 		(property "Value" "+24V"
-			(at 265.43 39.37 0)
+			(at 288.036 52.832 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 265.43 44.45 0)
+			(at 281.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18650,7 +19016,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 265.43 44.45 0)
+			(at 281.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18659,7 +19025,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+24V\""
-			(at 265.43 44.45 0)
+			(at 281.94 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18671,7 +19037,7 @@
 			(uuid "ef5e4d82-ae81-437d-b269-134490c9cfc5")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR065")
 					(unit 1)
@@ -18758,7 +19124,7 @@
 			(uuid "825d1638-0ccc-4293-a722-f3c4417af999")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R3")
 					(unit 1)
@@ -18824,7 +19190,7 @@
 			(uuid "c66349f6-8db1-4d52-9d8a-864e592642e4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR068")
 					(unit 1)
@@ -18911,7 +19277,7 @@
 			(uuid "d478ef99-d800-4f7a-a706-d57e057c2b13")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R9")
 					(unit 1)
@@ -18999,7 +19365,7 @@
 			(uuid "1e24013a-baa4-4829-8bef-db2b90fb790a")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C7")
 					(unit 1)
@@ -19064,7 +19430,7 @@
 			(uuid "8bc61b41-144e-42a9-9664-2ca8616806d4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR08")
 					(unit 1)
@@ -19151,7 +19517,7 @@
 			(uuid "bf711d8e-d530-40ce-8b60-db5add13cfc9")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R14")
 					(unit 1)
@@ -19217,7 +19583,7 @@
 			(uuid "5c5cf43b-5c46-4785-9e31-827bac7fbbae")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR026")
 					(unit 1)
@@ -19302,7 +19668,7 @@
 			(uuid "eb718ee8-e4bb-4a6a-9bed-b360e0d56c25")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R1")
 					(unit 1)
@@ -19390,7 +19756,7 @@
 			(uuid "6caa49d9-4065-4c19-afe5-9065b14d73b1")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D5")
 					(unit 1)
@@ -19478,7 +19844,7 @@
 			(uuid "c9ae8629-e79b-4a66-856d-1d3b04aea1c4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C2")
 					(unit 1)
@@ -19566,7 +19932,7 @@
 			(uuid "f1709dbb-b6a4-47c1-b192-d6c277f16605")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "D9")
 					(unit 1)
@@ -19662,7 +20028,7 @@
 			(uuid "ad96bff5-e762-47c9-91d5-f04764b029ca")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C20")
 					(unit 1)
@@ -19728,7 +20094,7 @@
 			(uuid "7ae780ee-c846-47a1-a276-ffb075dadd17")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR09")
 					(unit 1)
@@ -19738,7 +20104,7 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 335.28 41.91 0)
+		(at 337.82 57.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -19747,7 +20113,7 @@
 		(fields_autoplaced yes)
 		(uuid "edb2273b-a38b-4728-9a0e-b2cab3a70639")
 		(property "Reference" "C5"
-			(at 337.82 40.6462 0)
+			(at 340.36 55.8862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19756,7 +20122,7 @@
 			)
 		)
 		(property "Value" ".33u"
-			(at 337.82 43.1862 0)
+			(at 340.36 58.4262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19765,7 +20131,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 335.28 41.91 0)
+			(at 337.82 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19774,7 +20140,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 335.28 41.91 0)
+			(at 337.82 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19783,7 +20149,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 335.28 41.91 0)
+			(at 337.82 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19792,7 +20158,7 @@
 			)
 		)
 		(property "LCSC" "C309049"
-			(at 335.28 41.91 0)
+			(at 337.82 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19801,7 +20167,7 @@
 			)
 		)
 		(property "LCSC Part" "C309049"
-			(at 335.28 41.91 0)
+			(at 337.82 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19816,7 +20182,7 @@
 			(uuid "69f23f96-653b-4cb5-a07b-e1bd7a02caaa")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C5")
 					(unit 1)
@@ -19882,7 +20248,7 @@
 			(uuid "bd52a21a-0c0f-4771-bc56-bc9b91cca022")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR045")
 					(unit 1)
@@ -19948,7 +20314,7 @@
 			(uuid "1f73cefb-6a21-4275-ace4-a4c248c996b9")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR053")
 					(unit 1)
@@ -20035,7 +20401,7 @@
 			(uuid "1879aed4-b62a-4359-bd45-e7d7e0176744")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R22")
 					(unit 1)
@@ -20120,7 +20486,7 @@
 			(uuid "2527cc17-22db-46c3-bade-aa0d7e1107c4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R11")
 					(unit 1)
@@ -20186,7 +20552,7 @@
 			(uuid "1288c2af-e289-416e-a7b8-f82c5b25b64e")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR035")
 					(unit 1)
@@ -20273,7 +20639,7 @@
 			(uuid "8a64ffbf-0083-41a5-bb24-6e5b544841ca")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C23")
 					(unit 1)
@@ -20358,7 +20724,7 @@
 			(uuid "ad7da5fd-75cc-4396-b8c5-742dac77600f")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "R17")
 					(unit 1)
@@ -20446,7 +20812,7 @@
 			(uuid "ee5ed411-6007-4064-85d5-fde8fc57efba")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "C8")
 					(unit 1)
@@ -20456,7 +20822,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 340.36 34.29 270)
+		(at 342.9 49.53 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -20465,7 +20831,7 @@
 		(fields_autoplaced yes)
 		(uuid "fcbd28fb-4048-44b7-92ef-52206a9544c4")
 		(property "Reference" "#PWR017"
-			(at 336.55 34.29 0)
+			(at 339.09 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20474,7 +20840,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 344.17 34.2899 90)
+			(at 346.71 49.5299 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20483,7 +20849,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 340.36 34.29 0)
+			(at 342.9 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20492,7 +20858,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 340.36 34.29 0)
+			(at 342.9 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20501,7 +20867,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 340.36 34.29 0)
+			(at 342.9 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20513,7 +20879,7 @@
 			(uuid "8b30d2c0-ea21-46cc-a2a9-ff12534a6676")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR017")
 					(unit 1)
@@ -20579,7 +20945,7 @@
 			(uuid "04716b4a-a0ea-41b6-bf4d-5badfb546d86")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR033")
 					(unit 1)
@@ -20645,76 +21011,9 @@
 			(uuid "58b49f69-5b6a-4915-a379-966037cf91d4")
 		)
 		(instances
-			(project "LampBoardModule"
+			(project "LampBoardDesk"
 				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
 					(reference "#PWR051")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole_Pad")
-		(at 275.59 191.77 270)
-		(unit 1)
-		(exclude_from_sim yes)
-		(in_bom no)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ffb1ad44-05b1-4c14-8837-9280db37b93e")
-		(property "Reference" "H4"
-			(at 279.4 190.4999 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "MountingHole_Pad"
-			(at 279.4 193.0399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "MountingHole:MountingHole_2.7mm_M2.5_DIN965_Pad"
-			(at 275.59 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 275.59 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Mounting Hole with connection"
-			(at 275.59 191.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7bc164b4-6f23-4f42-83e5-f7d94a3685b0")
-		)
-		(instances
-			(project "LampBoardModule"
-				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
-					(reference "H4")
 					(unit 1)
 				)
 			)

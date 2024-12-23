@@ -61,10 +61,10 @@
       34,
       35,
       36,
-      39,
-      40
+      37,
+      39
     ],
-    "visible_layers": "ffdffff_ffffffff",
+    "visible_layers": "ffdf3ff_ffffffff",
     "zone_display_mode": 0
   },
   "git": {

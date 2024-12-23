@@ -1,0 +1,18 @@
+
+Changes in JLC 3d viewer
+- top
+  - rotate, move 24->5
+  - flip buffer chip
+  - rotate, flip flash
+- bottom
+  - flip dc connector
+  - flip capacitor
+
+v0.2, desk Fixes
+- green connector needs to be closer to edge
+- switch position is backwards
+- mosfet is backwards
+
+v0.2 module fixes
+- forgot to hook up voltage divider
+- mosfet is backwards

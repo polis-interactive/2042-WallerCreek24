@@ -5,7 +5,6 @@ use embassy_sync::{blocking_mutex::raw::CriticalSectionRawMutex, channel};
 pub enum Events {
   ButtonPress(bool),
   EncoderTurn(bool),
-  SwitchToggle(bool),
   ModeTimeout,
 }
 

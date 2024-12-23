@@ -1,6 +1,6 @@
 
 
-use portable_atomic::{AtomicBool, AtomicU8, AtomicU16, Ordering};
+use portable_atomic::{AtomicU8, AtomicU16, Ordering};
 
 use crate::color::{eased_step, LampColor, COLOR_MAX, EASE_STEP, RGBA8}; 
 
@@ -10,14 +10,12 @@ const VALUE_MAX: u16 = 1000;
 
 #[derive(Default, Debug)]
 struct AtomicStore {
-  is_on: AtomicBool,
   brightness: AtomicU8,
   color: AtomicU8,
   value: AtomicU16,
 }
 
 static STORE: AtomicStore = AtomicStore {
-  is_on: AtomicBool::new(false),
   brightness: AtomicU8::new(192),
   color: AtomicU8::new(0),
   value: AtomicU16::new(0),
@@ -29,9 +27,6 @@ pub fn reset_state() {
   STORE.value.store(0, Ordering::Relaxed);
 }
 
-pub fn update_is_on(is_on: bool) {
-  STORE.is_on.store(is_on, Ordering::Relaxed);
-}
 
 pub fn update_brightness(is_increment: bool) {
   let mut brightness = STORE.brightness.load(Ordering::Relaxed);
@@ -65,7 +60,6 @@ pub fn update_value(is_increment: bool) {
 
 #[derive(PartialEq)]
 pub struct Store {
-  pub is_on: bool,
   pub brightness: u8,
   pub color: RGBA8,
   pub value: u16
@@ -80,7 +74,6 @@ pub fn get_store() -> Store {
   };
   color.from_u16(STORE.color.load(Ordering::Relaxed));
   return Store {
-    is_on: STORE.is_on.load(Ordering::Relaxed),
     brightness: STORE.brightness.load(Ordering::Relaxed),
     color: color,
     value: STORE.value.load(Ordering::Relaxed)
@@ -88,7 +81,6 @@ pub fn get_store() -> Store {
 }
 
 pub fn update_store(store: &mut Store) {
-  store.is_on = STORE.is_on.load(Ordering::Relaxed);
   store.brightness = STORE.brightness.load(Ordering::Relaxed);
   store.color.from_u16(STORE.color.load(Ordering::Relaxed));
   store.value = STORE.value.load(Ordering::Relaxed);

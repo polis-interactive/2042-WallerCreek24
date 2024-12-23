@@ -1,6 +1,5 @@
 use embassy_rp::{
-  peripherals::PIO0,
-  pio_programs::ws2812::PioWs2812
+  gpio::Output, peripherals::PIO0, pio_programs::ws2812::PioWs2812
 };
 use embassy_time::{Duration, Ticker};
 
@@ -13,22 +12,19 @@ pub const LED_COUNT: usize = 5;
 
 
 #[embassy_executor::task]
-pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>) {
+pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut en: Output<'static>, mut en_led: Output<'static>) {
   let mut ticker = Ticker::every(Duration::from_millis(10));
   let mut data = [RGBA8::default(); LED_COUNT];
   let mut local_store = get_store();
-  local_store.is_on = true;
   let mut target_store = get_store();
+  en.set_high();
+  en_led.set_high();
   loop {
     update_store(&mut target_store);
-    if !target_store.is_on {
-      set_off(&mut data);
-    } else {
-      if target_store != local_store {
-        step_toward_store(&target_store, &mut local_store);
-      }
-      set_from_store(&local_store, &mut data);
+    if target_store != local_store {
+       step_toward_store(&target_store, &mut local_store);
     }
+    set_from_store(&local_store, &mut data);
     lights.write_rgba(&data).await;
     ticker.next().await;
   }
@@ -73,5 +69,15 @@ fn set_from_store(store: &Store, data: &mut [RGBA8; LED_COUNT]) {
     led.b = GAMMA8[scale8(store.color.b, store.brightness) as usize];
     // might need different gamma on alpha value
     led.a = GAMMA8[scale8(store.color.a, store.brightness) as usize];
+  }
+}
+
+fn set_red(data: &mut [RGBA8; LED_COUNT]) {
+  for led in data.iter_mut() {
+    led.r = 255;
+    led.g = 0;
+    led.b = 0;
+    // might need different gamma on alpha value
+    led.a = 0;
   }
 }

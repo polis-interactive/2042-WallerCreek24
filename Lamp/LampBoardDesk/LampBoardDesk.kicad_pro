@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 1.6002,
-          "width": 0.9144
+          "drill": 1.399997,
+          "height": 2.0,
+          "width": 2.0
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -490,7 +490,7 @@
       "plot": "Manufacturing/",
       "pos_files": "Manufacturing/",
       "specctra_dsn": "",
-      "step": "",
+      "step": "LampBoardDesk.step",
       "svg": "",
       "vrml": ""
     },

@@ -1,7 +1,8 @@
 #![no_std]
 #![no_main]
 
-use lamp::{reset_state, Debouncer, button_task, encoder_task, lights_task, manager_task};
+use embassy_rp::flash::{Async, Flash, ERASE_SIZE};
+use lamp::{load_store, Debouncer, button_task, encoder_task, lights_task, manager_task};
 
 use defmt::*;
 
@@ -38,15 +39,22 @@ assign_resources! {
   }
   led: LedResources {
     data_pin: PIN_12,
-    dma_chan: DMA_CH0,
+    dma_chan: DMA_CH1,
     en_pin: PIN_17,
     en_led_pin: PIN_2
+  },
+  flash: FlashResources {
+    dma_chan: DMA_CH0
   }
 }
 
 bind_interrupts!(struct Irqs {
   PIO0_IRQ_0 => InterruptHandler<PIO0>;
 });
+
+const ADDR_OFFSET: u32 = 0x100000;
+const FLASH_SIZE: u32 = 2 * 1024 * 1024;
+const _FLASH_SIZE: usize = FLASH_SIZE as usize;
 
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
@@ -66,12 +74,16 @@ async fn main(spawner: Spawner) {
   info!("Start Watchdog");
 
   let mut watchdog = Watchdog::new(p.WATCHDOG);
-  watchdog.start(Duration::from_millis(1_050));
+  watchdog.start(Duration::from_millis(3_000));
 
 
   info!("Initialize State");
 
-  reset_state();
+  let mut flash = Flash::<_, Async, _FLASH_SIZE>::new(p.FLASH, r.flash.dma_chan);
+  let flash_range_start = (flash.capacity() - 4 as usize * ERASE_SIZE) as u32;
+  let flash_range_end = flash.capacity() as u32;
+  let map_flash_range = flash_range_start..flash_range_end;
+  load_store(&mut flash, map_flash_range.clone()).await;
 
   info!("Initialize, start up button");
 
@@ -103,7 +115,7 @@ async fn main(spawner: Spawner) {
   info!("Initialize, start manager");
 
   let mng_led = Output::new(r.manager.led_pin, Level::Low);
-  spawner.must_spawn(manager_task(spawner, mng_led));
+  spawner.must_spawn(manager_task(spawner, mng_led, flash, map_flash_range));
 
   info!("Main task finished; feeding watchdog");
 

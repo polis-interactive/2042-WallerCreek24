@@ -39,13 +39,16 @@ embedded-hal-async = "1.0"
 embedded-hal-bus = { version = "0.2", features = ["async"] }
 embedded-io-async = { version = "0.6.1", features = ["defmt-03"] }
 embedded-storage = { version = "0.3" }
+embedded-storage-async = "0.4.1"
 static_cell = "2.1"
-portable-atomic = { version = "1.9", features = ["critical-section"] }
+portable-atomic = { version = "1.9", features = ["critical-section", "serde"] }
 log = "0.4"
 pio-proc = "0.2"
 pio = "0.2.1"
 rand = { version = "0.8.5", default-features = false }
 num-integer = { version = "0.1.46", default-features = false}
+
+sequential-storage = { version = "4.0.0", features = ["defmt-03"]}
 
 [profile.release]
 debug = 2

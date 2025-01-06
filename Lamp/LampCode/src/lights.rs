@@ -16,8 +16,9 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
   let mut ticker = Ticker::every(Duration::from_millis(10));
   let mut data = [RGBA8::default(); LED_COUNT];
   let mut local_store = get_store();
+  local_store.brightness = 0;
   let mut target_store = get_store();
-  en.set_high();
+  en.set_high(); 
   en_led.set_high();
   loop {
     update_store(&mut target_store);

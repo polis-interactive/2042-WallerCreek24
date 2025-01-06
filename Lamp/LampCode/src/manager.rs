@@ -1,19 +1,24 @@
 
 
+use core::ops::Range;
+
 use embassy_executor::Spawner;
 use embassy_futures::select::{select, Either};
-use embassy_rp::gpio::Output;
+use embassy_rp::{flash::{Async, Flash}, gpio::Output, peripherals::FLASH};
 use embassy_sync::{blocking_mutex::raw::CriticalSectionRawMutex, signal};
 use embassy_time::{Duration, Timer};
 
 use crate::{
   common::{Events, EVENT_CHANNEL},
-  store::{reset_state, update_brightness, update_color, update_value}
+  store::{write_store, reset_state, update_brightness, update_color, update_value}
 };
 
 // 3.5 minutes, meh
 const MODE_TIMEOUT_IN_SECONDS: u64 = 60 * 3 + 30;
-const SAVE_TIMEOUT_IN_SECONDS: u64 = 15;
+const SAVE_TIMEOUT_IN_MILISECONDS: u64 = 1000;
+
+// can't get around having this defined twice... wish I knew rust better
+const FLASH_SIZE: usize = 2 * 1024 * 1024;
 
 enum ManagerStates {
   Brightness,
@@ -53,18 +58,26 @@ enum SaveCommands {
 static SAVE_SIGNAL: signal::Signal<CriticalSectionRawMutex, SaveCommands> = signal::Signal::new();
 
 #[embassy_executor::task]
-pub async fn manager_task(spawner: Spawner, mut led: Output<'static>) {
+pub async fn manager_task(
+  spawner: Spawner,
+  mut led: Output<'static>,
+  mut flash: Flash<'static, FLASH, Async, FLASH_SIZE>,
+  flash_range: Range<u32>
+) {
   spawner.must_spawn(mode_timeout_task());
   spawner.must_spawn(save_task());
   let receiver = EVENT_CHANNEL.receiver();
   let mut manager_state = ManagerStates::Brightness;
   let mut count = 0;
+  let mut data_buffer = [0; 32];
   loop {
     let event = receiver.receive().await;
     match event {
+      Events::SaveStore => {
+        write_store(&mut flash, flash_range.clone(), &mut data_buffer).await;
+      }
       Events::ModeTimeout => {
         manager_state = ManagerStates::Brightness;
-        continue;
       }
       // long press
       Events::ButtonPress(true) => {
@@ -136,18 +149,20 @@ async fn mode_timeout_task() {
 
 #[embassy_executor::task]
 async fn save_task() {
+  let sender = EVENT_CHANNEL.sender();
   loop {
     // wait for an initial signal
     SAVE_SIGNAL.wait().await;
     loop {
       let futures = select(
-        Timer::after(Duration::from_secs(SAVE_TIMEOUT_IN_SECONDS)),
+        Timer::after(Duration::from_millis(SAVE_TIMEOUT_IN_MILISECONDS)),
         SAVE_SIGNAL.wait()
       ).await;
       match futures {
         // save the state, go back to waiting
         Either::First(_) => {
-          // TODO: actually save
+          sender.send(Events::SaveStore).await;
+          break;
         }
         // user has taken some action; keep waiting for timeout
         _ => {

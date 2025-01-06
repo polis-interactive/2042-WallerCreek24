@@ -174,193 +174,6 @@
 				)
 			)
 		)
-		(symbol "ABM8-272-T3:ABM8-272-T3"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "Y"
-				(at 36.83 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Value" "ABM8-272-T3"
-				(at 36.83 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-				)
-			)
-			(property "Footprint" "ABM8272T3"
-				(at 36.83 -94.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://abracon.com/datasheets/ABM8-272-T3.pdf"
-				(at 36.83 -194.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Description" "Crystal, 12 MHz, SMD, 3.2mm x 2.5mm, 30 ppm, 10 pF, 30 ppm, ABM8 Series"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Height" "0.8"
-				(at 36.83 -394.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "815-ABM8-272-T3"
-				(at 36.83 -494.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/ABRACON/ABM8-272-T3?qs=QpmGXVUTftEj6miOiJBMxQ%3D%3D"
-				(at 36.83 -594.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "ABRACON"
-				(at 36.83 -694.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "ABM8-272-T3"
-				(at 36.83 -794.92 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left top)
-					(hide yes)
-				)
-			)
-			(symbol "ABM8-272-T3_1_1"
-				(rectangle
-					(start 5.08 2.54)
-					(end 35.56 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "CRYSTAL_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 40.64 -2.54 180)
-					(length 5.08)
-					(name "GND_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 40.64 0 180)
-					(length 5.08)
-					(name "CRYSTAL_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "GND_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Device:C"
 			(pin_numbers hide)
 			(pin_names
@@ -4549,6 +4362,218 @@
 				)
 			)
 		)
+		(symbol "easyeda2kicad:XYDBPCNANF-12MHZ"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "X"
+				(at 0 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "XYDBPCNANF-12MHZ"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "easyeda2kicad:OSC-SMD_4P-L2.5-W2.0-BL"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://lcsc.com/product-detail/SMD-Crystal-Resonators_TAITIEN-Elec-XYDBPCNANF-12MHZ_C521567.html"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C521567"
+				(at 0 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "XYDBPCNANF-12MHZ_0_1"
+				(rectangle
+					(start -5.08 5.08)
+					(end 5.08 -5.08)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center -3.81 -3.81)
+					(radius 0.38)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -0.51 1.78)
+					(end 0.51 -1.78)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 -1.78) (xy -1.27 1.78)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.78) (xy 1.27 1.78)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 -2.54) (xy -2.54 -2.54) (xy -2.54 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 2.54 2.54) (xy 2.54 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin input line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "power:+1V1"
 			(power)
 			(pin_names
@@ -5379,6 +5404,12 @@
 		(uuid "d800daf5-609a-4458-bd55-09ba7b185aa6")
 	)
 	(junction
+		(at 346.71 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "debf09f5-1088-4ea0-b540-637bb75dd06f")
+	)
+	(junction
 		(at 273.05 179.07)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5407,12 +5438,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f3d3f48a-4b04-4e00-bda9-6a62c37a0356")
-	)
-	(junction
-		(at 342.9 114.3)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f646405d-741d-4507-999f-d79ea344c3d3")
 	)
 	(junction
 		(at 77.47 27.94)
@@ -5530,7 +5555,7 @@
 	)
 	(wire
 		(pts
-			(xy 342.9 114.3) (xy 342.9 118.11)
+			(xy 346.71 116.84) (xy 346.71 120.65)
 		)
 		(stroke
 			(width 0)
@@ -5660,7 +5685,7 @@
 	)
 	(wire
 		(pts
-			(xy 339.09 110.49) (xy 339.09 111.76)
+			(xy 345.44 110.49) (xy 345.44 111.76)
 		)
 		(stroke
 			(width 0)
@@ -5710,7 +5735,7 @@
 	)
 	(wire
 		(pts
-			(xy 384.81 111.76) (xy 391.16 111.76)
+			(xy 384.81 111.76) (xy 400.05 111.76)
 		)
 		(stroke
 			(width 0)
@@ -5810,26 +5835,6 @@
 	)
 	(wire
 		(pts
-			(xy 396.24 111.76) (xy 400.05 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2982ff6f-c1d6-4b16-a688-15e50b349caf")
-	)
-	(wire
-		(pts
-			(xy 335.28 114.3) (xy 342.9 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2a7216e8-f8ec-41bd-987c-9ec4744327d5")
-	)
-	(wire
-		(pts
 			(xy 85.09 52.07) (xy 85.09 48.26)
 		)
 		(stroke
@@ -5920,7 +5925,7 @@
 	)
 	(wire
 		(pts
-			(xy 386.08 114.3) (xy 386.08 116.84)
+			(xy 384.81 116.84) (xy 384.81 119.38)
 		)
 		(stroke
 			(width 0)
@@ -5947,6 +5952,16 @@
 			(type default)
 		)
 		(uuid "35a9649a-e667-4fc2-9f41-ebc3d623472a")
+	)
+	(wire
+		(pts
+			(xy 346.71 116.84) (xy 358.14 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37b2bf8a-0c56-4d2d-84a8-17ee6eeca2fd")
 	)
 	(wire
 		(pts
@@ -6360,6 +6375,16 @@
 	)
 	(wire
 		(pts
+			(xy 346.71 116.84) (xy 339.09 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63516f08-9468-4dc1-a381-363b4c99799b")
+	)
+	(wire
+		(pts
 			(xy 396.24 151.13) (xy 402.59 151.13)
 		)
 		(stroke
@@ -6577,6 +6602,16 @@
 			(type default)
 		)
 		(uuid "7b1b4dc3-bcaf-4e27-89e7-e252a080dc1c")
+	)
+	(wire
+		(pts
+			(xy 373.38 111.76) (xy 384.81 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b858424-d815-4d4d-936b-f94771f1675b")
 	)
 	(wire
 		(pts
@@ -6850,7 +6885,7 @@
 	)
 	(wire
 		(pts
-			(xy 339.09 111.76) (xy 342.9 111.76)
+			(xy 345.44 111.76) (xy 358.14 111.76)
 		)
 		(stroke
 			(width 0)
@@ -6980,16 +7015,6 @@
 	)
 	(wire
 		(pts
-			(xy 383.54 114.3) (xy 386.08 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a8d49a21-edc0-45f8-a2e6-c08ee346635e")
-	)
-	(wire
-		(pts
 			(xy 298.45 48.26) (xy 302.26 48.26)
 		)
 		(stroke
@@ -7037,6 +7062,16 @@
 			(type default)
 		)
 		(uuid "b0c9f4b2-7457-430b-b868-b6a6457fc05f")
+	)
+	(wire
+		(pts
+			(xy 373.38 116.84) (xy 384.81 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0e3dc2a-9a8c-4f24-8dc6-d50d53b6b19b")
 	)
 	(wire
 		(pts
@@ -7277,16 +7312,6 @@
 			(type default)
 		)
 		(uuid "daeae1c6-9bb8-4791-bbf3-21a154a09455")
-	)
-	(wire
-		(pts
-			(xy 383.54 111.76) (xy 384.81 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db057c33-bddb-4d70-a074-f7f4ba447945")
 	)
 	(wire
 		(pts
@@ -7748,7 +7773,7 @@
 		(uuid "4469ea76-79f1-40a7-a6f4-aaa7d591f0ad")
 	)
 	(label "XIN"
-		(at 335.28 114.3 180)
+		(at 339.09 116.84 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8507,7 +8532,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 342.9 123.19 0)
+		(at 346.71 125.73 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8516,7 +8541,7 @@
 		(fields_autoplaced yes)
 		(uuid "0ef5de79-30be-412c-a8b3-8261b6d39e0c")
 		(property "Reference" "#PWR06"
-			(at 342.9 129.54 0)
+			(at 346.71 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8525,7 +8550,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 342.9 128.27 0)
+			(at 346.71 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8533,7 +8558,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 342.9 123.19 0)
+			(at 346.71 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8542,7 +8567,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 342.9 123.19 0)
+			(at 346.71 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8551,7 +8576,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 342.9 123.19 0)
+			(at 346.71 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12954,7 +12979,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 339.09 110.49 180)
+		(at 345.44 110.49 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12963,7 +12988,7 @@
 		(fields_autoplaced yes)
 		(uuid "62a7931e-1fa4-4ccf-b7c7-c105bbba6283")
 		(property "Reference" "#PWR07"
-			(at 339.09 104.14 0)
+			(at 345.44 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12972,7 +12997,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 339.09 105.41 0)
+			(at 345.44 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12980,7 +13005,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 339.09 110.49 0)
+			(at 345.44 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12989,7 +13014,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 339.09 110.49 0)
+			(at 345.44 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12998,7 +13023,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 339.09 110.49 0)
+			(at 345.44 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14759,7 +14784,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "15p"
+		(property "Value" "12p"
 			(at 387.096 107.442 0)
 			(effects
 				(font
@@ -14795,7 +14820,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C86285"
+		(property "LCSC" "C1547"
 			(at 384.81 106.68 0)
 			(effects
 				(font
@@ -14804,7 +14829,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C86285"
+		(property "LCSC Part" "C1547"
 			(at 384.81 106.68 0)
 			(effects
 				(font
@@ -16702,8 +16727,8 @@
 		)
 	)
 	(symbol
-		(lib_id "ABM8-272-T3:ABM8-272-T3")
-		(at 342.9 111.76 0)
+		(lib_id "easyeda2kicad:XYDBPCNANF-12MHZ")
+		(at 365.76 114.3 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16711,43 +16736,41 @@
 		(dnp no)
 		(uuid "c2086d93-5aee-4f56-82a4-c0e2d67738d6")
 		(property "Reference" "Y1"
-			(at 363.22 104.14 0)
+			(at 365.76 106.934 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "ABM8-272-T3"
-			(at 363.22 106.68 0)
+		(property "Value" "XYDBPCNANF-12MHZ"
+			(at 365.506 121.412 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "ABM8-272-T3:ABM8272T3"
-			(at 379.73 206.68 0)
+		(property "Footprint" "easyeda2kicad:OSC-SMD_4P-L2.5-W2.0-BL"
+			(at 365.76 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left top)
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://abracon.com/datasheets/ABM8-272-T3.pdf"
-			(at 379.73 306.68 0)
+		(property "Datasheet" "https://lcsc.com/product-detail/SMD-Crystal-Resonators_TAITIEN-Elec-XYDBPCNANF-12MHZ_C521567.html"
+			(at 365.76 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left top)
 				(hide yes)
 			)
 		)
 		(property "Description" "Crystal, 12 MHz, SMD, 3.2mm x 2.5mm, 30 ppm, 10 pF, 30 ppm, ABM8 Series"
-			(at 342.9 111.76 0)
+			(at 365.76 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16756,7 +16779,7 @@
 			)
 		)
 		(property "Height" "0.8"
-			(at 379.73 506.68 0)
+			(at 328.93 -280.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16766,7 +16789,7 @@
 			)
 		)
 		(property "Mouser Part Number" "815-ABM8-272-T3"
-			(at 379.73 606.68 0)
+			(at 328.93 -380.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16776,7 +16799,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/ABRACON/ABM8-272-T3?qs=QpmGXVUTftEj6miOiJBMxQ%3D%3D"
-			(at 379.73 706.68 0)
+			(at 328.93 -480.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16786,7 +16809,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "ABRACON"
-			(at 379.73 806.68 0)
+			(at 328.93 -580.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16796,7 +16819,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "ABM8-272-T3"
-			(at 379.73 906.68 0)
+			(at 328.93 -680.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16805,8 +16828,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C20625731"
-			(at 342.9 111.76 0)
+		(property "LCSC" "C521567"
+			(at 365.76 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16814,8 +16837,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C20625731"
-			(at 342.9 111.76 0)
+		(property "LCSC Part" "C521567"
+			(at 365.76 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17963,91 +17986,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_Small_US")
-		(at 393.7 111.76 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e32aab64-915e-4d10-8ffa-f50458d19a2a")
-		(property "Reference" "R1"
-			(at 393.954 106.934 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1K"
-			(at 393.954 108.966 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 393.7 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 393.7 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, small US symbol"
-			(at 393.7 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25543"
-			(at 393.7 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part" "C25543"
-			(at 393.7 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ab681163-9108-4252-b118-042427d529bb")
-		)
-		(pin "2"
-			(uuid "eb718ee8-e4bb-4a6a-9bed-b360e0d56c25")
-		)
-		(instances
-			(project "LampBoardModule"
-				(path "/2c4f5d84-5b5f-4f7f-af1c-98ee2d5f685b"
-					(reference "R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 255.27 146.05 90)
 		(unit 1)
@@ -18137,16 +18075,15 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 342.9 120.65 0)
+		(at 346.71 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e5f14a99-9d02-46e2-93ff-f7a1204520d6")
 		(property "Reference" "C2"
-			(at 345.44 119.3862 0)
+			(at 349.25 121.9262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18154,8 +18091,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "15p"
-			(at 345.44 121.9262 0)
+		(property "Value" "12p"
+			(at 349.758 124.206 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18164,7 +18101,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 342.9 120.65 0)
+			(at 346.71 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18173,7 +18110,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 342.9 120.65 0)
+			(at 346.71 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18182,7 +18119,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 342.9 120.65 0)
+			(at 346.71 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18190,8 +18127,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C86285"
-			(at 342.9 120.65 0)
+		(property "LCSC" "C1547"
+			(at 346.71 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18199,8 +18136,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part" "C86285"
-			(at 342.9 120.65 0)
+		(property "LCSC Part" "C1547"
+			(at 346.71 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18499,7 +18436,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 386.08 116.84 0)
+		(at 384.81 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18508,7 +18445,7 @@
 		(fields_autoplaced yes)
 		(uuid "ed742e4e-86db-4fb1-9302-0e0bf77224ab")
 		(property "Reference" "#PWR09"
-			(at 386.08 123.19 0)
+			(at 384.81 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18517,7 +18454,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 386.08 121.92 0)
+			(at 384.81 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18525,7 +18462,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 386.08 116.84 0)
+			(at 384.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18534,7 +18471,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 386.08 116.84 0)
+			(at 384.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18543,7 +18480,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 386.08 116.84 0)
+			(at 384.81 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)

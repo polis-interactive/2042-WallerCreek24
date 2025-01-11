@@ -9,6 +9,7 @@ mod encoder;
 pub use encoder::encoder_task;
 
 mod color;
+mod mode;
 
 mod store;
 pub use store::load_store;

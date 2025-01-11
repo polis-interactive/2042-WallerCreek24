@@ -50,6 +50,7 @@ num-integer = { version = "0.1.46", default-features = false}
 
 sequential-storage = { version = "4.0.0", features = ["defmt-03"]}
 
+
 [profile.release]
 debug = 2
 lto = true

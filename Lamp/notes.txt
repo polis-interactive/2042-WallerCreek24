@@ -6,9 +6,9 @@ Changes in JLC 3d viewer
   - rotate, flip flash
 - bottom
   - flip dc connector (270 + 30)
-  - flip capacitor (180)
-  - rotate switch (270 - 5)
-  - rotate encoder (180 + 10)
+  - flip capacitor (180 + 15)
+  - rotate switch (90)
+  - rotate encoder (270 - 10)
 
 v0.2, desk Fixes
 - green connector needs to be closer to edge
@@ -23,9 +23,9 @@ v0.2 module fixes
 jan 16th to 20th
 jan 23rd to 25th
 
-- take shiping by christmas off the website
-- take extra products off the website
-  - try to turn it off so we don't loose data
+* - take shiping by christmas off the website
+* - take extra products off the website
+*    - try to turn it off so we don't loose data
 - get an email automation that auto sends the current situation on purchase
   - maybe make an automation to auto subscribe
 - how do we handle pickup?
@@ -35,6 +35,7 @@ jan 23rd to 25th
   - need to unfulfill everyone's order
 - how are we going to ship them
   - we have a label printer
+  - need a shipping report
   - get a list of everything that needs to be shipped
     - needs to be updatable
     - try to do all through shopify
@@ -49,3 +50,8 @@ jan 23rd to 25th
   - add a fish pun
   - 3's and 5's are groups / teams
   - 3 solos, 1 group of 3, 1 group of 5 (backup b team basketball)
+- 11 to 7, friday / monday the 24th / 27th
+  - 24th 5-7
+  - 25th 3-7
+  - 26th 11-3
+  - board programming needs to be done 13th

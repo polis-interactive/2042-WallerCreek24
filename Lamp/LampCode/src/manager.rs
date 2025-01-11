@@ -10,7 +10,7 @@ use embassy_time::{Duration, Timer};
 
 use crate::{
   common::{Events, EVENT_CHANNEL},
-  store::{write_store, reset_state, update_brightness, update_color, update_value}
+  store::{write_store, reset_state, update_brightness, update_color, update_mode}
 };
 
 // 3.5 minutes, meh
@@ -22,17 +22,16 @@ const FLASH_SIZE: usize = 2 * 1024 * 1024;
 
 enum ManagerStates {
   Brightness,
-  Value,
+  Mode,
   Color
 }
 
 fn transition_manager_state(current_state: ManagerStates) -> ManagerStates {
   match current_state {
       ManagerStates::Brightness => {
-        // TODO: value doesn't do anything
-        ManagerStates::Color
+        ManagerStates::Mode
       }
-      ManagerStates::Value => {
+      ManagerStates::Mode => {
         ManagerStates::Color
       }
       ManagerStates::Color => {
@@ -97,7 +96,7 @@ pub async fn manager_task(
         SAVE_SIGNAL.signal(SaveCommands::Save);
         match manager_state {
             ManagerStates::Brightness => update_brightness(is_increment),
-            ManagerStates::Value => update_value(is_increment),
+            ManagerStates::Mode => update_mode(is_increment),
             ManagerStates::Color => update_color(is_increment),
         }
       }

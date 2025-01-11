@@ -74,7 +74,7 @@ async fn main(spawner: Spawner) {
   info!("Start Watchdog");
 
   let mut watchdog = Watchdog::new(p.WATCHDOG);
-  watchdog.start(Duration::from_millis(1_500));
+  // watchdog.start(Duration::from_millis(2));
 
 
   info!("Initialize State");
@@ -121,7 +121,7 @@ async fn main(spawner: Spawner) {
 
   loop {
     Timer::after_secs(1).await;
-    watchdog.feed();
+    // watchdog.feed();
     boot_led.toggle();
   }
 }

@@ -74,7 +74,7 @@ async fn main(spawner: Spawner) {
   info!("Start Watchdog");
 
   let mut watchdog = Watchdog::new(p.WATCHDOG);
-  watchdog.start(Duration::from_millis(3_000));
+  watchdog.start(Duration::from_millis(2_000));
 
 
   info!("Initialize State");

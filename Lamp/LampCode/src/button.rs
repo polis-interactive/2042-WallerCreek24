@@ -5,6 +5,8 @@ use embassy_time::{with_deadline, Duration, Instant, Timer};
 use crate::common::{EVENT_CHANNEL, Events};
 
 
+const RESET_TIMEOUT_IN_MILISECONDS: u64 = 2000;
+
 pub struct Debouncer<'a> {
   input: Input<'a>,
   debounce: Duration,
@@ -57,7 +59,7 @@ pub async fn button_task(mut btn: Debouncer<'static>, mut led: Output<'static>) 
     led.set_high();
 
     // check if its a long press
-    match with_deadline(start + Duration::from_secs(3), btn.debounce()).await {
+    match with_deadline(start + Duration::from_millis(RESET_TIMEOUT_IN_MILISECONDS), btn.debounce()).await {
       // Button released <3s
       Ok(_) => {
         sender.send(Events::ButtonPress(false)).await;

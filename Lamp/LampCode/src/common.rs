@@ -1,7 +1,8 @@
 
+use defmt::Format;
 use embassy_sync::{blocking_mutex::raw::CriticalSectionRawMutex, channel};
 
-#[derive(PartialEq, Eq)]
+#[derive(Format, PartialEq, Eq)]
 pub enum Events {
   ButtonPress(bool),
   EncoderTurn(bool),

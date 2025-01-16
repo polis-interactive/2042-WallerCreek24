@@ -47,7 +47,7 @@ impl AtomicStore {
 
 
 static STORE: AtomicStore = AtomicStore {
-  brightness: AtomicU8::new(192),
+  brightness: AtomicU8::new(255),
   color: AtomicU8::new(0),
   value: AtomicU16::new(0),
 };
@@ -56,6 +56,7 @@ pub async fn load_store<E: defmt::Format>(
   flash: &mut impl MultiwriteNorFlash<Error = E>,
   flash_range: Range<u32>,
 ) {
+
   let mut data_buffer = [0; 32];
   let fetched = fetch_item::<u8, &[u8], _>(
     flash,
@@ -77,7 +78,7 @@ pub async fn load_store<E: defmt::Format>(
     warn!("No data in the persisted store");
   }
   reset_state();
-  // let _ = sequential_storage::erase_all(flash, flash_range.clone()).await;
+  let _ = sequential_storage::erase_all(flash, flash_range.clone()).await;
 }
 
 pub async fn write_store<E: defmt::Format>(

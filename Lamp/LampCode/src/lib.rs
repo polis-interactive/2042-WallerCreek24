@@ -10,6 +10,8 @@ pub use encoder::encoder_task;
 
 mod color;
 
+mod walker;
+
 mod store;
 pub use store::load_store;
 

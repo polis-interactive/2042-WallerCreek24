@@ -29,8 +29,7 @@ enum ManagerStates {
 fn transition_manager_state(current_state: ManagerStates) -> ManagerStates {
   match current_state {
       ManagerStates::Brightness => {
-        // TODO: value doesn't do anything
-        ManagerStates::Color
+        ManagerStates::Value
       }
       ManagerStates::Value => {
         ManagerStates::Color

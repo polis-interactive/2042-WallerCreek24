@@ -1,5 +1,5 @@
 
-//use num_integer::Integer;
+use defmt::*;
 use smart_leds::{hsv::{hsv2rgb, Hsv}, RGBA};
 
 pub type RGBA8 = RGBA<u8>;
@@ -27,9 +27,29 @@ pub fn eased_step(current: u8, target: u8, factor: f32) -> u8 {
   }
 }
 
+// derived from lib8tion
+
+pub const fn scale8(i: u8, scale: u8) -> u8 {
+  (((i as u16) * (1 + scale as u16)) >> 8) as u8
+}
+
+pub fn lerp8(a: u8, b: u8, pct: u8) -> u8 {
+  if b > a {
+    let delta = b - a;
+    let scaled = scale8(delta, pct);
+    return a + scaled;
+  } else {
+    let delta = a - b;
+    let scaled = scale8(delta, pct);
+    return a - scaled;
+  }
+}
+
 pub trait LampColor {
   fn from_u16(&mut self, value: u8);
-  fn walk_toward(&mut self, other: &RGBA<u8>);
+  fn walk_toward(&mut self, other: &RGBA8);
+  fn lerp_from(&mut self, other: &RGBA8, pct: u8);
+  fn print_color(&self);
 }
 
 impl LampColor for RGBA8 {
@@ -53,10 +73,22 @@ impl LampColor for RGBA8 {
     self.b = rgb.b;
     self.a = 0; // (w as u8).saturating_mul(WHITE_MUL);
   }
-  fn walk_toward(&mut self, other: &RGBA<u8>) {
+
+  fn walk_toward(&mut self, other: &RGBA8) {
       self.r = eased_step(self.r, other.r, EASE_STEP);
       self.g = eased_step(self.g, other.g, EASE_STEP);
       self.b = eased_step(self.b, other.b, EASE_STEP);
       self.a = eased_step(self.a, other.a, EASE_STEP);
+  }
+
+  fn lerp_from(&mut self, other: &RGBA8, pct: u8) {
+    self.r = lerp8(other.r, self.r, pct);
+    self.g = lerp8(other.g, self.g, pct);
+    self.b = lerp8(other.b, self.b, pct);
+    self.a = lerp8(other.a, self.a, pct);
+  }
+
+  fn print_color(&self) {
+    info!("RGBA(r {:?}, g {:?}, b {:?}, a {:?})", self.r, self.g, self.b, self.a);
   }
 }

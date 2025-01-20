@@ -135,9 +135,9 @@ pub fn update_color(is_increment: bool) {
 pub fn update_value(is_increment: bool) {
   let old_value = STORE.value.load(Ordering::Relaxed);
   let new_value = if is_increment {
-    if old_value >= WALKER_INTENSITY_MAX { 0 } else { old_value + 1 }
+    if old_value >= WALKER_INTENSITY_MAX { WALKER_INTENSITY_MAX } else { old_value + 1 }
   } else {
-    if old_value == 0 { WALKER_INTENSITY_MAX } else { old_value - 1 }
+    if old_value == 0 { 0 } else { old_value - 1 }
   };
   // info!("Old value: {:?}; new value: {:?}", old_value, new_value);
   STORE.value.store(new_value, Ordering::Relaxed);

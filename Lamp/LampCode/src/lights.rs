@@ -1,50 +1,56 @@
-use defmt::*;
+
 use embassy_rp::{
-  gpio::Output, peripherals::PIO0, pio_programs::ws2812::PioWs2812
+  clocks::RoscRng,
+  gpio::Output,
+  peripherals::PIO0,
+  pio_programs::ws2812::PioWs2812
 };
-use embassy_time::{Duration, Instant, Ticker};
+use embassy_time::{Duration, Ticker};
 
 use crate::{
-  color::{scale8, LampColor, RGBA8},
-  store::{get_store, step_toward_store, update_store}, walker::WalkerIntensity
+  color::{LampColor, RGBA8},
+  store::{get_store, step_toward_store, update_store},
+  walker::Walker
 };
 
 pub const LED_COUNT: usize = 5;
-
+pub const TICK_RATE_IN_MS: u64 = 10;
 
 #[embassy_executor::task]
 pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut en: Output<'static>, mut en_led: Output<'static>) {
-  let mut ticker = Ticker::every(Duration::from_millis(10));
-  let mut data = [RGBA8::default(); LED_COUNT];
+  let mut ticker = Ticker::every(Duration::from_millis(TICK_RATE_IN_MS));
+  let mut data_buffer = [RGBA8::default(); LED_COUNT];
   // we keep track of last value, so on switch we can fade into the new mode without it being jarring
-  let mut last_value_data = [RGBA8::default(); LED_COUNT];
+  let mut last_data_buffer = [RGBA8::default(); LED_COUNT];
   // used so we don't post_process data
-  let mut output_data = [RGBA8::default(); LED_COUNT];
+  let mut frame_buffer = [RGBA8::default(); LED_COUNT];
   let mut local_store = get_store();
   local_store.brightness = 0;
+  let mut rng = RoscRng;
+  // let mut rng = SmallRng::from_rng(seeder).unwrap();
+  let mut walkers = Walker::new_walkers(&local_store.value.intensity, &mut rng);
   let mut target_store = get_store();
   // reset the lights as soon as we turn them on
   en.set_high(); 
   en_led.set_high();
-  set_off(&mut data);
-  lights.write_rgba(&data).await;
+  set_off(&mut data_buffer);
+  lights.write_rgba(&data_buffer).await;
   ticker.next().await;
-  let start = Instant::now();
   loop {
     update_store(&mut target_store);
     if target_store != local_store {
       if step_toward_store(&target_store, &mut local_store) {
-        // reset walker
-        last_value_data.copy_from_slice(&data);
+        Walker::update_walkers(&mut walkers, &local_store.value.intensity, &mut rng);
+        last_data_buffer.copy_from_slice(&data_buffer);
       }
     }
-    run_walker(&mut data, &local_store.color, &local_store.value.intensity);
+    Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng);
     if local_store.value.pct < 255 {
-      lerp_with_last(local_store.value.pct, &mut data, &last_value_data);
+      lerp_with_last(local_store.value.pct, &mut data_buffer, &last_data_buffer);
     }
     // todo: maybe brightness should be an input to walker
-    post_process(&mut output_data, &data, local_store.brightness);
-    lights.write_rgba(&output_data).await;
+    post_process(&mut frame_buffer, &data_buffer, local_store.brightness);
+    lights.write_rgba(&frame_buffer).await;
     ticker.next().await;
   }
 }
@@ -58,22 +64,11 @@ fn set_off(data: &mut [RGBA8; LED_COUNT]) {
   }
 }
 
-fn run_walker(data: &mut [RGBA8; LED_COUNT], color: &RGBA8, intensity: &WalkerIntensity) {
-  let walker_value: u8 = intensity.to_u8().saturating_mul(255u8.div_ceil(5));
-  for led in data.iter_mut() {
-    led.r = if color.a == 0 { color.r } else { walker_value };
-    led.g = color.g;
-    led.b = color.b;
-    led.a = if color.a == 0 { walker_value } else { color.a };
-  }
-}
-
 fn lerp_with_last(pct: u8, data: &mut [RGBA8; LED_COUNT], last_data: &[RGBA8; LED_COUNT]) {
   for (current, last) in data.iter_mut().zip(last_data.iter()) {
     current.lerp_from(last, pct);
   }
 }
-
 
 const GAMMA8: [u8; 256] = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -91,12 +86,9 @@ const GAMMA8: [u8; 256] = [
 ];
 
 
-fn post_process(output_data: &mut [RGBA8; LED_COUNT], data: &[RGBA8; LED_COUNT], brightness: u8) {
-  for (out_led, led) in output_data.iter_mut().zip(data.iter()) {
-    out_led.r = GAMMA8[scale8(led.r, brightness) as usize];
-    out_led.g = GAMMA8[scale8(led.g, brightness) as usize];
-    out_led.b = GAMMA8[scale8(led.b, brightness) as usize];
-    // might need different gamma on alpha value
-    out_led.a = GAMMA8[scale8(led.a, brightness) as usize];
+fn post_process(frame_buffer: &mut [RGBA8; LED_COUNT], data_buffer: &[RGBA8; LED_COUNT], brightness: u8) {
+  for (out_led, led) in frame_buffer.iter_mut().zip(data_buffer.iter()) {
+    // todo: may need separate alpha gamma?
+    out_led.post_process(led, brightness, &GAMMA8);
   }
 }

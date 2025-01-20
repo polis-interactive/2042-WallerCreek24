@@ -4,14 +4,12 @@ use smart_leds::{hsv::{hsv2rgb, Hsv}, RGBA};
 
 pub type RGBA8 = RGBA<u8>;
 
-// hue value with 6 steps of warm white + 32 colors + just warm white at 0
-//pub const WHITE_STEPS: u8 = 6;
-//pub const WHITE_MUL: u8 = 51;
-pub const COLOR_STEPS: u8 = 32;
-pub const COLOR_MUL: u8 = 8;
+// hue value with 36 colors + just warm white at 0
+pub const COLOR_STEPS: u8 = 37;
+pub const COLOR_MUL: u8 = 7;
 // could add 1 for this, but just do exclusive checks
 pub const COLOR_MAX: u8 =  COLOR_STEPS;
-pub const EASE_STEP: f32 = 10.0f32;
+pub const COLOR_EASE_STEP: f32 = 11.0f32;
 
 pub fn eased_step(current: u8, target: u8, factor: f32) -> u8 {
   let delta = (target as i16) - (current as i16);
@@ -49,6 +47,9 @@ pub trait LampColor {
   fn from_u16(&mut self, value: u8);
   fn walk_toward(&mut self, other: &RGBA8);
   fn lerp_from(&mut self, other: &RGBA8, pct: u8);
+  fn fade_from(&mut self, other: &RGBA8, pct: u8);
+  fn post_process(&mut self, other: &Self, pct: u8, gamma: &[u8; 256]);
+  #[allow(dead_code)]
   fn print_color(&self);
 }
 
@@ -62,7 +63,7 @@ impl LampColor for RGBA8 {
       return;
     }
     // let (c, w) = (value - 1).div_rem(&WHITE_STEPS);
-    let c = (value - 1).saturating_mul(COLOR_MUL);
+    let c = (value - 1).wrapping_mul(COLOR_MUL);
     let rgb =  hsv2rgb(Hsv {
       hue: c,
       sat: 255,
@@ -74,19 +75,35 @@ impl LampColor for RGBA8 {
     self.a = 0; // (w as u8).saturating_mul(WHITE_MUL);
   }
 
-  fn walk_toward(&mut self, other: &RGBA8) {
-      self.r = eased_step(self.r, other.r, EASE_STEP);
-      self.g = eased_step(self.g, other.g, EASE_STEP);
-      self.b = eased_step(self.b, other.b, EASE_STEP);
-      self.a = eased_step(self.a, other.a, EASE_STEP);
+  fn walk_toward(&mut self, other: &Self) {
+      self.r = eased_step(self.r, other.r, COLOR_EASE_STEP);
+      self.g = eased_step(self.g, other.g, COLOR_EASE_STEP);
+      self.b = eased_step(self.b, other.b, COLOR_EASE_STEP);
+      self.a = eased_step(self.a, other.a, COLOR_EASE_STEP);
   }
 
-  fn lerp_from(&mut self, other: &RGBA8, pct: u8) {
+  fn lerp_from(&mut self, other: &Self, pct: u8) {
     self.r = lerp8(other.r, self.r, pct);
     self.g = lerp8(other.g, self.g, pct);
     self.b = lerp8(other.b, self.b, pct);
     self.a = lerp8(other.a, self.a, pct);
   }
+
+  fn fade_from(&mut self, other: &Self, pct: u8) {
+    self.r = scale8(other.r, pct);
+    self.g = scale8(other.g, pct);
+    self.b = scale8(other.b, pct);
+    self.a = scale8(other.a, pct);
+  }
+
+  fn post_process(&mut self, other: &Self, pct: u8, gamma: &[u8; 256]) {
+    self.r = scale8(other.r, pct);
+    self.g = scale8(other.g, pct);
+    self.b = scale8(other.b, pct);
+    // might need different gamma on alpha value
+    self.a = scale8(other.a, pct);
+  }
+
 
   fn print_color(&self) {
     info!("RGBA(r {:?}, g {:?}, b {:?}, a {:?})", self.r, self.g, self.b, self.a);

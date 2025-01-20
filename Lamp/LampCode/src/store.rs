@@ -6,11 +6,19 @@ use defmt::*;
 use embedded_storage_async::nor_flash::MultiwriteNorFlash;
 use heapless::Vec;
 use portable_atomic::{AtomicU8, Ordering};
-use sequential_storage::{cache::NoCache, map::{store_item, fetch_item}, erase_all};
+use sequential_storage::{
+  cache::NoCache,
+  map::{store_item, fetch_item},
+  erase_all
+};
 
-use crate::{color::{eased_step, LampColor, COLOR_MAX, EASE_STEP, RGBA8}, walker::{WalkerSetting, WALKER_FADE_IN_STEP, WALKER_INTENSITY_MAX}}; 
+use crate::{
+  color::{eased_step, LampColor, COLOR_MAX, RGBA8},
+  walker::{WalkerSetting, WALKER_FADE_IN_STEP, WALKER_INTENSITY_MAX}
+}; 
 
-const BRIGHTNESS_INCREMENT: u8 = 12;
+const BRIGHTNESS_INCREMENT: u8 = 16;
+const BRIGHTNESS_EASE_STEP: f32 = 16.0f32;
 
 #[derive(Default, Debug)]
 struct AtomicStore {
@@ -33,8 +41,8 @@ impl AtomicStore {
 
   fn from_bytes(&self, data: &[u8]) {
     let brightness = data[0];
-    let color = data[1];
-    let value = data[2];
+    let color = data[1].max(0).min(COLOR_MAX);
+    let value = data[2].max(0).min(WALKER_INTENSITY_MAX);
     self.brightness.store(brightness, Ordering::Relaxed);
     self.color.store(color, Ordering::Relaxed);
     self.value.store(value, Ordering::Relaxed);
@@ -114,13 +122,14 @@ pub fn update_brightness(is_increment: bool) {
 }
 
 pub fn update_color(is_increment: bool) {
-  let mut color = STORE.color.load(Ordering::Relaxed);
-  if is_increment {
-    color = if color > COLOR_MAX { 0 } else { color + 1 };
+  let old_color = STORE.color.load(Ordering::Relaxed);
+  let new_color = if is_increment {
+    if old_color >= COLOR_MAX { 0 } else { old_color + 1 }
   } else {
-    color = if color == 0 { COLOR_MAX } else { color - 1 };
-  }
-  STORE.color.store(color, Ordering::Relaxed);
+    if old_color == 0 { COLOR_MAX } else { old_color - 1 }
+  };
+  // info!("Old Color: {:?}; New Color: {:?}", old_color, new_color);
+  STORE.color.store(new_color, Ordering::Relaxed);
 }
 
 pub fn update_value(is_increment: bool) {
@@ -169,9 +178,17 @@ pub fn update_store(store: &mut Store) {
 // returns true if the mode changed
 pub fn step_toward_store(target_store: &Store, local_store: &mut Store) -> bool {
   if target_store.brightness != local_store.brightness {
-    local_store.brightness = eased_step(local_store.brightness, target_store.brightness, EASE_STEP);
+    let new_brightness = eased_step(
+      local_store.brightness, target_store.brightness, BRIGHTNESS_EASE_STEP
+    );
+    // info!(
+    //   "Old Brightness: {:?}; New Brightness: {:?}; Target Brightness: {:?}",
+    //   local_store.brightness, new_brightness, target_store.brightness
+    // );
+    local_store.brightness = new_brightness;
   }
   if target_store.color != local_store.color {
+    // target_store.color.print_color();
     local_store.color.walk_toward(&target_store.color);
   }
   if target_store.value.intensity != local_store.value.intensity {

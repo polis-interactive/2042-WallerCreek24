@@ -5,7 +5,8 @@ use embassy_rp::{
   peripherals::PIO0,
   pio_programs::ws2812::PioWs2812
 };
-use embassy_time::{Duration, Ticker};
+use embassy_time::{Duration, Instant, Ticker};
+use smart_leds::RGBA;
 
 use crate::{
   color::{LampColor, RGBA8},
@@ -14,7 +15,7 @@ use crate::{
 };
 
 pub const LED_COUNT: usize = 5;
-pub const TICK_RATE_IN_MS: u64 = 10;
+pub const TICK_RATE_IN_MS: u64 = 10; // 10;
 
 #[embassy_executor::task]
 pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut en: Output<'static>, mut en_led: Output<'static>) {
@@ -27,7 +28,6 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
   let mut local_store = get_store();
   local_store.brightness = 0;
   let mut rng = RoscRng;
-  // let mut rng = SmallRng::from_rng(seeder).unwrap();
   let mut walkers = Walker::new_walkers(&local_store.value.intensity, &mut rng);
   let mut target_store = get_store();
   // reset the lights as soon as we turn them on
@@ -36,6 +36,9 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
   set_off(&mut data_buffer);
   lights.write_rgba(&data_buffer).await;
   ticker.next().await;
+  let mut ticks: u8 = 0;
+  let mut last = Instant::now();
+  let step_size = Duration::from_millis(30);
   loop {
     update_store(&mut target_store);
     if target_store != local_store {
@@ -44,7 +47,7 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
         last_data_buffer.copy_from_slice(&data_buffer);
       }
     }
-    Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng);
+    Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng, ticks);
     if local_store.value.pct < 255 {
       lerp_with_last(local_store.value.pct, &mut data_buffer, &last_data_buffer);
     }
@@ -52,6 +55,10 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
     post_process(&mut frame_buffer, &data_buffer, local_store.brightness);
     lights.write_rgba(&frame_buffer).await;
     ticker.next().await;
+    if last.elapsed() > step_size {
+      ticks = ticks.wrapping_add(1);
+      last = Instant::now();
+    }
   }
 }
 
@@ -61,6 +68,13 @@ fn set_off(data: &mut [RGBA8; LED_COUNT]) {
     led.g = 0;
     led.b = 0;
     led.a = 0;
+  }
+}
+
+fn run_wheel(data: &mut [RGBA8; LED_COUNT], ticks: u8) {
+  for (idx, led) in data.iter_mut().enumerate() {
+    let use_ticks = ticks.wrapping_sub((idx * 10) as u8);
+    led.from_u8(use_ticks);
   }
 }
 

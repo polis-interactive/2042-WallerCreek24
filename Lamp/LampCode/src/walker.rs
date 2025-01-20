@@ -171,8 +171,11 @@ impl<'a> Walker<'a> {
     }
   }
   
-  pub fn run_walkers<const N: usize>(data: &mut [RGBA8; N], walkers: &mut [Walker; N], color: &RGBA8, rng: &mut impl Rng) {
-    for (walker, led) in walkers.iter_mut().zip(data.iter_mut()) { 
+  pub fn run_walkers<const N: usize>(data: &mut [RGBA8; N], walkers: &mut [Walker; N], color: &RGBA8, rng: &mut impl Rng, ticks: u8) {
+    // let mut c = RGBA8::default();
+    for (idx, (walker, led)) in walkers.iter_mut().zip(data.iter_mut()).enumerate() {
+      //let use_ticks = ticks.wrapping_sub((idx * 10) as u8);
+      //c.from_u8(use_ticks);
       walker.run_walker(led, color, rng);
     }
   }

@@ -44,7 +44,8 @@ pub fn lerp8(a: u8, b: u8, pct: u8) -> u8 {
 }
 
 pub trait LampColor {
-  fn from_u16(&mut self, value: u8);
+  fn from_u8_white(&mut self, value: u8);
+  fn from_u8(&mut self, value: u8);
   fn walk_toward(&mut self, other: &RGBA8);
   fn lerp_from(&mut self, other: &RGBA8, pct: u8);
   fn fade_from(&mut self, other: &RGBA8, pct: u8);
@@ -54,7 +55,7 @@ pub trait LampColor {
 }
 
 impl LampColor for RGBA8 {
-  fn from_u16(&mut self, value: u8) {
+  fn from_u8_white(&mut self, value: u8) {
     if value == 0 {
       self.r = 0;
       self.g = 0;
@@ -66,6 +67,18 @@ impl LampColor for RGBA8 {
     let c = (value - 1).wrapping_mul(COLOR_MUL);
     let rgb =  hsv2rgb(Hsv {
       hue: c,
+      sat: 255,
+      val: 255
+    });
+    self.r = rgb.r;
+    self.g = rgb.g;
+    self.b = rgb.b;
+    self.a = 0; // (w as u8).saturating_mul(WHITE_MUL);
+  }
+
+  fn from_u8(&mut self, value: u8) {
+    let rgb =  hsv2rgb(Hsv {
+      hue: value,
       sat: 255,
       val: 255
     });
@@ -97,11 +110,11 @@ impl LampColor for RGBA8 {
   }
 
   fn post_process(&mut self, other: &Self, pct: u8, gamma: &[u8; 256]) {
-    self.r = scale8(other.r, pct);
-    self.g = scale8(other.g, pct);
-    self.b = scale8(other.b, pct);
+    self.r = gamma[scale8(other.r, pct) as usize];
+    self.g = gamma[scale8(other.g, pct) as usize];
+    self.b = gamma[scale8(other.b, pct) as usize];
     // might need different gamma on alpha value
-    self.a = scale8(other.a, pct);
+    self.a = gamma[scale8(other.a, pct) as usize];
   }
 
 

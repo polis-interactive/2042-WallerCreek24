@@ -1,32 +1,56 @@
+
 use embassy_rp::{
-  gpio::Output, peripherals::PIO0, pio_programs::ws2812::PioWs2812
+  clocks::RoscRng,
+  gpio::Output,
+  peripherals::PIO0,
+  pio_programs::ws2812::PioWs2812
 };
 use embassy_time::{Duration, Ticker};
 
 use crate::{
-  color::RGBA8,
-  store::{get_store, update_store, Store, step_toward_store}
+  color::{LampColor, RGBA8},
+  store::{get_store, step_toward_store, update_store},
+  walker::Walker
 };
 
 pub const LED_COUNT: usize = 5;
-
+pub const TICK_RATE_IN_MS: u64 = 10;
 
 #[embassy_executor::task]
 pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut en: Output<'static>, mut en_led: Output<'static>) {
-  let mut ticker = Ticker::every(Duration::from_millis(10));
-  let mut data = [RGBA8::default(); LED_COUNT];
+  let mut ticker = Ticker::every(Duration::from_millis(TICK_RATE_IN_MS));
+  let mut data_buffer = [RGBA8::default(); LED_COUNT];
+  // we keep track of last value, so on switch we can fade into the new mode without it being jarring
+  let mut last_data_buffer = [RGBA8::default(); LED_COUNT];
+  // used so we don't post_process data
+  let mut frame_buffer = [RGBA8::default(); LED_COUNT];
   let mut local_store = get_store();
   local_store.brightness = 0;
+  let mut rng = RoscRng;
+  // let mut rng = SmallRng::from_rng(seeder).unwrap();
+  let mut walkers = Walker::new_walkers(&local_store.value.intensity, &mut rng);
   let mut target_store = get_store();
+  // reset the lights as soon as we turn them on
   en.set_high(); 
   en_led.set_high();
+  set_off(&mut data_buffer);
+  lights.write_rgba(&data_buffer).await;
+  ticker.next().await;
   loop {
     update_store(&mut target_store);
     if target_store != local_store {
-       step_toward_store(&target_store, &mut local_store);
+      if step_toward_store(&target_store, &mut local_store) {
+        Walker::update_walkers(&mut walkers, &local_store.value.intensity, &mut rng);
+        last_data_buffer.copy_from_slice(&data_buffer);
+      }
     }
-    set_from_store(&local_store, &mut data);
-    lights.write_rgba(&data).await;
+    Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng);
+    if local_store.value.pct < 255 {
+      lerp_with_last(local_store.value.pct, &mut data_buffer, &last_data_buffer);
+    }
+    // todo: maybe brightness should be an input to walker
+    post_process(&mut frame_buffer, &data_buffer, local_store.brightness);
+    lights.write_rgba(&frame_buffer).await;
     ticker.next().await;
   }
 }
@@ -40,6 +64,11 @@ fn set_off(data: &mut [RGBA8; LED_COUNT]) {
   }
 }
 
+fn lerp_with_last(pct: u8, data: &mut [RGBA8; LED_COUNT], last_data: &[RGBA8; LED_COUNT]) {
+  for (current, last) in data.iter_mut().zip(last_data.iter()) {
+    current.lerp_from(last, pct);
+  }
+}
 
 const GAMMA8: [u8; 256] = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -56,29 +85,10 @@ const GAMMA8: [u8; 256] = [
   223, 225, 228, 231, 233, 236, 239, 241, 244, 247, 249, 252, 255,
 ];
 
-// Generate the gamma correction table at compile time
 
-const fn scale8(i: u8, scale: u8) -> u8 {
-  (((i as u16) * (1 + scale as u16)) >> 8) as u8
-}
-
-
-fn set_from_store(store: &Store, data: &mut [RGBA8; LED_COUNT]) {
-  for led in data.iter_mut() {
-    led.r = GAMMA8[scale8(store.color.r, store.brightness) as usize];
-    led.g = GAMMA8[scale8(store.color.g, store.brightness) as usize];
-    led.b = GAMMA8[scale8(store.color.b, store.brightness) as usize];
-    // might need different gamma on alpha value
-    led.a = GAMMA8[scale8(store.color.a, store.brightness) as usize];
-  }
-}
-
-fn set_red(data: &mut [RGBA8; LED_COUNT]) {
-  for led in data.iter_mut() {
-    led.r = 255;
-    led.g = 0;
-    led.b = 0;
-    // might need different gamma on alpha value
-    led.a = 0;
+fn post_process(frame_buffer: &mut [RGBA8; LED_COUNT], data_buffer: &[RGBA8; LED_COUNT], brightness: u8) {
+  for (out_led, led) in frame_buffer.iter_mut().zip(data_buffer.iter()) {
+    // todo: may need separate alpha gamma?
+    out_led.post_process(led, brightness, &GAMMA8);
   }
 }

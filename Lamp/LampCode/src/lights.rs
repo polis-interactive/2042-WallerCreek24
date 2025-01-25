@@ -9,8 +9,10 @@ use embassy_time::{Duration, Ticker};
 
 use crate::{
   color::{LampColor, RGBA8},
+  common::Mode,
   store::{get_store, step_toward_store, update_store},
-  walker::Walker
+  walker::Walker,
+  rainbow::Rainbow,
 };
 
 pub const LED_COUNT: usize = 5;
@@ -27,8 +29,8 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
   let mut local_store = get_store();
   local_store.brightness = 0;
   let mut rng = RoscRng;
-  // let mut rng = SmallRng::from_rng(seeder).unwrap();
-  let mut walkers = Walker::new_walkers(&local_store.value.intensity, &mut rng);
+  let mut walkers = Walker::new_walkers(&local_store.walker_value, &mut rng);
+  let mut rainbow = Rainbow::new();
   let mut target_store = get_store();
   // reset the lights as soon as we turn them on
   en.set_high(); 
@@ -40,13 +42,20 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
     update_store(&mut target_store);
     if target_store != local_store {
       if step_toward_store(&target_store, &mut local_store) {
-        Walker::update_walkers(&mut walkers, &local_store.value.intensity, &mut rng);
+        if local_store.mode == Mode::Walker {
+          // TODO: I don't think I need this...?
+          Walker::update_walkers(&mut walkers, &local_store.walker_value, &mut rng);
+        }
         last_data_buffer.copy_from_slice(&data_buffer);
       }
     }
-    Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng);
-    if local_store.value.pct < 255 {
-      lerp_with_last(local_store.value.pct, &mut data_buffer, &last_data_buffer);
+    match local_store.mode {
+      Mode::Lamp => run_lamp(&mut data_buffer, &local_store.color),
+      Mode::Walker => Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng),
+      Mode::Rainbow => rainbow.run_rainbow(&mut data_buffer, &local_store.rainbow_value),
+    }
+    if local_store.mode_pct < 255 {
+      lerp_with_last(local_store.mode_pct, &mut data_buffer, &last_data_buffer);
     }
     // todo: maybe brightness should be an input to walker
     post_process(&mut frame_buffer, &data_buffer, local_store.brightness);
@@ -61,6 +70,12 @@ fn set_off(data: &mut [RGBA8; LED_COUNT]) {
     led.g = 0;
     led.b = 0;
     led.a = 0;
+  }
+}
+
+fn run_lamp(data: &mut [RGBA8; LED_COUNT], color: &RGBA8) {
+  for led in data.iter_mut() {
+    led.set_from(color);
   }
 }
 
@@ -89,6 +104,6 @@ const GAMMA8: [u8; 256] = [
 fn post_process(frame_buffer: &mut [RGBA8; LED_COUNT], data_buffer: &[RGBA8; LED_COUNT], brightness: u8) {
   for (out_led, led) in frame_buffer.iter_mut().zip(data_buffer.iter()) {
     // todo: may need separate alpha gamma?
-    out_led.post_process(led, brightness, &GAMMA8);
+    out_led.post_process(led, brightness, false, &GAMMA8);
   }
 }

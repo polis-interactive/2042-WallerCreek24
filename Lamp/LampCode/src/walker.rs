@@ -2,7 +2,7 @@
 use defmt::Format;
 use embassy_time::{Instant, Duration};
 
-use crate::color::{lerp8, LampColor, RGBA8};
+use crate::color::{duration_to_u8_pct, lerp8, LampColor, RGBA8};
 
 use rand::{
   distributions::{Standard, Distribution},
@@ -10,33 +10,25 @@ use rand::{
 };
 
 
-pub const WALKER_INTENSITY_MAX: u8 = 2;
+pub const WALKER_VALUE_MAX_INCLUSIVE: u8 = 2;
 
 #[derive(PartialEq, Clone, Copy)]
-pub struct WalkerIntensity(u8);
+pub struct WalkerValue(u8);
 
-impl WalkerIntensity {
+impl WalkerValue {
   pub fn to_usize(&self) -> usize {
     self.0 as usize
   }
 }
 
-impl From<u8> for WalkerIntensity {
+impl From<u8> for WalkerValue {
   fn from(item: u8) -> Self {
-    if item >= WALKER_INTENSITY_MAX {
-      return Self(WALKER_INTENSITY_MAX);
+    if item >= WALKER_VALUE_MAX_INCLUSIVE {
+      return Self(WALKER_VALUE_MAX_INCLUSIVE);
     } else {
       return Self(item);
     }
   }
-}
-
-pub const WALKER_FADE_IN_STEP: u8 = 8;
-
-#[derive(PartialEq)]
-pub struct WalkerSetting {
-  pub intensity: WalkerIntensity,
-  pub pct: u8
 }
 
 #[derive(Format, PartialEq, Default, Clone, Copy)]
@@ -93,7 +85,7 @@ struct HoldConfig {
   weight_choose_high: u8
 }
 
-static HOLD_CONFIGS: [HoldConfig; (WALKER_INTENSITY_MAX + 1) as usize] = [
+static HOLD_CONFIGS: [HoldConfig; (WALKER_VALUE_MAX_INCLUSIVE + 1) as usize] = [
   // solid
   HoldConfig {
     hold_value: 255,
@@ -158,16 +150,16 @@ pub struct Walker<'a> {
 
 impl<'a> Walker<'a> {
 
-  pub fn new_walkers<const N: usize>(intensity: &WalkerIntensity, rng: &mut impl Rng) -> [Walker<'a>; N] {
+  pub fn new_walkers<const N: usize>(value: &WalkerValue, rng: &mut impl Rng) -> [Walker<'a>; N] {
     let mut walkers = [Walker::new(); N];
-    Walker::update_walkers(&mut walkers, intensity, rng);
+    Walker::update_walkers(&mut walkers, value, rng);
     walkers
   }
   
-  pub fn update_walkers<const N: usize>(walkers: &mut [Walker; N], intensity: &WalkerIntensity, rng: &mut impl Rng) {
+  pub fn update_walkers<const N: usize>(walkers: &mut [Walker; N], value: &WalkerValue, rng: &mut impl Rng) {
     // info!("Updating walkers with intensity: {:?}", intensity.to_usize());
     for (idx, walker) in walkers.iter_mut().enumerate() {
-      walker.update_walker(intensity, rng, idx);
+      walker.update_walker(value, rng, idx);
     }
   }
   
@@ -198,8 +190,8 @@ impl<'a> Walker<'a> {
     self.pause_value = rng.gen_range(range);
   }
 
-  fn update_walker(&mut self, intensity: &WalkerIntensity, rng: &mut impl Rng, idx: usize) {
-    self.hold_config = &HOLD_CONFIGS[intensity.to_usize()];
+  fn update_walker(&mut self, value: &WalkerValue, rng: &mut impl Rng, idx: usize) {
+    self.hold_config = &HOLD_CONFIGS[value.to_usize()];
     self.state = if idx == 0 {
       // holding means it will transition to  low
       WalkerState::FadingInLow
@@ -217,7 +209,7 @@ impl<'a> Walker<'a> {
     if self.last_time.elapsed() > self.time_in_state {
       self.transition_state(rng);
     }
-    let fade_pct = self.get_current_pct();
+    let fade_pct = duration_to_u8_pct(&self.last_time, &self.time_in_state);
     let pct = match self.state {
         WalkerState::Holding => self.hold_config.hold_value,
         WalkerState::FadingInLow | WalkerState::FadingInHigh => {
@@ -229,15 +221,6 @@ impl<'a> Walker<'a> {
         WalkerState::Low | WalkerState::High => self.pause_value,
     };
     led.fade_from(color, pct);
-  }
-
-  fn get_current_pct(&self) -> u8 {
-    let raw_pct =  (
-      self.last_time.elapsed().as_millis() as f32
-    ) / (
-      self.time_in_state.as_millis() as f32
-    );
-    (255.0f32 * raw_pct).min(255.0).max(0.0) as u8
   }
 
   fn transition_state(&mut self, rng: &mut impl Rng) {

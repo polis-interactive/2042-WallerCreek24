@@ -7,6 +7,7 @@ use num_traits::Float;
 use crate::color::{duration_to_u8_pct, LampColor, RGBA8};
 
 pub const RAINBOW_VALUE_MAX_INCLUSIVE: u8 = 11;
+pub const RAINBOW_VALUE_DEFAULT: u8 = 6;
 
 #[derive(PartialEq, Clone, Copy)]
 pub struct RainbowValue(u8);
@@ -33,7 +34,9 @@ pub const RAINBOW_STEP_MAX_EXCLUSIVE: u8 =  64;
 pub const RAINBOW_MUL: u8 = 4;
 pub const RAINBOW_MUL_F32: f32 = 4.0f32;
 
-#[derive(Default)]
+
+const RAINBOW_START_STEP: u8 = 0;
+
 struct RainbowStep(u8);
 
 impl RainbowStep {
@@ -47,6 +50,12 @@ impl RainbowStep {
     let current = base.wrapping_sub(idx * spread);
     let next = base.wrapping_sub(idx * spread - RAINBOW_MUL);
     (current, next)
+  }
+}
+
+impl Default for RainbowStep {
+  fn default() -> Self {
+      Self { 0: RAINBOW_START_STEP }
   }
 }
 
@@ -90,6 +99,7 @@ impl Rainbow {
       self.last_time = Instant::now();
       self.step.step_next();
       // print = true;
+      // info!("Now on step: {:?}", self.step.0);
     }
     let pct = duration_to_u8_pct(&self.last_time, &duration);
     for (idx, led) in data.iter_mut().enumerate() {

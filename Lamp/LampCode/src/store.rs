@@ -15,8 +15,8 @@ use sequential_storage::{
 use crate::{
   color::{eased_step, LampColor, COLOR_MAX_INCLUSIVE, RGBA8},
   common::{Mode, MODE_FADE_IN_STEP, MODE_MAX_INCLUSIVE},
-  rainbow::{RainbowValue, RAINBOW_VALUE_MAX_INCLUSIVE},
-  walker::{WALKER_INCREMENT, WALKER_EASE_STEP}
+  rainbow::{RainbowValue, RAINBOW_VALUE_DEFAULT, RAINBOW_VALUE_MAX_INCLUSIVE},
+  walker::{WALKER_VALUE_DEFAULT, WALKER_EASE_STEP, WALKER_INCREMENT}
 }; 
 
 const BRIGHTNESS_INCREMENT: u8 = 16;
@@ -66,8 +66,8 @@ static STORE: AtomicStore = AtomicStore {
   brightness: AtomicU8::new(255),
   color: AtomicU8::new(0),
   mode: AtomicU8::new(0),
-  walker_value: AtomicU8::new(0),
-  rainbow_value: AtomicU8::new(0)
+  walker_value: AtomicU8::new(WALKER_VALUE_DEFAULT),
+  rainbow_value: AtomicU8::new(RAINBOW_VALUE_DEFAULT)
 };
 
 pub async fn load_store<E: defmt::Format>(

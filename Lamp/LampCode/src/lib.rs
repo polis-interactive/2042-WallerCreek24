@@ -12,6 +12,8 @@ mod color;
 
 mod walker;
 
+mod rainbow;
+
 mod store;
 pub use store::load_store;
 

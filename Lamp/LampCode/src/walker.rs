@@ -1,8 +1,8 @@
 
-use defmt::Format;
-use embassy_time::{Instant, Duration};
+use defmt::*;
+use embassy_time::Instant;
 
-use crate::color::{lerp8, LampColor, RGBA8};
+use crate::color::{f32_ratio_to_u8_pct, lerp16_by_8, lerp8, LampColor, RGBA8};
 
 use rand::{
   distributions::{Standard, Distribution},
@@ -10,34 +10,14 @@ use rand::{
 };
 
 
-pub const WALKER_INTENSITY_MAX: u8 = 2;
+pub const WALKER_INCREMENT: u8 = 32;
+pub const WALKER_EASE_STEP: f32 = 8.0f32;
+pub const WALKER_VALUE_DEFAULT: u8 = 128;
 
-#[derive(PartialEq, Clone, Copy)]
-pub struct WalkerIntensity(u8);
+// in case we want to favor high / low
+// TODO: this should come from value, but meh
+const WALKER_CHOOSE_HIGH: u8 = 128;
 
-impl WalkerIntensity {
-  pub fn to_usize(&self) -> usize {
-    self.0 as usize
-  }
-}
-
-impl From<u8> for WalkerIntensity {
-  fn from(item: u8) -> Self {
-    if item >= WALKER_INTENSITY_MAX {
-      return Self(WALKER_INTENSITY_MAX);
-    } else {
-      return Self(item);
-    }
-  }
-}
-
-pub const WALKER_FADE_IN_STEP: u8 = 8;
-
-#[derive(PartialEq)]
-pub struct WalkerSetting {
-  pub intensity: WalkerIntensity,
-  pub pct: u8
-}
 
 #[derive(Format, PartialEq, Default, Clone, Copy)]
 pub enum WalkerState {
@@ -58,6 +38,79 @@ impl WalkerState {
       _ => false
     }
   }
+  fn toggle_next(&self, choose_high: bool) -> WalkerState {
+    match self {
+        WalkerState::Holding => {
+          if choose_high {
+            WalkerState::FadingInHigh
+          } else {
+            WalkerState::FadingInLow
+          }
+        },
+        WalkerState::FadingInLow => WalkerState::Low,
+        WalkerState::Low => WalkerState::FadingOutLow,
+        WalkerState::FadingOutLow => WalkerState::Holding,
+        WalkerState::FadingInHigh => WalkerState::High,
+        WalkerState::High => WalkerState::FadingOutHigh,
+        WalkerState::FadingOutHigh => WalkerState::Holding,
+    }
+  }
+
+  fn get_time_range(&self, value: u8) -> (u16, u16) {
+    match self {
+      WalkerState::Holding => {
+        // hold range at 0: (2000, 3000)
+        // hold range at 255: (200, 350)
+        (lerp16_by_8(2_000, 200, value), lerp16_by_8(3000, 350, value))
+      },
+      WalkerState::FadingInLow | WalkerState::FadingInHigh => {
+        // fade in range at 0: (1_750, 2_500)
+        // fade in range at 255: (750, 1_000)
+        (lerp16_by_8(1_750, 750, value), lerp16_by_8(2_500, 1_000, value))
+      },
+      WalkerState::Low | WalkerState::High => {
+        // pause range at 0: (2_250, 2_750)
+        // pause range at 255: (100, 200)
+        (lerp16_by_8(2_500, 100, value), lerp16_by_8(2_750, 200, value))
+      },
+      WalkerState::FadingOutLow | WalkerState::FadingOutHigh => {
+        // fade out range at 0: (1_750, 2_500)
+        // fade out range at 255: (600, 1_000)
+        (lerp16_by_8(1_750, 600, value), lerp16_by_8(2_500, 1_000, value))
+      }
+    }
+  }
+  fn get_fade_value(&self, pause_pct: u8, elapsed_pct: u8, value: u8) -> u8 {
+    match self {
+      WalkerState::Holding => self.get_hold_value(value),
+      WalkerState::FadingInLow | WalkerState::FadingInHigh => {
+        lerp8(self.get_hold_value(value), self.get_pause_value(pause_pct, value), elapsed_pct)
+      },
+      WalkerState::FadingOutLow | WalkerState::FadingOutHigh => {
+        lerp8(self.get_pause_value(pause_pct, value), self.get_hold_value(value), elapsed_pct)
+      },
+      WalkerState::Low | WalkerState::High => self.get_pause_value(pause_pct, value),
+    }
+  }
+  fn get_hold_value(&self, value: u8) -> u8 {
+    // hold at 0: 160,
+    // hold at 255: 128
+    lerp8(160, 128, value)
+  }
+
+  fn get_pause_value(&self, pause_pct: u8, value: u8) -> u8 {
+    let (min_pause_value, max_pause_value) = if self.is_high() {
+      // high pause range
+      // 192, 255?
+      (192, 255)
+    } else {
+      // low pause range
+      // pause range at 0: (32, 96)
+      // pause at 255: (0, 48) 
+      (lerp8(32, 0, value), lerp8(96, 48, value))
+    };
+    lerp8(min_pause_value, max_pause_value, pause_pct)
+  }
 }
 
 impl Distribution<WalkerState> for Standard {
@@ -74,106 +127,56 @@ impl Distribution<WalkerState> for Standard {
   }
 }
 
-
-#[derive(PartialEq)]
-struct HoldConfig {
-  hold_value: u8,
-  min_low_value: u8,
-  max_low_value: u8,
-  min_high_value: u8,
-  max_high_value: u8,
-  min_hold_time: Duration,
-  max_hold_time: Duration,
-  min_transition_in_time: Duration,
-  max_transition_in_time: Duration,
-  min_pause_time: Duration,
-  max_pause_time: Duration,
-  min_transition_out_time: Duration,
-  max_transition_out_time: Duration,
-  weight_choose_high: u8
-}
-
-static HOLD_CONFIGS: [HoldConfig; (WALKER_INTENSITY_MAX + 1) as usize] = [
-  // solid
-  HoldConfig {
-    hold_value: 255,
-    min_low_value: 255,
-    max_low_value: 255,
-    min_high_value: 255,
-    max_high_value: 255,
-    min_hold_time: Duration::from_millis(1_000),
-    max_hold_time: Duration::from_millis(1_000),
-    min_transition_in_time: Duration::from_millis(1_000),
-    max_transition_in_time: Duration::from_millis(1_000),
-    min_pause_time: Duration::from_millis(1_000),
-    max_pause_time: Duration::from_millis(1_000),
-    min_transition_out_time: Duration::from_millis(1_000),
-    max_transition_out_time: Duration::from_millis(1_000),
-    weight_choose_high: 128
-  },
-  // chill
-  HoldConfig {
-    hold_value: 160,
-    min_low_value: 32,
-    max_low_value: 96,
-    min_high_value: 192,
-    max_high_value: 255,
-    min_hold_time: Duration::from_millis(2_000),
-    max_hold_time: Duration::from_millis(3_000),
-    min_transition_in_time: Duration::from_millis(1_750),
-    max_transition_in_time: Duration::from_millis(2_500),
-    min_pause_time: Duration::from_millis(2_250),
-    max_pause_time: Duration::from_millis(2_750),
-    min_transition_out_time: Duration::from_millis(1_750),
-    max_transition_out_time: Duration::from_millis(2_500),
-    weight_choose_high: 128
-  },
-  // eratic
-  HoldConfig {
-    hold_value: 128,
-    min_low_value: 0,
-    max_low_value: 64,
-    min_high_value: 192,
-    max_high_value: 255,
-    min_hold_time: Duration::from_millis(200),
-    max_hold_time: Duration::from_millis(350),
-    min_transition_in_time: Duration::from_millis(750),
-    max_transition_in_time: Duration::from_millis(1_000),
-    min_pause_time: Duration::from_millis(100),
-    max_pause_time: Duration::from_millis(200),
-    min_transition_out_time: Duration::from_millis(600),
-    max_transition_out_time: Duration::from_millis(1_000),
-    weight_choose_high: 128
-  },
-];
-
 #[derive(Clone, Copy)]
-pub struct Walker<'a> {
-  pub state: WalkerState,
+pub struct Walker {
+  state: WalkerState,
   last_time: Instant,
-  time_in_state: Duration,
-  pause_value: u8,
-  hold_config: &'a HoldConfig
+  elapsed_move: u8,
+  move_pct: u8,
+  pause_pct: u8,
 }
 
-impl<'a> Walker<'a> {
+impl Walker {
 
-  pub fn new_walkers<const N: usize>(intensity: &WalkerIntensity, rng: &mut impl Rng) -> [Walker<'a>; N] {
+  pub fn new_walkers<const N: usize>(rng: &mut impl Rng) -> [Walker; N] {
     let mut walkers = [Walker::new(); N];
-    Walker::update_walkers(&mut walkers, intensity, rng);
+    // info!("Printing time ranges");
+    // for idx in [0, 128, 255] {
+    //   info!("Holding range ({:?}): {:?}", idx, WalkerState::Holding.get_time_range(idx));
+    //   info!("In range ({:?}): {:?}", idx, WalkerState::FadingInHigh.get_time_range(idx));
+    //   info!("Pausing range ({:?}): {:?}", idx, WalkerState::High.get_time_range(idx));
+    //   info!("Out range ({:?}): {:?}", idx, WalkerState::FadingOutHigh.get_time_range(idx));
+    // }
+    // info!("Printing values");
+    // for idx in [0, 255] {
+    //   info!("Holding Value ({:?}): {:?}", idx, WalkerState::Holding.get_hold_value(idx));
+    //   info!(
+    //     "Low Range ({:?}): ({:?}, {:?})", idx,
+    //     WalkerState::Low.get_pause_value(0, idx),
+    //     WalkerState::Low.get_pause_value(255, idx)
+    //   );
+    //   info!(
+    //     "High Range ({:?}): ({:?}, {:?})", idx,
+    //     WalkerState::High.get_pause_value(0, idx),
+    //     WalkerState::High.get_pause_value(255, idx)
+    //   );
+    // }
+    Walker::setup_walkers(&mut walkers, rng);
     walkers
   }
-  
-  pub fn update_walkers<const N: usize>(walkers: &mut [Walker; N], intensity: &WalkerIntensity, rng: &mut impl Rng) {
+
+  pub fn setup_walkers<const N: usize>(walkers: &mut [Walker; N], rng: &mut impl Rng) {
     // info!("Updating walkers with intensity: {:?}", intensity.to_usize());
     for (idx, walker) in walkers.iter_mut().enumerate() {
-      walker.update_walker(intensity, rng, idx);
+      walker.setup_walker(idx, rng);
     }
   }
   
-  pub fn run_walkers<const N: usize>(data: &mut [RGBA8; N], walkers: &mut [Walker; N], color: &RGBA8, rng: &mut impl Rng) {
+  pub fn run_walkers<const N: usize>(
+    data: &mut [RGBA8; N], walkers: &mut [Walker; N], value: u8, color: &RGBA8, rng: &mut impl Rng
+  ) {
     for (walker, led) in walkers.iter_mut().zip(data.iter_mut()) { 
-      walker.run_walker(led, color, rng);
+      walker.run_walker(led, value, color, rng);
     }
   }
 
@@ -181,110 +184,57 @@ impl<'a> Walker<'a> {
     Self {
       state: WalkerState::default(),
       last_time: Instant::now(),
-      time_in_state: Duration::default(),
-      hold_config: &HOLD_CONFIGS[0],
-      pause_value: 0,
+      elapsed_move: u8::default(),
+      move_pct: u8::default(),
+      pause_pct: u8::default(),
     }
   }
   
-  fn set_pause_value(&mut self, rng: &mut impl Rng) {
-    let config = self.hold_config;
-    // this isn't the most accurate but good enough for our purposes
-    let range = if self.state.is_high() {
-      config.min_high_value..=config.max_high_value
-    } else {
-      config.min_low_value..=config.max_low_value
-    };
-    self.pause_value = rng.gen_range(range);
+  fn set_pause_pct(&mut self, rng: &mut impl Rng) {
+    self.pause_pct = rng.gen();
   }
 
-  fn update_walker(&mut self, intensity: &WalkerIntensity, rng: &mut impl Rng, idx: usize) {
-    self.hold_config = &HOLD_CONFIGS[intensity.to_usize()];
+  fn setup_walker(&mut self, idx: usize, rng: &mut impl Rng) {
     self.state = if idx == 0 {
-      // holding means it will transition to  low
+      // fading in low means it will start out low
       WalkerState::FadingInLow
     } else {
       // otherwise, let it be somewhere random
       rng.gen()
     };
     // may not be needed but meh
-    self.set_pause_value(rng);
+    self.set_pause_pct(rng);
     self.transition_state(rng);
     // info!("Started Walker: {:?}; in state: {:?}", idx + 1, self.state);
   }
 
-  fn run_walker(&mut self, led: &mut RGBA8, color: &RGBA8, rng: &mut impl Rng) {
-    if self.last_time.elapsed() > self.time_in_state {
-      self.transition_state(rng);
+  fn run_walker(&mut self, led: &mut RGBA8, value: u8, color: &RGBA8, rng: &mut impl Rng) {
+    let (min_time, max_time) = self.state.get_time_range(value);
+    let time_in_state_in_ms = lerp16_by_8(min_time, max_time, value);
+    let elapsed_pct = f32_ratio_to_u8_pct(
+      self.last_time.elapsed().as_millis() as f32,
+      time_in_state_in_ms as f32
+    );
+    if elapsed_pct > 0 {
+      self.elapsed_move = self.elapsed_move.saturating_add(elapsed_pct);
+      if self.elapsed_move == 255 {
+        self.transition_state(rng);
+      } else {
+        self.last_time = Instant::now();
+      }
     }
-    let fade_pct = self.get_current_pct();
-    let pct = match self.state {
-        WalkerState::Holding => self.hold_config.hold_value,
-        WalkerState::FadingInLow | WalkerState::FadingInHigh => {
-          lerp8(self.hold_config.hold_value, self.pause_value, fade_pct)
-        },
-        WalkerState::FadingOutLow | WalkerState::FadingOutHigh => {
-          lerp8(self.pause_value, self.hold_config.hold_value, fade_pct)
-        },
-        WalkerState::Low | WalkerState::High => self.pause_value,
-    };
+    let pct = self.state.get_fade_value(self.pause_pct, self.elapsed_move, value);
     led.fade_from(color, pct);
   }
 
-  fn get_current_pct(&self) -> u8 {
-    let raw_pct =  (
-      self.last_time.elapsed().as_millis() as f32
-    ) / (
-      self.time_in_state.as_millis() as f32
-    );
-    (255.0f32 * raw_pct).min(255.0).max(0.0) as u8
-  }
-
   fn transition_state(&mut self, rng: &mut impl Rng) {
-    let config = self.hold_config;
-    let min_millis;
-    let max_millis;
-    match self.state {
-      WalkerState::Holding => {
-        self.state = match rng.gen::<u8>() >= config.weight_choose_high {
-          true => {
-            WalkerState::FadingInHigh
-          },
-          false => {
-            WalkerState::FadingInLow
-          },
-        };
-        self.set_pause_value(rng);
-        min_millis = config.min_transition_in_time.as_millis();
-        max_millis = config.max_transition_in_time.as_millis();
-      },
-      WalkerState::FadingInLow => {
-        self.state = WalkerState::Low;
-        min_millis = config.min_pause_time.as_millis();
-        max_millis = config.max_pause_time.as_millis();
-      },
-      WalkerState::FadingInHigh => {
-        self.state = WalkerState::High;
-        min_millis = config.min_pause_time.as_millis();
-        max_millis = config.max_pause_time.as_millis();
-      }
-      WalkerState::Low => {
-        self.state = WalkerState::FadingOutLow;
-        min_millis = config.min_transition_out_time.as_millis();
-        max_millis = config.max_transition_out_time.as_millis();
-      },
-      WalkerState::High => {
-        self.state = WalkerState::FadingOutHigh;
-        min_millis = config.min_transition_out_time.as_millis();
-        max_millis = config.max_transition_out_time.as_millis();
-      }
-      WalkerState::FadingOutLow | WalkerState::FadingOutHigh => {
-        self.state = WalkerState::Holding;
-        min_millis = config.min_hold_time.as_millis();
-        max_millis = config.max_hold_time.as_millis();
-      }
-    };
-    self.time_in_state = Duration::from_millis(rng.gen_range(min_millis..=max_millis));
+    if self.state == WalkerState::Holding {
+      // about to transition, update pct it will walk toward
+      self.set_pause_pct(rng);
+    }
+    self.state = self.state.toggle_next(rng.gen::<u8>() >= WALKER_CHOOSE_HIGH);
+    self.move_pct = rng.gen();
     self.last_time = Instant::now();
+    self.elapsed_move = 0;
   }
 }

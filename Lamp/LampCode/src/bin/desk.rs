@@ -52,7 +52,8 @@ bind_interrupts!(struct Irqs {
   PIO0_IRQ_0 => InterruptHandler<PIO0>;
 });
 
-const ADDR_OFFSET: u32 = 0x100000;
+// I thought I needed this by flash examples, meh
+// const ADDR_OFFSET: u32 = 0x100000;
 const FLASH_SIZE: u32 = 2 * 1024 * 1024;
 const _FLASH_SIZE: usize = FLASH_SIZE as usize;
 

@@ -29,7 +29,7 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
   let mut local_store = get_store();
   local_store.brightness = 0;
   let mut rng = RoscRng;
-  let mut walkers = Walker::new_walkers(&local_store.walker_value, &mut rng);
+  let mut walkers = Walker::new_walkers(&mut rng);
   let mut rainbow = Rainbow::new();
   let mut target_store = get_store();
   // reset the lights as soon as we turn them on
@@ -43,15 +43,16 @@ pub async fn lights_task(mut lights: PioWs2812<'static, PIO0, 1, LED_COUNT>, mut
     if target_store != local_store {
       if step_toward_store(&target_store, &mut local_store) {
         if local_store.mode == Mode::Walker {
-          // TODO: I don't think I need this...?
-          Walker::update_walkers(&mut walkers, &local_store.walker_value, &mut rng);
+          Walker::setup_walkers(&mut walkers, &mut rng);
         }
         last_data_buffer.copy_from_slice(&data_buffer);
       }
     }
     match local_store.mode {
       Mode::Lamp => run_lamp(&mut data_buffer, &local_store.color),
-      Mode::Walker => Walker::run_walkers(&mut data_buffer, &mut walkers, &local_store.color, &mut rng),
+      Mode::Walker => Walker::run_walkers(
+        &mut data_buffer, &mut walkers, local_store.walker_value, &local_store.color, &mut rng
+      ),
       Mode::Rainbow => rainbow.run_rainbow(&mut data_buffer, &local_store.rainbow_value),
     }
     if local_store.mode_pct < 255 {

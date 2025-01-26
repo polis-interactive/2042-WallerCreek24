@@ -12,9 +12,6 @@ pub const RAINBOW_VALUE_MAX_INCLUSIVE: u8 = 11;
 pub struct RainbowValue(u8);
 
 impl RainbowValue {
-  fn to_u32(&self) -> u32 {
-    self.0.into()
-  }
   fn to_f32(&self) ->f32 {
     self.0.into()
   }
@@ -40,9 +37,6 @@ pub const RAINBOW_MUL_F32: f32 = 4.0f32;
 struct RainbowStep(u8);
 
 impl RainbowStep {
-  fn to_u8(&self) -> u8 {
-    self.0 as u8
-  }
 
   fn step_next(&mut self) {
     self.0 = (self.0 + 1) % RAINBOW_STEP_MAX_EXCLUSIVE;

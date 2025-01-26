@@ -16,7 +16,7 @@ use crate::{
   color::{eased_step, LampColor, COLOR_MAX_INCLUSIVE, RGBA8},
   common::{Mode, MODE_FADE_IN_STEP, MODE_MAX_INCLUSIVE},
   rainbow::{RainbowValue, RAINBOW_VALUE_MAX_INCLUSIVE},
-  walker::{WalkerValue, WALKER_VALUE_MAX_INCLUSIVE}
+  walker::{WALKER_INCREMENT, WALKER_EASE_STEP}
 }; 
 
 const BRIGHTNESS_INCREMENT: u8 = 16;
@@ -51,7 +51,7 @@ impl AtomicStore {
     let brightness = data[0];
     let color = data[1].max(0).min(COLOR_MAX_INCLUSIVE);
     let mode = data[2].max(0).min(MODE_MAX_INCLUSIVE);
-    let walker_value = data[3].max(0).min(WALKER_VALUE_MAX_INCLUSIVE);
+    let walker_value = data[3];
     let rainbow_value = data[4].max(0).min(RAINBOW_VALUE_MAX_INCLUSIVE);
     self.brightness.store(brightness, Ordering::Relaxed);
     self.color.store(color, Ordering::Relaxed);
@@ -132,13 +132,13 @@ pub fn load_mode() -> Mode {
 }
 
 pub fn update_brightness(is_increment: bool) {
-  let mut brightness = STORE.brightness.load(Ordering::Relaxed);
-  brightness = if is_increment { 
-    brightness.saturating_add(BRIGHTNESS_INCREMENT) 
+  let old_brightness = STORE.brightness.load(Ordering::Relaxed);
+  let new_brightness = if is_increment { 
+    old_brightness.saturating_add(BRIGHTNESS_INCREMENT) 
   } else {  
-    brightness.saturating_sub(BRIGHTNESS_INCREMENT)
+    old_brightness.saturating_sub(BRIGHTNESS_INCREMENT)
   };
-  STORE.brightness.store(brightness, Ordering::Relaxed);
+  STORE.brightness.store(new_brightness, Ordering::Relaxed);
 }
 
 pub fn update_color(is_increment: bool) {
@@ -159,11 +159,10 @@ pub fn update_mode(mode: Mode) {
 pub fn update_walker_value(is_increment: bool) {
   let old_value = STORE.walker_value.load(Ordering::Relaxed);
   let new_value = if is_increment {
-    if old_value >= WALKER_VALUE_MAX_INCLUSIVE { WALKER_VALUE_MAX_INCLUSIVE } else { old_value + 1 }
+    old_value.saturating_add(WALKER_INCREMENT)
   } else {
-    if old_value == 0 { 0 } else { old_value - 1 }
+    old_value.saturating_sub(WALKER_INCREMENT)
   };
-  // info!("Old walker value: {:?}; new walker value: {:?}", old_value, new_value);
   STORE.walker_value.store(new_value, Ordering::Relaxed);
 }
 
@@ -185,7 +184,7 @@ pub struct Store {
   pub color: RGBA8,
   pub mode: Mode,
   pub mode_pct: u8,
-  pub walker_value: WalkerValue,
+  pub walker_value: u8,
   pub rainbow_value: RainbowValue,
 }
 
@@ -202,7 +201,7 @@ pub fn get_store() -> Store {
     color,
     mode: STORE.mode.load(Ordering::Relaxed).into(),
     mode_pct: 255,
-    walker_value: STORE.walker_value.load(Ordering::Relaxed).into(),
+    walker_value: STORE.walker_value.load(Ordering::Relaxed),
     rainbow_value: STORE.rainbow_value.load(Ordering::Relaxed).into()
   }
 }
@@ -212,7 +211,7 @@ pub fn update_store(store: &mut Store) {
   store.color.from_u8_white(STORE.color.load(Ordering::Relaxed));
   store.mode = STORE.mode.load(Ordering::Relaxed).into();
   // target mode always has mode_pct 255
-  store.walker_value = STORE.walker_value.load(Ordering::Relaxed).into();
+  store.walker_value = STORE.walker_value.load(Ordering::Relaxed);
   store.rainbow_value = STORE.rainbow_value.load(Ordering::Relaxed).into();
 }
 
@@ -232,9 +231,15 @@ pub fn step_toward_store(target_store: &Store, local_store: &mut Store) -> bool 
     // target_store.color.print_color();
     local_store.color.walk_toward(&target_store.color);
   }
-  // TODO: should these be eased steps?
   if target_store.walker_value != local_store.walker_value {
-    local_store.walker_value = target_store.walker_value;
+    let new_walker_value = eased_step(
+      local_store.walker_value, target_store.walker_value, WALKER_EASE_STEP
+    );
+    // info!(
+    //   "Old Walker Value: {:?}; New Walker Value: {:?}; Target Walker Value: {:?}",
+    //   local_store.walker_value, new_walker_value, target_store.walker_value
+    // );
+    local_store.walker_value = new_walker_value;
   }
   if target_store.rainbow_value != local_store.rainbow_value {
     local_store.rainbow_value = target_store.rainbow_value;

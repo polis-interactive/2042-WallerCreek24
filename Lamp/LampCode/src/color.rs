@@ -28,29 +28,48 @@ pub fn eased_step(current: u8, target: u8, factor: f32) -> u8 {
 
 // derived from lib8tion
 
-pub const fn scale8(i: u8, scale: u8) -> u8 {
-  (((i as u16) * (1 + scale as u16)) >> 8) as u8
+pub const fn scale8(i: u8, pct: u8) -> u8 {
+  (((i as u16) * (1 + pct as u16)) >> 8) as u8
 }
 
 pub fn lerp8(a: u8, b: u8, pct: u8) -> u8 {
   if b > a {
     let delta = b - a;
     let scaled = scale8(delta, pct);
-    return a + scaled;
+    a + scaled
   } else {
     let delta = a - b;
     let scaled = scale8(delta, pct);
-    return a - scaled;
+    a - scaled
   }
 }
 
+pub fn scale16_by_8(i: u16, pct: u8) -> u16 {
+  if pct == 0 {
+    0
+  } else {
+    (((i as u32) * (1 + pct as u32)) >> 8) as u16
+  }
+}
+
+pub fn lerp16_by_8(a: u16, b: u16, pct: u8) -> u16 {
+  if b > a {
+    let delta = b - a;
+    let scaled = scale16_by_8(delta, pct);
+    a + scaled
+  } else {
+    let delta = a - b;
+    let scaled = scale16_by_8(delta, pct);
+    a - scaled
+  }
+}
+
+pub fn f32_ratio_to_u8_pct(a: f32, b: f32) -> u8 {
+  (255.0f32 * a as f32 / b as f32).min(255.0).max(0.0) as u8
+}
+
 pub fn duration_to_u8_pct(now: &Instant, total: &Duration) -> u8 {
-  let raw_pct =  (
-    now.elapsed().as_millis() as f32
-  ) / (
-    total.as_millis() as f32
-  );
-  (255.0f32 * raw_pct).min(255.0).max(0.0) as u8
+  f32_ratio_to_u8_pct(now.elapsed().as_millis() as f32, total.as_millis() as f32)
 }
 
 pub trait LampColor {

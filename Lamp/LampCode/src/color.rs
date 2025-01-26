@@ -55,6 +55,7 @@ pub fn duration_to_u8_pct(now: &Instant, total: &Duration) -> u8 {
 
 pub trait LampColor {
   fn from_u8_white(&mut self, value: u8);
+  fn from_u8(&mut self, value: u8);
   fn set_from(&mut self, other: &RGBA8);
   fn walk_toward(&mut self, other: &RGBA8);
   fn lerp_from(&mut self, other: &RGBA8, pct: u8);
@@ -78,6 +79,18 @@ impl LampColor for RGBA8 {
     let c = (value - 1).wrapping_mul(COLOR_MUL);
     let rgb =  hsv2rgb(Hsv {
       hue: c,
+      sat: 255,
+      val: 255
+    });
+    self.r = rgb.r;
+    self.g = rgb.g;
+    self.b = rgb.b;
+    self.a = 0;
+  }
+
+  fn from_u8(&mut self, value: u8) {
+    let rgb =  hsv2rgb(Hsv {
+      hue: value,
       sat: 255,
       val: 255
     });

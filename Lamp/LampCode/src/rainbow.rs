@@ -3,7 +3,6 @@
 use defmt::*;
 use embassy_time::{Duration, Instant};
 use num_traits::Float;
-use smart_leds::hsv::{hsv2rgb, Hsv};
 
 use crate::color::{duration_to_u8_pct, LampColor, RGBA8};
 
@@ -32,9 +31,10 @@ impl From<u8> for RainbowValue {
 }
 
 // right now, this is just our 37 colors; may change though
-pub const RAINBOW_STEP_MAX_EXCLUSIVE: u8 =  37;
+pub const RAINBOW_STEP_MAX_EXCLUSIVE: u8 =  64;
 // not exact spacing of color, but yeilds the best spread
-pub const RAINBOW_MUL: u8 = 7;
+pub const RAINBOW_MUL: u8 = 4;
+pub const RAINBOW_MUL_F32: f32 = 4.0f32;
 
 #[derive(Default)]
 struct RainbowStep(u8);
@@ -44,52 +44,15 @@ impl RainbowStep {
     self.0 as u8
   }
 
-  fn increment_u8(value: u8, increment: u8) -> u8 {
-    let next = value + increment;
-    if next >= RAINBOW_STEP_MAX_EXCLUSIVE {
-      next - RAINBOW_STEP_MAX_EXCLUSIVE
-    } else {
-      next
-    }
-  }
-
-  fn increment(&self, increment: u8) -> u8 {
-    RainbowStep::increment_u8(self.0, increment)
-  }
-  fn decrement(&self, decrement: i8) -> u8 {
-    let next = self.0 as i8 - decrement;
-    if next < 0 {
-      (RAINBOW_STEP_MAX_EXCLUSIVE as i8 + next) as u8
-    } else {
-      next as u8
-    }
-  }
   fn step_next(&mut self) {
-    self.0 = self.increment(1);
+    self.0 = (self.0 + 1) % RAINBOW_STEP_MAX_EXCLUSIVE;
   }
-  fn get_current_and_next(&self, decrement: u8) -> (u8, u8) {
-    let this = self.decrement(decrement as i8);
-    let next = RainbowStep::increment_u8(this, 1);
-    (this, next)
-  }
-}
 
-trait RainbowColor {
-  fn from_u8(&mut self, value: u8);
-}
-
-impl RainbowColor for RGBA8 {
-  fn from_u8(&mut self, value: u8) {
-    let c = value.wrapping_mul(RAINBOW_MUL);
-    let rgb =  hsv2rgb(Hsv {
-      hue: c,
-      sat: 255,
-      val: 255
-    });
-    self.r = rgb.r;
-    self.g = rgb.g;
-    self.b = rgb.b;
-    self.a = 0;
+  fn get_current_and_next(&self, idx: u8, spread: u8) -> (u8, u8) {
+    let base = self.0.wrapping_mul(RAINBOW_MUL);
+    let current = base.wrapping_sub(idx * spread);
+    let next = base.wrapping_sub(idx * spread - RAINBOW_MUL);
+    (current, next)
   }
 }
 
@@ -109,13 +72,15 @@ impl Rainbow {
   }
 
   fn value_to_params(value: &RainbowValue) -> (Duration, u8) {
-    // duration at 0: 1000ms
+    // duration at 0: 500ms
     // duration at 11: 50ms
-    let duration_value = 1000.0 - (5.0 * value.to_f32() + 1.0).log2() * 161.0;
+    let duration_value = 750.0 - (5.0 * value.to_f32() + 1.0).log2() * 121.0;
     let duration = Duration::from_millis(duration_value.ceil() as u64);
-    // spreat at 0: 1
-    // spread at 11: 5
-    let spread = 1; // (1.0 + 0.364 * value.to_f32()).max(1.0).min(3.0) as u8;
+    // spreat at 0: 2 * RAINBOW_MUL
+    // spread at 11: 5 * RAINBOW_MUL
+    let spread = (
+      RAINBOW_MUL_F32 * (2.0 + 3.0 * value.to_f32() / 11.0)
+    ).max(2.0 * RAINBOW_MUL_F32).min(RAINBOW_MUL_F32 * 5.0).ceil() as u8; 
     (
       duration,
       spread
@@ -126,18 +91,28 @@ impl Rainbow {
     let mut a = RGBA8::default();
     let mut b = RGBA8::default();
     let (duration, spread) = Rainbow::value_to_params(value);
+    // let mut print = false;
     if self.last_time.elapsed() >= duration {
       self.last_time = Instant::now();
       self.step.step_next();
+      // print = true;
     }
     let pct = duration_to_u8_pct(&self.last_time, &duration);
     for (idx, led) in data.iter_mut().enumerate() {
-      let (this_step, next_step) = self.step.get_current_and_next(
-        (idx as u8).wrapping_mul(spread)
-      );
-      a.from_u8(this_step);
+      let (current_step, next_step) = self.step.get_current_and_next(idx as u8, spread);
+      a.from_u8(current_step);
       b.from_u8(next_step);
       led.lerp_between(&a, &b, pct);
+      // if next_step.wrapping_sub(current_step) != 7 {
+      //   info!(
+      //     "found a weird one: step: {:?}; idx: {:?}; current: {:?}; next: {:?}",
+      //     self.step.0, idx, current_step, next_step
+      //   );
+      // }
+      // if print {
+      //   info!("step: {:?}; idx: {:?}; current: {:?}; next: {:?}", self.step.0, idx, current_step, next_step);
+      //   print = false;
+      // }
     }
   }
 }

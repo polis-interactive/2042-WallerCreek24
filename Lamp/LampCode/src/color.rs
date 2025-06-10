@@ -88,10 +88,10 @@ pub trait LampColor {
 impl LampColor for RGBA8 {
   fn from_u8_white(&mut self, value: u8) {
     if value == 0 {
-      self.r = 0;
-      self.g = 0;
-      self.b = 0;
-      self.a = 255;
+      self.r = 255;
+      self.g = 139;
+      self.b = 43;
+      self.a = 0;
       return;
     }
     // let (c, w) = (value - 1).div_rem(&WHITE_STEPS);
